@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2014 Remel Pugh
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<resources>
+    <string name="app_name" />
+    <string name="delete">Delete</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="loading_please_wait">Please wait&#8230;</string>
+    <string name="retry">Retry</string>
+    <string name="utils__drawer_close">Close navigation drawer</string>
+    <string name="utils__drawer_open">Open navigation drawer</string>
+
+    <!-- CHANGE LOG DIALOG -->
+    <string name="change_log_changes">Changes</string>
+    <string name="change_log_close">Close</string>
+    <string name="change_log_error">Could not load change log</string>
+    <string name="change_log_fixes">Fixes</string>
+    <string name="change_log_release">Release: %s</string>
+    <string name="change_log_title">Change log v%s</string>
+    <!-- END CHANGE LOG DIALOG -->
+
+    <!-- DATE TIME PICKER DIALOG -->
+    <string name="date_time_picker_title">Date/Time Picker</string>
+    <string name="date_time_picker_set">Set</string>
+    <string name="date_time_picker_now">Now</string>
+    <!-- END DATE TIME PICKER DIALOG -->
+
+    <!-- GOOGLE SERVICES STRINGS -->
+    <string name="google_services_legal_notices_summary"></string>
+    <string name="google_services_legal_notices_title">Legal Notices</string>
+    <!-- END GOOGLE SERVICES STRINGS -->
+
+    <!-- GpsUtils DIALOG -->
+    <string name="gps_message">To enhance your Maps experience:\n\n• Turn on GPS and mobile network location</string>
+    <string name="gps_never_show">Never show this again</string>
+    <string name="gps_settings">Settings</string>
+    <string name="gps_skip">Skip</string>
+    <string name="gps_title">Improve location accuracy</string>
+    <string name="about_licenses">Open Source Licenses</string>
+    <!-- END GpsUtils DIALOG -->
+
+    <!-- OPEN SOURCE DIALOG -->
+    <string name="open_source_actionbar_sherlock">ActionBarSherlock</string>
+    <string name="open_source_actionbar_sherlock_license">
+        <![CDATA[
+        <pre>
+        Copyright (&#169;) 2012 Jake Wharton
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+        </pre>
+        ]]>
+    </string>
+    <string name="open_source_google_gson">Google Gson</string>
+    <string name="open_source_google_gson_license">
+        <![CDATA[
+        <pre>
+        Copyright (&#169;) 2008 Google Inc.
+
+        Licensed under the Apache License, Version 2.0 (the "License");
+        you may not use this file except in compliance with the License.
+        You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        Unless required by applicable law or agreed to in writing, software
+        distributed under the License is distributed on an "AS IS" BASIS,
+        WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+        See the License for the specific language governing permissions and
+        limitations under the License.
+        </pre>
+        ]]>
+    </string>
+    <!-- END OPEN SOURCE DIALOG -->
+</resources>
