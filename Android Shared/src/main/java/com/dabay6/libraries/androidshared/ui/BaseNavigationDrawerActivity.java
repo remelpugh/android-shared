@@ -209,7 +209,7 @@ public abstract class BaseNavigationDrawerActivity extends BaseFragmentActivity 
                     actionBar.setSubtitle(subtitle);
                 }
 
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
             }
 
             @Override
@@ -221,7 +221,7 @@ public abstract class BaseNavigationDrawerActivity extends BaseFragmentActivity 
                 actionBar.setTitle(drawerTitle);
                 actionBar.setSubtitle(null);
 
-                invalidateOptionsMenu();
+                supportInvalidateOptionsMenu();
             }
         };
 
