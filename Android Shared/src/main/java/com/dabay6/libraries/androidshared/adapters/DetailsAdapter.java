@@ -53,22 +53,22 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
     private final int[] textViewResourceId;
     private int dropDownResource;
     private DetailsItemFilter filter;
-    private List<DetailsItem> items;
+    private DetailsItemList items;
     private boolean notifyOnChange = true;
-    private List<DetailsItem> originalItems;
+    private DetailsItemList originalItems;
 
     /**
      * @param context The current context.
      */
     public DetailsAdapter(final Context context) {
-        this(context, new ArrayList<DetailsItem>());
+        this(context, new DetailsItemList());
     }
 
     /**
      * @param context The current context.
      * @param data    The {@link DetailsItem} to represent in the {@link android.widget.ListView}.
      */
-    public DetailsAdapter(final Context context, final List<DetailsItem> data) {
+    public DetailsAdapter(final Context context, final DetailsItemList data) {
         this(context, data, layout.simple_list_item_2, new int[]{id.text1, id.text2});
     }
 
@@ -78,7 +78,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
      * @param resource The resource ID for a layout file containing a layout to use when
      *                 instantiating views.
      */
-    public DetailsAdapter(final Context context, final List<DetailsItem> data, final int resource) {
+    public DetailsAdapter(final Context context, final DetailsItemList data, final int resource) {
         this(context, data, resource, new int[]{id.text1, id.text2});
     }
 
@@ -90,7 +90,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
      * @param textViewResourceId The resource IDs for a layout file containing 2 TextView to use when
      *                           instantiating views.
      */
-    public DetailsAdapter(final Context context, final List<DetailsItem> data, final int resource,
+    public DetailsAdapter(final Context context, final DetailsItemList data, final int resource,
                           final int[] textViewResourceId) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -185,7 +185,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
      *
      * @return An DetailsAdapter
      */
-    public static DetailsAdapter createFromResource(final Context context, final List<DetailsItem> items,
+    public static DetailsAdapter createFromResource(final Context context, final DetailsItemList items,
                                                     final int resource, final int[] textViewResourceId) {
         return new DetailsAdapter(context, items, resource, textViewResourceId);
     }
@@ -360,12 +360,14 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
             holder = new ViewHolder();
 
             convertView = inflater.inflate(resource, parent, false);
-            finder = new ViewsFinder(convertView);
+            if (convertView != null) {
+                finder = new ViewsFinder(convertView);
 
-            holder.label = finder.find(textViewResourceId[0]);
-            holder.data = finder.find(textViewResourceId[1]);
+                holder.label = finder.find(textViewResourceId[0]);
+                holder.data = finder.find(textViewResourceId[1]);
 
-            convertView.setTag(holder);
+                convertView.setTag(holder);
+            }
         }
         else {
             holder = (ViewHolder) convertView.getTag();
@@ -387,15 +389,15 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
 
             if (originalItems == null) {
                 synchronized (lock) {
-                    originalItems = new ArrayList<DetailsItem>(items);
+                    originalItems = new DetailsItemList(items);
                 }
             }
 
             if (prefix == null || prefix.length() == 0) {
-                final ArrayList<DetailsItem> list;
+                final DetailsItemList list;
 
                 synchronized (lock) {
-                    list = new ArrayList<DetailsItem>(originalItems);
+                    list = new DetailsItemList(originalItems);
                 }
 
                 results.values = list;
@@ -440,8 +442,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
 
         @Override
         protected void publishResults(final CharSequence constraint, final FilterResults results) {
-            //noinspection unchecked
-            items = (List<DetailsItem>) results.values;
+            items = (DetailsItemList) results.values;
 
             if (results.count > 0) {
                 notifyDataSetChanged();

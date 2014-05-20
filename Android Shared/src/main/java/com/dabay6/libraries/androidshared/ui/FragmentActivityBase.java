@@ -29,7 +29,18 @@ package com.dabay6.libraries.androidshared.ui;
  * @version 1.0
  */
 @SuppressWarnings("unused")
-public interface FragmentActivityBase extends ActivityBase {
+public interface FragmentActivityBase {
+    /**
+     * Sets the parent {@link android.app.Activity}'s subtitle.
+     *
+     * @param subtitleResId The resource id of the subtitle.
+     */
+    void setSubtitle(final int subtitleResId);
+
+    /**
+     * Sets the parent {@link android.app.Activity}'s subtitle.
+     */
+    void setSubtitle(final String subtitle);
     /**
      * Gets whether the activity is running on a phone or tablet.
      *

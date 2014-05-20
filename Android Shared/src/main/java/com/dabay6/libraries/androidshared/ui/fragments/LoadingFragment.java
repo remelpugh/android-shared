@@ -354,14 +354,6 @@ public class LoadingFragment extends BaseFragment {
         return null;
     }
 
-    //    /**
-    //     * {@inheritDoc}
-    //     */
-    //    @Override
-    //    protected boolean hasOptionsMenu() {
-    //        return false;
-    //    }
-
     /**
      * {@inheritDoc}
      */

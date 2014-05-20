@@ -84,7 +84,7 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
         super.onCreate(savedInstanceState);
 
         initialize(savedInstanceState);
-        setHasOptionsMenu(hasOptionsMenu());
+        setHasOptionsMenu(getMenuResourceId() != null && getMenuResourceId() > 0);
     }
 
     /**
@@ -199,15 +199,6 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
      * @return Resource identifier for the menu resource.
      */
     protected abstract Integer getMenuResourceId();
-
-    //    /**
-    //     * Indicates if this instance has a options menu.
-    //     *
-    //     * @return True if this instance has menu options, otherwise false.
-    //     */
-    //    protected boolean hasOptionsMenu() {
-    //        return true;
-    //    }
 
     /**
      * Initializes this instance.

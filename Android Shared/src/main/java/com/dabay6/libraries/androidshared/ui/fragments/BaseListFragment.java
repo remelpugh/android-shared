@@ -95,7 +95,7 @@ public abstract class BaseListFragment extends ListFragment implements FragmentB
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(hasOptionsMenu());
+        setHasOptionsMenu(getMenuResourceId() != null && getMenuResourceId() > 0);
     }
 
     /**
@@ -179,15 +179,6 @@ public abstract class BaseListFragment extends ListFragment implements FragmentB
      * @return Resource identifier for the menu resource.
      */
     protected abstract Integer getMenuResourceId();
-
-    //    /**
-    //     * Indicates if this instance has a options menu.
-    //     *
-    //     * @return True if this instance has menu options, otherwise false.
-    //     */
-    //    protected boolean hasOptionsMenu() {
-    //        return true;
-    //    }
 
     /**
      * Setup the {@link android.widget.ListView}.
