@@ -23,7 +23,6 @@
 package com.dabay6.libraries.androidshared.helper;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -31,6 +30,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.view.ActionMode.Callback;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
@@ -41,7 +41,6 @@ import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
 
-import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -299,7 +298,7 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
             select(itemId);
         }
         else {
-            unselect(itemId);
+            unSelect(itemId);
         }
     }
 
@@ -318,8 +317,6 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
         }
 
         if (context instanceof ActionBarActivity) {
-            //|| context instanceof SherlockFragmentActivity ||
-            // context instanceof SherlockPreferenceActivity) {
             return;
         }
 
@@ -379,20 +376,18 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
     }
 
     private void startActionMode() {
-        try {
-            final Activity activity = (Activity) adapterView.getContext();
-            final Method method = activity.getClass().getMethod("startActionMode", ActionMode.Callback.class);
-
-            actionMode = (ActionMode) method.invoke(activity, baseAdapter);
+        if (!(adapterView.getContext() instanceof ActionBarActivity)) {
+            throw new IllegalStateException("Context must be an ActionBarActivity");
         }
-        catch (Exception e) {
-            Logger.error(TAG, e.getMessage(), e);
-
-            throw new RuntimeException(e);
+        if (!(baseAdapter instanceof Callback)) {
+            throw new IllegalStateException("Adapter must implement ActionMode.Callback");
         }
+
+        ActionBarActivity activity = (ActionBarActivity) adapterView.getContext();
+        actionMode = activity.startSupportActionMode((ActionMode.Callback) baseAdapter);
     }
 
-    private void unselect(final long itemId) {
+    private void unSelect(final long itemId) {
         final boolean isChecked = isChecked(itemId);
 
         if (!isChecked) {
