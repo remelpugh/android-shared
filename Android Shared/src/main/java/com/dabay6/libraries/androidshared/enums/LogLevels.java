@@ -23,10 +23,9 @@
 package com.dabay6.libraries.androidshared.enums;
 
 import android.util.Log;
+import android.util.SparseArray;
 
 import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * LogLevels
@@ -56,7 +55,7 @@ public enum LogLevels {
      * Log all messages.
      */
     VERBOSE(0);
-    private static final Map<Integer, LogLevels> lookup = new HashMap<Integer, LogLevels>();
+    private static final SparseArray<LogLevels> lookup = new SparseArray<LogLevels>();
     private final int index;
 
     /**

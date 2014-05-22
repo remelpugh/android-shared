@@ -50,7 +50,6 @@ public final class IntentUtils {
      * Hide constructor
      */
     private IntentUtils() {
-
     }
 
     /**
@@ -72,7 +71,9 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newDialNumberIntent(final String phone) {
-        return new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone.replace(" ", "")));
+        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_DIAL);
+
+        return builder.addData(Uri.parse("tel:" + phone.replace(" ", ""))).isExternal().toIntent();
     }
 
     /**
@@ -85,14 +86,13 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newEmailIntent(final String to, final String subject, final String body) {
-        final Intent intent = new Intent(Intent.ACTION_SEND);
+        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_SEND);
 
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
-        intent.putExtra(Intent.EXTRA_TEXT, body);
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.setType("message/rfc822");
-
-        return intent;
+        return builder.add(Intent.EXTRA_EMAIL, new String[]{to})
+                      .add(Intent.EXTRA_TEXT, body)
+                      .add(Intent.EXTRA_SUBJECT, subject)
+                      .addType("message/rfc822")
+                      .toIntent();
     }
 
     /**
@@ -104,6 +104,7 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newMapIntent(final String address, final String title) {
+        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_VIEW);
         final StringBuilder request = new StringBuilder();
 
         request.append("geo:0,0?q=");
@@ -118,7 +119,7 @@ public final class IntentUtils {
         request.append("&hl=");
         request.append(Locale.getDefault().getLanguage());
 
-        return new Intent(Intent.ACTION_VIEW, Uri.parse(request.toString()));
+        return builder.addData(Uri.parse(request.toString())).toIntent();
     }
 
     /**
@@ -130,15 +131,15 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newSelectPictureIntent(final String title) {
-        final Intent intent = new Intent(Intent.ACTION_PICK);
+        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_PICK);
 
-        intent.setType("image/*");
+        builder.addType("image/*");
 
         if (TextUtils.isEmpty(title)) {
-            return intent;
+            return builder.toIntent();
         }
         else {
-            return Intent.createChooser(intent, title);
+            return Intent.createChooser(builder.toIntent(), title);
         }
     }
 
@@ -152,11 +153,9 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newTakePictureIntent(final File file) {
-        final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        final IntentBuilder builder = new IntentBuilder(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-
-        return intent;
+        return builder.add(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file)).toIntent();
     }
 
     /**
@@ -167,7 +166,7 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newWebIntent(final String url) {
-        return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        return (new IntentBuilder(Intent.ACTION_VIEW)).addData(Uri.parse(url)).toIntent();
     }
 
     /**
@@ -195,7 +194,13 @@ public final class IntentUtils {
      */
     private static boolean isIntentAvailable(final Context context, final Intent intent) {
         final PackageManager packageManager = context.getPackageManager();
-        final List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+        final List<ResolveInfo> list;
+
+        if (packageManager == null) {
+            return false;
+        }
+
+        list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 
         return list.size() > 0;
     }
@@ -392,6 +397,64 @@ public final class IntentUtils {
             intent.putExtra(fieldName, value);
 
             return this;
+        }
+
+        /**
+         *
+         * @param fieldName
+         * @param uri
+         * @return
+         */
+        public IntentBuilder add(final String fieldName, final Uri uri) {
+            intent.putExtra(fieldName, uri);
+
+            return this;
+        }
+
+        /**
+         * Set the data this intent is operating on.
+         *
+         * @param uri The Uri of the data this intent is now targeting.
+         *
+         * @return this builder
+         */
+        public IntentBuilder addData(final Uri uri) {
+            intent.setData(uri);
+
+            return this;
+        }
+
+        /**
+         * Add additional flags to the intent (or with existing flags value).
+         *
+         * @param flag The new flags to set.
+         *
+         * @return this builder
+         */
+        public IntentBuilder addFlag(final int flag) {
+            intent.addFlags(flag);
+
+            return this;
+        }
+
+        /**
+         * Set an explicit MIME data type.
+         *
+         * @param type The MIME type of the data being handled by this intent.
+         *
+         * @return this builder
+         */
+        public IntentBuilder addType(final String type) {
+            intent.setType(type);
+
+            return this;
+        }
+
+        /**
+         * @return this builder
+         */
+        public IntentBuilder isExternal() {
+            return addFlag(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         }
 
         /**
