@@ -113,6 +113,7 @@ public final class StrictModeHelper {
     /**
      * @return The current instance of {@link StrictModeHelper}.
      */
+    @SuppressWarnings("UnusedReturnValue")
     public StrictModeHelper reset() {
         if (!AppUtils.isDebugEnabled(context)) {
             return this;

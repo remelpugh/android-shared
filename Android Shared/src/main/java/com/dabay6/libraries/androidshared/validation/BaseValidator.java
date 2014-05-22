@@ -50,7 +50,7 @@ public abstract class BaseValidator implements Validator {
      * @param view  The {@link android.view.View} that will be validated.
      * @param resId The error message string resource id.
      */
-    public BaseValidator(final TextView view, final int resId) {
+    BaseValidator(final TextView view, final int resId) {
         this(view, null);
         messageResourceId = resId;
     }
@@ -61,7 +61,7 @@ public abstract class BaseValidator implements Validator {
      * @param view    The {@link android.view.View} that will be validated.
      * @param message The error message.
      */
-    public BaseValidator(final TextView view, final String message) {
+    BaseValidator(final TextView view, final String message) {
         messageResourceId = null;
         source = view;
         this.message = message;

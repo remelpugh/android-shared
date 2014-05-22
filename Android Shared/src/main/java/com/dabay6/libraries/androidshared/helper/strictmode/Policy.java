@@ -67,7 +67,7 @@ public final class Policy {
          */
         PenaltyDialog,
         /**
-         * Enable detected violations log a stacktrace and timing data to the {@link android.os.DropBoxManager} on
+         * Enable detected violations log a stack trace and timing data to the {@link android.os.DropBoxManager} on
          * policy
          * violation.
          */
@@ -123,7 +123,7 @@ public final class Policy {
         /**
          * Detect when a {@link android.content.BroadcastReceiver} or {@link android.content.ServiceConnection} is
          * leaked
-         * during {@link android.content.Context} teardown.
+         * during {@link android.content.Context} tear down.
          */
         DetectLeakedRegistrationObjects,
         /**
@@ -137,7 +137,7 @@ public final class Policy {
          */
         PenaltyDeath,
         /**
-         * Enable detected violations log a stacktrace and timing data to the {@link android.os.DropBoxManager} on
+         * Enable detected violations log a stack trace and timing data to the {@link android.os.DropBoxManager} on
          * policy
          * violation.
          */

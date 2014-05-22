@@ -184,11 +184,13 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
     /**
      * @param savedInstanceState
      */
+    @SuppressWarnings("EmptyMethod")
     protected abstract void afterViews(final Bundle savedInstanceState);
 
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected abstract int getLayoutResourceId();
 
     /**
@@ -196,6 +198,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      *
      * @return Resource identifier for the menu resource.
      */
+    @SuppressWarnings("SameReturnValue")
     protected abstract Integer getMenuResourceId();
 
     /**
@@ -206,6 +209,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      *                           BaseDialogFragment#onSaveInstanceState(android.os.Bundle)}. Note:
      *                           Otherwise it is null.
      */
+    @SuppressWarnings("EmptyMethod")
     protected void initialize(final Bundle savedInstanceState) {
     }
 }

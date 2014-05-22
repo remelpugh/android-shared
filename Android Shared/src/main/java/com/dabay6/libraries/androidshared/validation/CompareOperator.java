@@ -34,6 +34,7 @@ package com.dabay6.libraries.androidshared.validation;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public enum CompareOperator {
     /**
      * Determine if the value is of some particular data type.

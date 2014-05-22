@@ -22,6 +22,7 @@
 
 package com.dabay6.libraries.androidshared.ui.dialogs;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -133,7 +134,8 @@ public class DateTimePickerDialogFragment extends BaseDialogFragment {
         final Context context = getActivity();
         final Resources res = getActivity().getResources();
         final String title = res.getString(R.string.date_time_picker_title);
-        final View view = getActivity().getLayoutInflater().inflate(R.layout.util__date_time_picker, null);
+        @SuppressLint("InflateParams") final View view =
+                getActivity().getLayoutInflater().inflate(R.layout.util__date_time_picker, null);
         final ViewsFinder finder;
         Long milliseconds = null;
 
@@ -175,6 +177,7 @@ public class DateTimePickerDialogFragment extends BaseDialogFragment {
                 if (onDateTimePickerListener != null) {
                     final Calendar calendar = Calendar.getInstance();
 
+                    //noinspection MagicConstant
                     calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
                                  timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 

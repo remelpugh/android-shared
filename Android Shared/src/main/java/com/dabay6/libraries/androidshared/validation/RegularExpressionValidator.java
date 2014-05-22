@@ -87,7 +87,7 @@ public class RegularExpressionValidator extends BaseValidator {
                 }
             }
             else {
-                final String text = view.getText().toString();
+                final CharSequence text = view.getText();
 
                 if (!TextUtils.isEmpty(text)) {
                     final Matcher matcher = pattern.matcher(text);

@@ -35,6 +35,7 @@ import android.support.v4.app.FragmentManager;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public class FragmentFinder {
     private final Finder finder;
 

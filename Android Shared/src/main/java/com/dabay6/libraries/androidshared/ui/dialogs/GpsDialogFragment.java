@@ -85,7 +85,7 @@ public class GpsDialogFragment extends BaseDialogFragment {
             return null;
         }
 
-        if (arguments != null && arguments.containsKey("TitleResouceId")) {
+        if (arguments != null && arguments.containsKey("TitleResourceId")) {
             return GpsUtils.createDialog(context, arguments.getInt("TitleResourceId"));
         }
 

@@ -107,10 +107,12 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
      * @param drawableResId
      */
     public void setNegativeButtonIcon(final int drawableResId) {
-        final Drawable drawable = getContext().getResources().getDrawable(drawableResId);
+        if (getContext() != null) {
+            final Drawable drawable = getContext().getResources().getDrawable(drawableResId);
 
-        negative.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-        refreshView();
+            negative.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+            refreshView();
+        }
     }
 
     /**
@@ -134,17 +136,21 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
      * @param drawableResId
      */
     public void setPositiveButtonIcon(final int drawableResId) {
-        final Drawable drawable = getContext().getResources().getDrawable(drawableResId);
+        if (getContext() != null) {
+            final Drawable drawable = getContext().getResources().getDrawable(drawableResId);
 
-        positive.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-        refreshView();
+            positive.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+            refreshView();
+        }
     }
 
     /**
      * @param textResId
      */
     public void setPositiveButtonText(final int textResId) {
-        setPositiveButtonText(getContext().getString(textResId));
+        if (getContext() != null) {
+            setPositiveButtonText(getContext().getString(textResId));
+        }
     }
 
     /**
@@ -242,10 +248,7 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
         try {
             LayoutInflater.from(context).inflate(R.layout.util__merge_button_bar, this, true);
 
-            if (isInEditMode()) {
-                // do nothing
-            }
-            else {
+            if (!isInEditMode()) {
                 final ViewsFinder finder = new ViewsFinder(this);
 
                 positive = finder.find(R.id.positive);
@@ -258,7 +261,9 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
         catch (final Exception ignored) {
         }
         finally {
-            array.recycle();
+            if (array != null) {
+                array.recycle();
+            }
         }
     }
 

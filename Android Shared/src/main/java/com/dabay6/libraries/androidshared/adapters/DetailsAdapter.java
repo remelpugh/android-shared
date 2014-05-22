@@ -416,7 +416,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
                 for (final DetailsItem value : values) {
                     final String valueText = StringUtils.toLowerCase(value.toString());
 
-                    // First match against the whole, non-splitted value
+                    // First match against the whole, non-split value
                     if (valueText.startsWith(prefixString)) {
                         newValues.add(value);
                     }

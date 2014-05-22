@@ -124,13 +124,15 @@ public final class ToastUtils {
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                final Toast toast = Toast.makeText(context, message, duration);
+                if (context != null) {
+                    final Toast toast = Toast.makeText(context, message, duration);
 
-                if (view != null) {
-                    toast.setView(view);
+                    if (view != null) {
+                        toast.setView(view);
+                    }
+
+                    toast.show();
                 }
-
-                toast.show();
             }
         });
     }

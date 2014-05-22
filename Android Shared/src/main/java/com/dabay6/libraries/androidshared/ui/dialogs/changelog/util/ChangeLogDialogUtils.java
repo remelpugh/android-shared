@@ -201,16 +201,9 @@ public final class ChangeLogDialogUtils {
      * @return A {@link String} containing the defined CSS styles.
      */
     public static String getStyle() {
-        final StringBuilder style = new StringBuilder();
-
-        style.append("<style type=\"text/css\">");
-        style.append("h1 { margin-left: 0px; font-size: 14pt; }");
-        style.append("h3 { margin-left: 0px; padding-left: 10px; font-size: 10pt; }");
-        style.append("li { margin-left: 0px; font-size: 10pt;}");
-        style.append("ul { padding-left: 30px;}");
-        style.append("</style>");
-
-        return style.toString();
+        return "<style type=\"text/css\">" + "h1 { margin-left: 0px; font-size: 14pt; }" +
+               "h3 { margin-left: 0px; padding-left: 10px; font-size: 10pt; }" +
+               "li { margin-left: 0px; font-size: 10pt;}" + "ul { padding-left: 30px;}" + "</style>";
     }
 
     /**

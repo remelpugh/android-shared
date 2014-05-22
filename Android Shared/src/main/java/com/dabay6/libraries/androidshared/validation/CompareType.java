@@ -34,6 +34,7 @@ package com.dabay6.libraries.androidshared.validation;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public enum CompareType {
     /**
      * Data to be compared expected to be {@link java.util.Date}.

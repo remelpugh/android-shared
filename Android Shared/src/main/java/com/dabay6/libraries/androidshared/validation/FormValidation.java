@@ -87,9 +87,6 @@ public class FormValidation {
                     isValid = false;
                     view.setError(validator.getMessage());
                 }
-                else {
-                    // view.setError(null);
-                }
             }
             else {
                 view.setError(null);

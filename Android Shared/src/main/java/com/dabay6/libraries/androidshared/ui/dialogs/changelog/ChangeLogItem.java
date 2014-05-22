@@ -28,6 +28,7 @@ package com.dabay6.libraries.androidshared.ui.dialogs.changelog;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public class ChangeLogItem {
     private String description;
 

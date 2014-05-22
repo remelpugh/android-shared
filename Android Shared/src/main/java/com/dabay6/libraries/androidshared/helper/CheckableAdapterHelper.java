@@ -127,6 +127,7 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
      *
      * @return
      */
+    @SuppressWarnings("UnusedReturnValue")
     @TargetApi(VERSION_CODES.HONEYCOMB)
     public View initializeView(final int position, final View view) {
         if (view instanceof Checkable) {
@@ -231,17 +232,15 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
         if (savedInstanceState.containsKey(KEY_SELECTED_ITEMS)) {
             final long[] items = savedInstanceState.getLongArray(KEY_SELECTED_ITEMS);
 
-            for (final long id : items) {
-                selectedItems.add(id);
+            if (items != null) {
+                for (final long id : items) {
+                    selectedItems.add(id);
+                }
             }
         }
 
         if (savedInstanceState.containsKey(KEY_SELECTED_ITEM)) {
             savedSelectedId = savedInstanceState.getLong(KEY_SELECTED_ITEM);
-
-            if (selectedItems.size() == 0) {
-
-            }
         }
     }
 
@@ -356,9 +355,12 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
             }
 
             final Resources res = adapterView.getResources();
-            final String title = res.getQuantityString(R.plurals.utils__number_of_selected_items, count, count);
 
-            actionMode.setTitle(title);
+            if (res != null) {
+                final String title = res.getQuantityString(R.plurals.utils__number_of_selected_items, count, count);
+
+                actionMode.setTitle(title);
+            }
         }
     }
 

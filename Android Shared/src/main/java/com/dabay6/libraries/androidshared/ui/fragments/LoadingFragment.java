@@ -32,6 +32,7 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import com.dabay6.libraries.androidshared.R;
@@ -381,6 +382,7 @@ public class LoadingFragment extends BaseFragment {
 
     private void setContentShown(final boolean shown, final boolean animate) {
         final Context context = getActivity();
+        Animation animation;
 
         afterViews();
 
@@ -392,8 +394,15 @@ public class LoadingFragment extends BaseFragment {
 
         if (shown) {
             if (animate) {
-                loadingContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out));
-                contentContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in));
+                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+                if (animation != null) {
+                    loadingContainer.startAnimation(animation);
+                }
+
+                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+                if (animation != null) {
+                    contentContainer.startAnimation(animation);
+                }
             }
             else {
                 loadingContainer.clearAnimation();
@@ -405,8 +414,15 @@ public class LoadingFragment extends BaseFragment {
         }
         else {
             if (animate) {
-                loadingContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in));
-                contentContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out));
+                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+                if (animation != null) {
+                    loadingContainer.startAnimation(animation);
+                }
+
+                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+                if (animation != null) {
+                    contentContainer.startAnimation(animation);
+                }
             }
             else {
                 loadingContainer.clearAnimation();

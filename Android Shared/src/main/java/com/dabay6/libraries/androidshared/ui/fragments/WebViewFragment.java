@@ -26,6 +26,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -197,6 +198,7 @@ public class WebViewFragment extends BaseFragment {
      */
     protected void setContentShown(boolean shown) {
         final Context context = getActivity();
+        Animation animation;
 
         if (isContentShown == shown) {
             return;
@@ -205,15 +207,29 @@ public class WebViewFragment extends BaseFragment {
         isContentShown = shown;
 
         if (shown) {
-            loadingContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out));
-            contentContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in));
+            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+            if (animation != null) {
+                loadingContainer.startAnimation(animation);
+            }
+
+            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+            if (animation != null) {
+                contentContainer.startAnimation(animation);
+            }
 
             ViewUtils.setGone(loadingContainer, true);
             ViewUtils.setGone(contentContainer, false);
         }
         else {
-            loadingContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_in));
-            contentContainer.startAnimation(AnimationUtils.loadAnimation(context, android.R.anim.fade_out));
+            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+            if (animation != null) {
+                loadingContainer.startAnimation(animation);
+            }
+
+            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+            if (animation != null) {
+                contentContainer.startAnimation(animation);
+            }
 
             ViewUtils.setGone(loadingContainer, false);
             ViewUtils.setGone(contentContainer, true);

@@ -123,11 +123,19 @@ public abstract class BaseCheckableAdapter<T> extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, final ViewGroup parent) {
         if (convertView == null) {
+            final Object viewHolder;
+
             convertView = inflater.inflate(layoutResourceId, parent, false);
-            convertView.setTag(getViewHolder(convertView));
+
+            if (convertView != null) {
+                viewHolder = getViewHolder(convertView);
+                if (viewHolder != null) {
+                    convertView.setTag(viewHolder);
+                }
+            }
         }
 
-        bindView(convertView.getTag());
+        bindView(convertView != null ? convertView.getTag() : null);
 
         return convertView;
     }
@@ -137,7 +145,7 @@ public abstract class BaseCheckableAdapter<T> extends BaseAdapter {
      */
     public void select(final int position, final boolean isSelected) {
         if (isSelected) {
-            selectedItems.put(position, isSelected);
+            selectedItems.put(position, true);
         }
         else {
             selectedItems.delete(position);
