@@ -198,6 +198,7 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
      *
      * @return Resource identifier for the menu resource.
      */
+    @SuppressWarnings("SameReturnValue")
     protected abstract Integer getMenuResourceId();
 
     /**

@@ -48,15 +48,17 @@ public final class AppUtils {
      * @return application version
      */
     public static String getApplicationVersion(final Context context) {
-        String version;
+        String version = "1.0";
 
         try {
             final PackageInfo info;
             final PackageManager manager = context.getPackageManager();
 
-            info = manager.getPackageInfo(context.getPackageName(), 0);
+            if (manager != null) {
+                info = manager.getPackageInfo(context.getPackageName(), 0);
 
-            version = info.versionName;
+                version = info.versionName;
+            }
         }
         catch (final NameNotFoundException ex) {
             version = "1.0";
@@ -73,6 +75,8 @@ public final class AppUtils {
      * @return true if debugging is enabled, otherwise false.
      */
     public static boolean isDebugEnabled(final Context context) {
-        return (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
+        return context == null || context.getApplicationInfo() == null ||
+               (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
+
     }
 }

@@ -22,6 +22,7 @@
 
 package com.dabay6.libraries.androidshared.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.OnNavigationListener;
@@ -61,6 +62,7 @@ public class ActionBarUtils {
      * @param actionBar the {@link ActionBar} to customize.
      * @param listener  the callback to be invoked when the action bar buttons are clicked.
      */
+    @SuppressLint("InflateParams")
     public static void configureDiscardDone(final ActionBar actionBar, final OnActionBarDiscardDoneListener listener) {
         final LayoutInflater inflater;
         final View view;

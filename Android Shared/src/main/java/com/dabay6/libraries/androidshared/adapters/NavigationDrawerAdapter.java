@@ -34,9 +34,9 @@ import com.dabay6.libraries.androidshared.R.layout;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
 import com.dabay6.libraries.androidshared.util.ListUtils;
+import com.dabay6.libraries.androidshared.util.StringUtils;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * NavigationDrawerAdapter
@@ -175,6 +175,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         final BaseNavigationListItem listItem = getItem(position);
         final int layoutResourceId;
         final CharSequence title = listItem.getTitle();
+        final TextView text;
         View view = convertView;
 
         layoutResourceId = (listItem instanceof NavigationDrawerCategory) ? layout.util__menu_row_category
@@ -184,11 +185,14 @@ public class NavigationDrawerAdapter extends BaseAdapter {
             view = LayoutInflater.from(context).inflate(layoutResourceId, parent, false);
         }
 
-        ((TextView) view).setText(title);
+        text = (TextView) view;
+        if (text != null) {
+            text.setText(title);
+        }
 
         if (AndroidUtils.isVersionBefore(VERSION_CODES.ICE_CREAM_SANDWICH) &&
-            listItem instanceof NavigationDrawerCategory) {
-            ((TextView) view).setText(title.toString().toUpperCase(Locale.getDefault()));
+            listItem instanceof NavigationDrawerCategory && text != null) {
+            text.setText(StringUtils.toUpperCase(text.getText()));
         }
 
         if (listItem instanceof NavigationDrawerItem) {
@@ -199,9 +203,11 @@ public class NavigationDrawerAdapter extends BaseAdapter {
                 final TextView menuItemView;
 
                 menuItemView = (TextView) view;
-                menuItemView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
-                menuItemView.setPadding(8, menuItemView.getPaddingTop(), menuItemView.getPaddingRight(),
-                                        menuItemView.getPaddingBottom());
+                if (menuItemView != null) {
+                    menuItemView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
+                    menuItemView.setPadding(8, menuItemView.getPaddingTop(), menuItemView.getPaddingRight(),
+                                            menuItemView.getPaddingBottom());
+                }
             }
         }
 

@@ -219,7 +219,14 @@ public class CheckableRelativeLayout extends RelativeLayout implements Checkable
         public SavedState(final Parcel source) {
             super(source);
 
-            isChecked = (Boolean) source.readValue(null);
+            final Boolean value = (Boolean) source.readValue(null);
+
+            if (value == null) {
+                isChecked = false;
+            }
+            else {
+                isChecked = value;
+            }
         }
 
         /**

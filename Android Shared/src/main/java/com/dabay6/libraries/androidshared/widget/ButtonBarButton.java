@@ -38,6 +38,7 @@ import com.dabay6.libraries.androidshared.R;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 class ButtonBarButton extends Button {
     /**
      * @param context
@@ -70,6 +71,7 @@ class ButtonBarButton extends Button {
      * @param attributes
      * @param defStyle
      */
+    @SuppressWarnings("EmptyMethod")
     private void initialize(final Context context, final AttributeSet attributes, final int defStyle) {
     }
 }

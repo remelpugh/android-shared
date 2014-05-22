@@ -180,12 +180,15 @@ public class SimpleTwoLineAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
             convertView = inflater.inflate(layoutResourceId, parent, false);
-            finder = new ViewsFinder(convertView);
 
-            holder.data = finder.find(android.R.id.text1);
-            holder.label = finder.find(android.R.id.text2);
+            if (convertView != null) {
+                finder = new ViewsFinder(convertView);
 
-            convertView.setTag(holder);
+                holder.data = finder.find(android.R.id.text1);
+                holder.label = finder.find(android.R.id.text2);
+
+                convertView.setTag(holder);
+            }
         }
         else {
             holder = (ViewHolder) convertView.getTag();

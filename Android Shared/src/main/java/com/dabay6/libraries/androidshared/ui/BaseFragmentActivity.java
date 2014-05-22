@@ -212,6 +212,7 @@ public abstract class BaseFragmentActivity extends ActionBarActivity
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected <T extends Fragment> T getFragment() {
         return null;
     }
@@ -219,6 +220,7 @@ public abstract class BaseFragmentActivity extends ActionBarActivity
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected String getFragmentTag() {
         return null;
     }
@@ -235,6 +237,7 @@ public abstract class BaseFragmentActivity extends ActionBarActivity
      *
      * @return The resource identifier for the menu
      */
+    @SuppressWarnings("SameReturnValue")
     protected Integer getMenuResource() {
         return null;
     }
@@ -256,6 +259,7 @@ public abstract class BaseFragmentActivity extends ActionBarActivity
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected boolean isHomeButtonEnabled() {
         return true;
     }
@@ -263,6 +267,7 @@ public abstract class BaseFragmentActivity extends ActionBarActivity
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected boolean isLogoEnabled() {
         return false;
     }

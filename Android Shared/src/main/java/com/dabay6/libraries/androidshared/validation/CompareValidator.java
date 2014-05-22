@@ -25,6 +25,7 @@
  */
 package com.dabay6.libraries.androidshared.validation;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 /**
@@ -36,6 +37,7 @@ import android.widget.TextView;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public class CompareValidator extends BaseValidator {
     private TextView compare;
     private CompareOperator operator;
@@ -73,21 +75,25 @@ public class CompareValidator extends BaseValidator {
         }
         else {
             if (isEnabled()) {
-                final String value = compare.getText().toString();
+                if (compare != null && !TextUtils.isEmpty(compare.getText())) {
+                    @SuppressWarnings("ConstantConditions") final String value = compare.getText().toString();
 
-                switch (type) {
-                    case String: {
-                        switch (operator) {
-                            case Equal: {
-                                return source.getText().toString().equalsIgnoreCase(value);
-                            }
-                            default: {
-                                return true;
+                    switch (type) {
+                        case String: {
+                            switch (operator) {
+                                case Equal: {
+                                    //noinspection ConstantConditions
+                                    return !TextUtils.isEmpty(source.getText()) &&
+                                           source.getText().toString().equalsIgnoreCase(value);
+                                }
+                                default: {
+                                    return true;
+                                }
                             }
                         }
-                    }
-                    default: {
-                        return true;
+                        default: {
+                            return true;
+                        }
                     }
                 }
                 // boolean isValid = true;

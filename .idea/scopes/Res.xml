@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Res" pattern="file[Android Shared]:src//res//*" />
+</component>

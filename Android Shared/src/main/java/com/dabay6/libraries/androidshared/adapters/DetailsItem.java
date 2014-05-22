@@ -28,6 +28,7 @@ package com.dabay6.libraries.androidshared.adapters;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public class DetailsItem {
     private String data;
     private String label;

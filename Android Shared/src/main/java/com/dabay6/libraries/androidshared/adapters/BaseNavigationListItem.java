@@ -36,7 +36,7 @@ public class BaseNavigationListItem implements NavigationListItem {
      *
      * @param title The title of this instance.
      */
-    public BaseNavigationListItem(final CharSequence title) {
+    BaseNavigationListItem(final CharSequence title) {
         this.title = title;
     }
 

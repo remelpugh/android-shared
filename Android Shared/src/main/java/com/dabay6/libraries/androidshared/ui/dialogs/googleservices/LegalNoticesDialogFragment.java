@@ -120,6 +120,7 @@ public class LegalNoticesDialogFragment extends BaseDialogFragment {
     /**
      *
      */
+    @SuppressWarnings("EmptyMethod")
     public void show() {
     }
 

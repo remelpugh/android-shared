@@ -35,6 +35,7 @@ package com.dabay6.libraries.androidshared.widget;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public interface OnButtonBarClickListener {
     /**
      * Called when the negative {@link android.widget.Button} has been clicked.

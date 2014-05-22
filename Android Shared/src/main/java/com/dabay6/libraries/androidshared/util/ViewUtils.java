@@ -60,8 +60,9 @@ public class ViewUtils {
      *
      * @return The text of the {@link EditText} view, otherwise null.
      */
+    @SuppressWarnings("ConstantConditions")
     public static String getText(final EditText view) {
-        if (view != null) {
+        if (view != null && !TextUtils.isEmpty(view.getText())) {
             return view.getText().toString();
         }
 
@@ -75,6 +76,7 @@ public class ViewUtils {
      *
      * @return true if all {@link EditText} views are empty, false otherwise.
      */
+    @SuppressWarnings("ConstantConditions")
     public static boolean isEmpty(final EditText... views) {
         for (final EditText view : views) {
             if (view != null) {
@@ -98,6 +100,7 @@ public class ViewUtils {
      *
      * @return view
      */
+    @SuppressWarnings("UnusedReturnValue")
     public static <T extends View> T setGone(final T view, final boolean gone) {
         if (view != null) {
             if (gone) {
@@ -125,6 +128,7 @@ public class ViewUtils {
      *
      * @return view
      */
+    @SuppressWarnings("UnusedReturnValue")
     public static <T extends View> T setInvisible(final T view, final boolean invisible) {
         if (view != null) {
             if (invisible) {

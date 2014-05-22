@@ -117,10 +117,10 @@ public final class NetworkUtils {
                 break;
             }
             default: {
-                ip = null;
+                return null;
             }
         }
 
-        return (ip == null) ? null : formatIpAddress(ip);
+        return formatIpAddress(ip);
     }
 }

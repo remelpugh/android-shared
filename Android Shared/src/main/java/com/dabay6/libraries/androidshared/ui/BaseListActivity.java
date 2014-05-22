@@ -119,6 +119,7 @@ public abstract class BaseListActivity extends ActionBarActivity {
      *
      * @return The resource identifier for the menu
      */
+    @SuppressWarnings("SameReturnValue")
     protected Integer getMenuResource() {
         return null;
     }
@@ -126,12 +127,14 @@ public abstract class BaseListActivity extends ActionBarActivity {
     /**
      * @param savedInstanceState
      */
+    @SuppressWarnings("EmptyMethod")
     protected void initialize(final Bundle savedInstanceState) {
     }
 
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected boolean isHomeAsUpEnabled() {
         return false;
     }
@@ -139,6 +142,7 @@ public abstract class BaseListActivity extends ActionBarActivity {
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected boolean isHomeButtonEnabled() {
         return true;
     }
@@ -146,6 +150,7 @@ public abstract class BaseListActivity extends ActionBarActivity {
     /**
      * @return
      */
+    @SuppressWarnings("SameReturnValue")
     protected boolean isLogoEnabled() {
         return false;
     }
@@ -156,6 +161,7 @@ public abstract class BaseListActivity extends ActionBarActivity {
      *
      * @return true if the title is to be displayed, otherwise false
      */
+    @SuppressWarnings("SameReturnValue")
     protected boolean isTitleEnabled() {
         return false;
     }

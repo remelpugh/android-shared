@@ -22,6 +22,8 @@
 
 package com.dabay6.libraries.androidshared.util;
 
+import android.text.TextUtils;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
@@ -45,6 +47,7 @@ public final class StringUtils {
     /**
      * @return An empty string.
      */
+    @SuppressWarnings("SameReturnValue")
     public static String empty() {
         return "";
     }
@@ -140,5 +143,55 @@ public final class StringUtils {
      */
     public static String toLowerCase(final String s, Locale locale) {
         return s.toLowerCase(locale);
+    }
+
+    /**
+     * Converts the passed in string to upper case, using the specified locale
+     *
+     * @param s The string to be changed to upper case.
+     *
+     * @return The lower case string.
+     */
+    public static String toUpperCase(final CharSequence s) {
+        return StringUtils.toUpperCase(s.toString());
+    }
+
+    /**
+     * Converts the passed in string to upper case, using the specified locale
+     *
+     * @param s The string to be changed to upper case.
+     *
+     * @return The lower case string.
+     */
+    public static String toUpperCase(final String s) {
+        return StringUtils.toUpperCase(s, Locale.getDefault());
+    }
+
+    /**
+     * Converts the passed in string to upper case, using the specified locale
+     *
+     * @param s      The string to be changed to upper case.
+     * @param locale The locale to apply.
+     *
+     * @return The lower case string.
+     */
+    public static String toUpperCase(final CharSequence s, Locale locale) {
+        return StringUtils.toUpperCase(s.toString(), locale);
+    }
+
+    /**
+     * Converts the passed in string to upper case, using the specified locale
+     *
+     * @param s      The string to be changed to upper case.
+     * @param locale The locale to apply.
+     *
+     * @return The lower case string.
+     */
+    public static String toUpperCase(final String s, Locale locale) {
+        if (TextUtils.isEmpty(s)) {
+            return StringUtils.empty();
+        }
+
+        return s.toUpperCase(locale);
     }
 }

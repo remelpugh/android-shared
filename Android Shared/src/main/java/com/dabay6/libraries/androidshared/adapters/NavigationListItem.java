@@ -31,6 +31,7 @@ package com.dabay6.libraries.androidshared.adapters;
  * @author Remel Pugh
  * @version 1.0
  */
+@SuppressWarnings("unused")
 public interface NavigationListItem {
     /**
      * Gets the {@link CharSequence} that represents the title for this instance.
