@@ -81,7 +81,7 @@ public class GpsDialogFragment extends BaseDialogFragment {
         final Bundle arguments = getArguments();
         final Context context = getActivity();
 
-        if (!GpsUtils.hasNeverShowAgain(context)) {
+        if (!GpsUtils.canBeShown(context)) {
             return null;
         }
 

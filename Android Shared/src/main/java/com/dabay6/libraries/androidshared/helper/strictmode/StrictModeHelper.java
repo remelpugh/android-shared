@@ -57,7 +57,7 @@ public final class StrictModeHelper {
      *
      */
     public void generate() {
-        if (!AppUtils.isDebugEnabled(context)) {
+        if (!AppUtils.isDebuggable(context)) {
             return;
         }
 
@@ -115,7 +115,7 @@ public final class StrictModeHelper {
      */
     @SuppressWarnings("UnusedReturnValue")
     public StrictModeHelper reset() {
-        if (!AppUtils.isDebugEnabled(context)) {
+        if (!AppUtils.isDebuggable(context)) {
             return this;
         }
 
@@ -130,7 +130,7 @@ public final class StrictModeHelper {
      */
     @TargetApi(VERSION_CODES.HONEYCOMB)
     public StrictModeHelper setThreadPolicy(final Policy.Thread... policies) {
-        if (!AppUtils.isDebugEnabled(context)) {
+        if (!AppUtils.isDebuggable(context)) {
             return this;
         }
 
@@ -197,7 +197,7 @@ public final class StrictModeHelper {
      */
     @TargetApi(VERSION_CODES.JELLY_BEAN)
     public StrictModeHelper setVmPolicy(final Policy.Vm... policies) {
-        if (!AppUtils.isDebugEnabled(context)) {
+        if (!AppUtils.isDebuggable(context)) {
             return this;
         }
 

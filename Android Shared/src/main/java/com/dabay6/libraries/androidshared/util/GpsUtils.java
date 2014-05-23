@@ -56,19 +56,23 @@ public final class GpsUtils {
     }
 
     /**
-     * @param context
+     * Check if the user has selected to never show the GPS dialog again.
      *
-     * @return
+     * @param context The {@link Context} used to retrieve the user preference.
+     *
+     * @return True if the dialog can be shown, otherwise false.
      */
-    public static AlertDialog createDialog(final Context context) {
-        return createDialog(context, string.gps_title);
+    public static boolean canBeShown(final Context context) {
+        final SharedPreferencesHelper helper = new SharedPreferencesHelper(context);
+
+        return helper.booleanValue(PREF_GPS_NEVER_SHOW, false);
     }
 
     /**
-     * @param context
-     * @param titleResourceId
+     * Creates the GPS dialog that allows the user to turn on GPS.
      *
-     * @return
+     * @param context         The {@link Context} used to create the dialog.
+     * @param titleResourceId The resource id for the title of the dialog.
      */
     public static AlertDialog createDialog(final Context context, final int titleResourceId) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -82,7 +86,7 @@ public final class GpsUtils {
                    @Override
                    public void onClick(final DialogInterface dialog, final int id) {
                        if (checkBox != null && checkBox.isChecked()) {
-                           setNeverShowAgain(context);
+                           setCanBeShown(context);
                        }
                    }
                })
@@ -92,7 +96,7 @@ public final class GpsUtils {
                        final IntentBuilder intent;
 
                        if (checkBox != null && checkBox.isChecked()) {
-                           setNeverShowAgain(context);
+                           setCanBeShown(context);
                        }
 
                        intent = new IntentBuilder(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -106,14 +110,12 @@ public final class GpsUtils {
     }
 
     /**
-     * @param context
+     * Creates the GPS dialog that allows the user to turn on GPS, with the default title.
      *
-     * @return
+     * @param context The {@link Context} used to create the dialog.
      */
-    public static boolean hasNeverShowAgain(final Context context) {
-        final SharedPreferencesHelper helper = new SharedPreferencesHelper(context);
-
-        return helper.booleanValue(PREF_GPS_NEVER_SHOW, false);
+    public static AlertDialog createDialog(final Context context) {
+        return createDialog(context, string.gps_title);
     }
 
     /**
@@ -167,14 +169,14 @@ public final class GpsUtils {
      * @param titleResourceId The resource containing the dialog title.
      */
     public static void showDisabledAlert(final Context context, final int titleResourceId) {
-        if (!hasNeverShowAgain(context)) {
+        if (canBeShown(context)) {
             final AlertDialog alert = createDialog(context, titleResourceId);
 
             alert.show();
         }
     }
 
-    private static void setNeverShowAgain(final Context context) {
+    private static void setCanBeShown(final Context context) {
         final SharedPreferencesEditorHelper helper = new SharedPreferencesEditorHelper(context);
 
         helper.putBoolean(PREF_GPS_NEVER_SHOW, true).commit();

@@ -241,6 +241,7 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
         /**
          * {@inheritDoc}
          */
+        @SuppressWarnings("NullableProblems")
         @Override
         public void writeToParcel(final Parcel dest, final int flags) {
             super.writeToParcel(dest, flags);

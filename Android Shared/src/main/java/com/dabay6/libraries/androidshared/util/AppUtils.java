@@ -74,7 +74,8 @@ public final class AppUtils {
      *
      * @return true if debugging is enabled, otherwise false.
      */
-    public static boolean isDebugEnabled(final Context context) {
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static boolean isDebuggable(final Context context) {
         return context == null || context.getApplicationInfo() == null ||
                (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
 

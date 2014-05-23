@@ -164,6 +164,7 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("NullableProblems")
     @Override
     protected void dispatchRestoreInstanceState(final SparseArray<Parcelable> container) {
         super.dispatchThawSelfOnly(container);
@@ -172,6 +173,7 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("NullableProblems")
     @Override
     protected void dispatchSaveInstanceState(final SparseArray<Parcelable> container) {
         super.dispatchFreezeSelfOnly(container);
@@ -325,6 +327,7 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
         }
 
         @Override
+        @SuppressWarnings("NullableProblems")
         public void writeToParcel(final Parcel destination, final int flags) {
             super.writeToParcel(destination, flags);
 

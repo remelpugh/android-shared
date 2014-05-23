@@ -25,8 +25,12 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
           android:exitFadeDuration="@android:integer/config_mediumAnimTime">
 
-    <item android:state_activated="true"
-          android:drawable="@drawable/util__list_activated" />
-    <item android:drawable="@android:color/transparent" />
+    <item android:drawable="@color/util__list_item_background_checked"
+          android:state_activated="true" />
+    <item android:drawable="@color/util__list_item_background_pressed"
+          android:state_pressed="true" />
+    <item android:drawable="@color/util__list_item_background_checked"
+          android:state_checked="true" />
+    <item android:drawable="@color/util__list_item_background_normal" />
 
 </selector>
