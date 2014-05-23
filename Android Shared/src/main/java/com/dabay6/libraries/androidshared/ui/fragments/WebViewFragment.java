@@ -66,19 +66,6 @@ public class WebViewFragment extends BaseFragment {
     }
 
     /**
-     * @param assetName The name of the asset containing the html.
-     *
-     * @return A {@link Bundle} containing the default arguments for an instance of {@link WebViewFragment}.
-     */
-    public static Bundle getDefaultArgs(final String assetName) {
-        final Bundle bundle = new Bundle();
-
-        bundle.putString(WebViewFragment.ASSET_NAME_KEY, assetName);
-
-        return bundle;
-    }
-
-    /**
      * Instantiate a new instance of {@link WebViewFragment}.
      *
      * @return A new instance of {@link WebViewFragment}.
@@ -87,7 +74,11 @@ public class WebViewFragment extends BaseFragment {
         final WebViewFragment fragment = new WebViewFragment();
 
         if (!TextUtils.isEmpty(assetName)) {
-            fragment.setArguments(getDefaultArgs(assetName));
+            final Bundle bundle = new Bundle();
+
+            bundle.putString(WebViewFragment.ASSET_NAME_KEY, assetName);
+
+            fragment.setArguments(bundle);
         }
 
         return fragment;
@@ -104,7 +95,7 @@ public class WebViewFragment extends BaseFragment {
     }
 
     /**
-     *
+     * {@inheritDoc}
      */
     protected final void afterViews() {
         if (contentContainer == null && loadingContainer == null) {
@@ -123,25 +114,6 @@ public class WebViewFragment extends BaseFragment {
         }
 
         loadWebView();
-    }
-
-    /**
-     *
-     */
-    protected void configureWebView() {
-        if (webView != null) {
-            final WebSettings settings;
-
-            settings = webView.getSettings();
-            settings.setSupportZoom(false);
-
-            webView.setWebViewClient(new WebViewClient() {
-                @Override
-                public void onPageFinished(WebView view, String url) {
-                    setContentShown(true);
-                }
-            });
-        }
     }
 
     /**
@@ -166,7 +138,7 @@ public class WebViewFragment extends BaseFragment {
     }
 
     /**
-     * @return
+     * {@inheritDoc}
      */
     @Override
     protected Integer getLayoutResourceId() {
@@ -174,15 +146,14 @@ public class WebViewFragment extends BaseFragment {
     }
 
     /**
-     * @return The menu resource id.
+     * {@inheritDoc}
      */
-    @SuppressWarnings("unused")
     protected Integer getMenuResourceId() {
         return null;
     }
 
     /**
-     * @param savedInstanceState The fragment saved instance state, if available.
+     * {@inheritDoc}
      */
     @Override
     protected void initialize(final Bundle savedInstanceState) {
@@ -194,19 +165,21 @@ public class WebViewFragment extends BaseFragment {
     }
 
     /**
-     * @param shown
+     * Show or hide the content of the fragment based on the passed in value.
+     *
+     * @param isVisible True if the content is visible, otherwise false.
      */
-    protected void setContentShown(boolean shown) {
+    protected void setContentShown(boolean isVisible) {
         final Context context = getActivity();
         Animation animation;
 
-        if (isContentShown == shown) {
+        if (isContentShown == isVisible) {
             return;
         }
 
-        isContentShown = shown;
+        isContentShown = isVisible;
 
-        if (shown) {
+        if (isVisible) {
             animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
             if (animation != null) {
                 loadingContainer.startAnimation(animation);
@@ -233,6 +206,22 @@ public class WebViewFragment extends BaseFragment {
 
             ViewUtils.setGone(loadingContainer, false);
             ViewUtils.setGone(contentContainer, true);
+        }
+    }
+
+    private void configureWebView() {
+        if (webView != null) {
+            final WebSettings settings;
+
+            settings = webView.getSettings();
+            settings.setSupportZoom(false);
+
+            webView.setWebViewClient(new WebViewClient() {
+                @Override
+                public void onPageFinished(WebView view, String url) {
+                    setContentShown(true);
+                }
+            });
         }
     }
 

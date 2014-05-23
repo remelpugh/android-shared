@@ -45,31 +45,41 @@ public class ViewsFinder {
     private final Finder finder;
 
     /**
-     * @param activity
+     * Creates a {@link com.dabay6.libraries.androidshared.view.ViewsFinder} using an {@link Activity} as the
+     * parent.
+     *
+     * @param activity The parent that will be searched.
      */
     public ViewsFinder(final Activity activity) {
-        finder = new WindowFinder(activity.getWindow());
+        this(activity.getWindow());
     }
 
     /**
-     * @param view
+     * Creates a {@link com.dabay6.libraries.androidshared.view.ViewsFinder} using a {@link View} as the parent.
+     *
+     * @param view The parent that will be searched.
      */
     public ViewsFinder(final View view) {
         finder = new ViewFinder(view);
     }
 
     /**
-     * @param window
+     * Creates a {@link com.dabay6.libraries.androidshared.view.ViewsFinder} using a {@link android.view.Window} as the
+     * parent.
+     *
+     * @param window The parent that will be searched.
      */
     public ViewsFinder(final Window window) {
         finder = new WindowFinder(window);
     }
 
     /**
-     * @param id
-     * @param runnable
+     * Adds a {@link android.text.TextWatcher} to the {@link android.widget.EditText} specified by the id.
      *
-     * @return
+     * @param id       The id of the {@link android.widget.EditText}.
+     * @param runnable The {@link Runnable} which will be executed when the text has changed.
+     *
+     * @return The {@link android.widget.EditText}.
      */
     public EditText addTextWatcher(final int id, final Runnable runnable) {
         return addTextWatcher(id, new TextWatcher() {
@@ -89,10 +99,12 @@ public class ViewsFinder {
     }
 
     /**
-     * @param id
-     * @param watcher
+     * Adds a {@link android.text.TextWatcher} to the {@link android.widget.EditText} specified by the id.
      *
-     * @return
+     * @param id      The id of the {@link android.widget.EditText}.
+     * @param watcher The {@link android.text.TextWatcher} to add.
+     *
+     * @return The {@link android.widget.EditText}.
      */
     public EditText addTextWatcher(final int id, final TextWatcher watcher) {
         final EditText view = find(id);
@@ -103,8 +115,9 @@ public class ViewsFinder {
     }
 
     /**
-     * @param watcher
-     * @param views
+     * Adds a {@link android.text.TextWatcher} to all the passed in {@link android.widget.EditText} views.
+     *
+     * @param views The {@link android.widget.EditText} views.
      */
     public void addTextWatcher(final TextWatcher watcher, final EditText... views) {
         for (final EditText view : views) {
@@ -115,8 +128,10 @@ public class ViewsFinder {
     }
 
     /**
-     * @param watcher
-     * @param ids
+     * Adds a {@link android.text.TextWatcher} to the {@link android.widget.EditText} specified by the id.
+     *
+     * @param watcher The {@link android.text.TextWatcher} to add.
+     * @param ids     The ids of the {@link android.widget.EditText}.
      */
     public void addTextWatcher(final TextWatcher watcher, final int... ids) {
         for (final int id : ids) {
@@ -127,9 +142,11 @@ public class ViewsFinder {
     }
 
     /**
-     * @param id
+     * Look for a child view with the given id.  If this view has the given id, return this view.
      *
-     * @return
+     * @param id The id to search for.
+     *
+     * @return The view that has the given id in the hierarchy or null
      */
     @SuppressWarnings("unchecked")
     public <T extends View> T find(final int id) {
@@ -144,6 +161,9 @@ public class ViewsFinder {
     /**
      * Register on click listener to child view with given id
      *
+     * @param id       The id to search for.
+     * @param listener The {@link android.view.View.OnClickListener} to be attached.
+     *
      * @return view registered with listener
      */
     public View onClick(final int id, final OnClickListener listener) {
@@ -155,10 +175,12 @@ public class ViewsFinder {
     }
 
     /**
-     * @param id
-     * @param runnable
+     * Register on click listener to child view with given id
      *
-     * @return
+     * @param id       The id to search for.
+     * @param runnable The {@link java.lang.Runnable} to be executed upon click the view.
+     *
+     * @return view registered with listener
      */
     public View onClick(final int id, final Runnable runnable) {
         return onClick(id, new OnClickListener() {
@@ -170,10 +192,10 @@ public class ViewsFinder {
     }
 
     /**
-     * @param listener
-     * @param ids
+     * Register on click listener to child views with given ids
      *
-     * @return
+     * @param listener The {@link android.view.View.OnClickListener} to be attached.
+     * @param ids      The id to search for.
      */
     public void onClick(final OnClickListener listener, final int... ids) {
         for (final int id : ids) {
@@ -273,20 +295,24 @@ public class ViewsFinder {
     }
 
     /**
-     * @param id
-     * @param resId
+     * Set the text of the {@link android.widget.TextView} specified by the id passed in.
      *
-     * @return
+     * @param id    The id of the {@link android.widget.TextView}.
+     * @param resId The resource id of the text to be set.
+     *
+     * @return The {@link TextView}, otherwise null.
      */
     public TextView setText(final int id, final int resId) {
         return setText(id, finder.getResources().getString(resId));
     }
 
     /**
-     * @param id
-     * @param text
+     * Set the text of the {@link android.widget.TextView} specified by the id passed in.
      *
-     * @return
+     * @param id   The id of the {@link android.widget.TextView}.
+     * @param text The text to be set.
+     *
+     * @return The {@link TextView}, otherwise null.
      */
     public TextView setText(final int id, final String text) {
         final TextView view = find(id);

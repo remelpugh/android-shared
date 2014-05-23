@@ -157,7 +157,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
     }
 
     /**
-     * @param titleId
+     * {@inheritDoc}
      */
     @Override
     public void setTitle(final int titleId) {
@@ -165,7 +165,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
     }
 
     /**
-     * @param title
+     * {@inheritDoc}
      */
     @Override
     public void setTitle(final String title) {
@@ -182,13 +182,17 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
     }
 
     /**
-     * @param savedInstanceState
+     * Called after the view has been created.
+     *
+     * @param savedInstanceState The saved state of fragment.
      */
     @SuppressWarnings("EmptyMethod")
     protected abstract void afterViews(final Bundle savedInstanceState);
 
     /**
-     * @return
+     * Gets the layout resource for this instance.
+     *
+     * @return Resource identifier for the layout resource.
      */
     @SuppressWarnings("SameReturnValue")
     protected abstract int getLayoutResourceId();

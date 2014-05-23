@@ -117,7 +117,7 @@ public class GpsDialogFragment extends BaseDialogFragment {
     }
 
     /**
-     * @return
+     * {@inheritDoc}
      */
     @Override
     protected Integer getMenuResourceId() {

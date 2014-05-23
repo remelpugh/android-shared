@@ -42,7 +42,9 @@ public final class NavigationUtils {
     }
 
     /**
-     * @param activity
+     * Navigate back up the back stack.
+     *
+     * @param activity The current {@link Activity}.
      */
     public static void navigateUp(final Activity activity) {
         // This is called when the Home (Up) button is pressed in the action bar. Create a simple intent that starts the

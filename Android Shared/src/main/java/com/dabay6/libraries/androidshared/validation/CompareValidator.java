@@ -159,21 +159,27 @@ public class CompareValidator extends BaseValidator {
     }
 
     /**
-     * @param value
+     * Set the type of operator to be done.
+     *
+     * @param value The {@link com.dabay6.libraries.androidshared.validation.CompareOperator}.
      */
     public void setCompareOperator(final CompareOperator value) {
         operator = value;
     }
 
     /**
-     * @param value
+     * Sets the type of compare to be done.
+     *
+     * @param value The {@link com.dabay6.libraries.androidshared.validation.CompareType}.
      */
     public void setCompareType(final CompareType value) {
         type = value;
     }
 
     /**
-     * @param value
+     * Sets the control to be validated.
+     *
+     * @param value The control to validate.
      */
     public void setControlToValidate(final TextView value) {
         compare = value;

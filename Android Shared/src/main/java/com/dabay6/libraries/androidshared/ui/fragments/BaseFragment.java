@@ -182,7 +182,7 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
     }
 
     /**
-     *
+     * Called after the view has been created.
      */
     protected abstract void afterViews();
 

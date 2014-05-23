@@ -53,6 +53,8 @@ public final class ExternalStorageUtils {
     }
 
     /**
+     * Opens the system defined system directory.
+     *
      * @return Returns the path of the directory holding application files on external storage.
      */
     public static File openMusicDirectory(final Context context) {
@@ -65,6 +67,8 @@ public final class ExternalStorageUtils {
     }
 
     /**
+     * Opens the system defined pictures directory.
+     *
      * @return Returns the path of the directory holding application files on external storage.
      */
     public static File openPublicPicturesDirectory() {
@@ -75,11 +79,6 @@ public final class ExternalStorageUtils {
         return null;
     }
 
-    /**
-     * @param path
-     *
-     * @return
-     */
     private static File openDirectory(final String path) {
         File file = null;
 

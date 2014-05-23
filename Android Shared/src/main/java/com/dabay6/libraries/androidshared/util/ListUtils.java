@@ -54,10 +54,12 @@ public final class ListUtils {
     }
 
     /**
-     * @param list
-     * @param <T>
+     * Determines if a given {@link java.util.List} is empty.
      *
-     * @return
+     * @param list The list to check.
+     * @param <T>  The generic type of the list items.
+     *
+     * @return True if the list is empty, otherwise false.
      */
     public static <T> boolean isEmpty(final List<T> list) {
         if (list == null || list.size() == 0) {
