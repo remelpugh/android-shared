@@ -22,15 +22,11 @@
   ~ SOFTWARE.
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-          android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:exitFadeDuration="@android:integer/config_mediumAnimTime">
 
-    <item android:drawable="@color/util__list_item_background_checked"
-          android:state_activated="true" />
-    <item android:drawable="@color/util__list_item_background_pressed"
-          android:state_pressed="true" />
-    <item android:drawable="@color/util__list_item_background_checked"
-          android:state_checked="true" />
+    <item android:drawable="@color/util__list_item_background_checked" android:state_activated="true" />
+    <item android:drawable="@color/util__list_item_background_pressed" android:state_pressed="true" />
+    <item android:drawable="@color/util__list_item_background_checked" android:state_checked="true" />
     <item android:drawable="@color/util__list_item_background_normal" />
 
 </selector>

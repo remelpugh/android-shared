@@ -27,6 +27,7 @@ import android.content.Context;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+
 import com.dabay6.libraries.androidshared.R.string;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -68,7 +69,6 @@ public class LegalNoticesUtils {
 
     /**
      * @param context
-     *
      * @return
      */
     public static AlertDialog createDialog(final Context context) {
@@ -78,7 +78,6 @@ public class LegalNoticesUtils {
     /**
      * @param context
      * @param titleResourceId
-     *
      * @return
      */
     public static AlertDialog createDialog(final Context context, final int titleResourceId) {
@@ -88,15 +87,14 @@ public class LegalNoticesUtils {
     /**
      * @param context
      * @param title
-     *
      * @return
      */
     public static AlertDialog createDialog(final Context context, final String title) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
 
         return builder.setTitle(title)
-                      .setMessage(GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(context))
-                      .create();
+                .setMessage(GooglePlayServicesUtil.getOpenSourceSoftwareLicenseInfo(context))
+                .create();
     }
 
     /**

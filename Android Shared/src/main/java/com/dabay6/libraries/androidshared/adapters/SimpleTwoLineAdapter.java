@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.dabay6.libraries.androidshared.util.ArrayUtils;
 import com.dabay6.libraries.androidshared.util.ListUtils;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
@@ -80,6 +81,20 @@ public class SimpleTwoLineAdapter extends BaseAdapter {
     /**
      * @param label
      * @param data
+     * @return
+     */
+    public static Map<String, String> createItem(final String label, final String data) {
+        final HashMap<String, String> map = new HashMap<String, String>();
+
+        map.put(LABEL_KEY, label);
+        map.put(DATA_KEY, data);
+
+        return map;
+    }
+
+    /**
+     * @param label
+     * @param data
      */
     @SuppressWarnings("unchecked")
     public void add(final String label, final String data) {
@@ -118,21 +133,6 @@ public class SimpleTwoLineAdapter extends BaseAdapter {
             items.clear();
             notifyDataSetChanged();
         }
-    }
-
-    /**
-     * @param label
-     * @param data
-     *
-     * @return
-     */
-    public static Map<String, String> createItem(final String label, final String data) {
-        final HashMap<String, String> map = new HashMap<String, String>();
-
-        map.put(LABEL_KEY, label);
-        map.put(DATA_KEY, data);
-
-        return map;
     }
 
     /**
@@ -189,8 +189,7 @@ public class SimpleTwoLineAdapter extends BaseAdapter {
 
                 convertView.setTag(holder);
             }
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

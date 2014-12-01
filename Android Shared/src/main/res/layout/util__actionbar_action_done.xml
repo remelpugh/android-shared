@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2014 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,18 +21,18 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/action_done"
-             android:layout_width="0dp"
-             android:layout_height="match_parent"
-             android:layout_weight="1">
+    android:id="@+id/action_done"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableLeft="@drawable/ic_action_tick"
-            android:drawablePadding="8dp"
-            android:gravity="center_vertical"
-            android:paddingRight="20dp"
-            android:text="@android:string/ok" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_action_tick"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:paddingRight="20dp"
+        android:text="@android:string/ok" />
 </FrameLayout>

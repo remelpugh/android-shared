@@ -80,7 +80,6 @@ public interface CheckableAdapter {
      * Gets whether the passed in item id is selected.
      *
      * @param itemId The id of the item to check.
-     *
      * @return True if the item is selected, otherwise false.
      */
     boolean isSelected(Long itemId);

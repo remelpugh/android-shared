@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dabay6.libraries.androidshared.util.GpsUtils;
 
 /**
@@ -57,7 +58,6 @@ public class GpsDialogFragment extends BaseDialogFragment {
      * Creates a new instance of the {@link GpsDialogFragment}.
      *
      * @param titleResourceId The resource identifier used for the dialog title.
-     *
      * @return A {@link GpsDialogFragment} instance.
      */
     public static GpsDialogFragment newInstance(final Integer titleResourceId) {

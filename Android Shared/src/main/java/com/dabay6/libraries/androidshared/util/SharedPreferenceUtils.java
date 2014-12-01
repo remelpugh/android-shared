@@ -44,7 +44,6 @@ public final class SharedPreferenceUtils {
      * Gets a SharedPreferences instance that points to the default file.
      *
      * @param context the {@link Context} used to access {@link SharedPreferences}.
-     *
      * @return the single {@link SharedPreferences} instance that can be used to retrieve and modify the preference
      */
     public static SharedPreferences get(final Context context) {
@@ -59,7 +58,6 @@ public final class SharedPreferenceUtils {
      * @param name    Desired preferences file. If a preferences file by this name does not exist, it will be created
      *                when you retrieve an editor (SharedPreferences.edit()) and then commit changes (Editor.commit()).
      * @param mode    Operating mode.
-     *
      * @return the single {@link SharedPreferences} instance that can be used to retrieve and modify the preference
      * values.
      */

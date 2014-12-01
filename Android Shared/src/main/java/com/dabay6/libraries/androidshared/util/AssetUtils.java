@@ -47,7 +47,6 @@ public final class AssetUtils {
      *
      * @param context  {@link Context} used to access the {@link android.content.res.AssetManager}.
      * @param fileName The name of the asset to open. This name can be hierarchical.
-     *
      * @return An {@link InputStream} containing the contents of the asset.
      */
     public static InputStream open(final Context context, final String fileName) throws IOException {
@@ -59,7 +58,6 @@ public final class AssetUtils {
      *
      * @param context  {@link Context} used to access the {@link android.content.res.AssetManager}.
      * @param fileName The name of the asset to open. This name can be hierarchical.
-     *
      * @return A {@link String} containing the contents of the asset.
      */
     public static String read(final Context context, final String fileName) throws IOException {

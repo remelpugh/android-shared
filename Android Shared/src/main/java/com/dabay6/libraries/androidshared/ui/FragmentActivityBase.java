@@ -41,6 +41,7 @@ public interface FragmentActivityBase {
      * Sets the parent {@link android.app.Activity}'s subtitle.
      */
     void setSubtitle(final String subtitle);
+
     /**
      * Gets whether the activity is running on a phone or tablet.
      *

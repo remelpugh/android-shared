@@ -29,11 +29,11 @@ import android.location.LocationManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+
 import com.dabay6.libraries.androidshared.R.id;
 import com.dabay6.libraries.androidshared.R.layout;
 import com.dabay6.libraries.androidshared.R.string;
-import com.dabay6.libraries.androidshared.helper.SharedPreferencesEditorHelper;
-import com.dabay6.libraries.androidshared.helper.SharedPreferencesHelper;
+import com.dabay6.libraries.androidshared.helper.PreferenceHelper;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.IntentUtils.IntentBuilder;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
@@ -59,13 +59,10 @@ public final class GpsUtils {
      * Check if the user has selected to never show the GPS dialog again.
      *
      * @param context The {@link Context} used to retrieve the user preference.
-     *
      * @return True if the dialog can be shown, otherwise false.
      */
     public static boolean canBeShown(final Context context) {
-        final SharedPreferencesHelper helper = new SharedPreferencesHelper(context);
-
-        return helper.booleanValue(PREF_GPS_NEVER_SHOW, false);
+        return PreferenceHelper.with(context).getBoolean(PREF_GPS_NEVER_SHOW, false);
     }
 
     /**
@@ -82,29 +79,29 @@ public final class GpsUtils {
         final CheckBox checkBox = finder.find(id.gps_never_show);
 
         builder.setMessage(string.gps_message)
-               .setNegativeButton(string.gps_skip, new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(final DialogInterface dialog, final int id) {
-                       if (checkBox != null && checkBox.isChecked()) {
-                           setCanBeShown(context);
-                       }
-                   }
-               })
-               .setPositiveButton(string.gps_settings, new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(final DialogInterface dialog, final int id) {
-                       final IntentBuilder intent;
+                .setNegativeButton(string.gps_skip, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        if (checkBox != null && checkBox.isChecked()) {
+                            setCanBeShown(context);
+                        }
+                    }
+                })
+                .setPositiveButton(string.gps_settings, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        final IntentBuilder intent;
 
-                       if (checkBox != null && checkBox.isChecked()) {
-                           setCanBeShown(context);
-                       }
+                        if (checkBox != null && checkBox.isChecked()) {
+                            setCanBeShown(context);
+                        }
 
-                       intent = new IntentBuilder(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                       context.startActivity(intent.toIntent());
-                   }
-               })
-               .setTitle(context.getString(titleResourceId))
-               .setView(view);
+                        intent = new IntentBuilder(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        context.startActivity(intent.toIntent());
+                    }
+                })
+                .setTitle(context.getString(titleResourceId))
+                .setView(view);
 
         return builder.create();
     }
@@ -123,7 +120,6 @@ public final class GpsUtils {
      *
      * @param context  {@link Context} used to create the {@link LocationManager}.
      * @param provider the name of the provider.
-     *
      * @return true if GpsUtils is enabled, otherwise false.
      */
     public static boolean isEnabled(final Context context, final String provider) {
@@ -136,7 +132,6 @@ public final class GpsUtils {
      * Determines if device GpsUtils is enabled.
      *
      * @param context {@link Context} used to create the {@link LocationManager}.
-     *
      * @return true if GpsUtils is enabled, otherwise false.
      */
     public static boolean isEnabled(final Context context) {
@@ -177,8 +172,6 @@ public final class GpsUtils {
     }
 
     private static void setCanBeShown(final Context context) {
-        final SharedPreferencesEditorHelper helper = new SharedPreferencesEditorHelper(context);
-
-        helper.putBoolean(PREF_GPS_NEVER_SHOW, true).commit();
+        PreferenceHelper.with(context).save(PREF_GPS_NEVER_SHOW, true);
     }
 }

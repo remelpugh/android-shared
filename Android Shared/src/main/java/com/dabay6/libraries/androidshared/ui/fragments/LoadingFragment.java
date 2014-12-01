@@ -35,6 +35,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.util.ViewUtils;
 
@@ -71,76 +72,9 @@ public class LoadingFragment extends BaseFragment {
     }
 
     /**
-     * @return
-     */
-    public View getContentView() {
-        return content;
-    }
-
-    /**
-     * @param view
-     */
-    public void setContentView(final View view) {
-        afterViews();
-
-        if (view == null) {
-            throw new IllegalArgumentException("Content view can't be null");
-        }
-
-        if (contentContainer instanceof ViewGroup) {
-            final ViewGroup container = (ViewGroup) contentContainer;
-
-            if (content == null) {
-                container.addView(view);
-            }
-            else {
-                final int index = container.indexOfChild(content);
-
-                // replace content view
-                container.removeView(content);
-                container.addView(view, index);
-            }
-
-            content = view;
-        }
-        else {
-            throw new IllegalStateException("Can't be used with a custom content view");
-        }
-    }
-
-    /**
-     * @return True if content is empty, otherwise false.
-     */
-    public boolean isContentEmpty() {
-        return isContentEmpty;
-    }
-
-    /**
-     * @param isEmpty
-     */
-    public void setContentEmpty(final boolean isEmpty) {
-        afterViews();
-
-        if (content == null) {
-            throw new IllegalStateException("Content view must be initialized before");
-        }
-        if (isEmpty) {
-            ViewUtils.setGone(empty, false);
-            ViewUtils.setGone(content, true);
-        }
-        else {
-            ViewUtils.setGone(empty, true);
-            ViewUtils.setGone(content, false);
-        }
-
-        isContentEmpty = isEmpty;
-    }
-
-    /**
      * Creates a new instance of the {@link LoadingFragment}.
      *
      * @param message The message to be displayed.
-     *
      * @return an instance of {@link LoadingFragment}
      */
     public static LoadingFragment newInstance(final String message) {
@@ -152,7 +86,6 @@ public class LoadingFragment extends BaseFragment {
      *
      * @param loadingDelay amount of time to wait before showing the try again button.
      * @param message      The message to be displayed.
-     *
      * @return an instance of {@link LoadingFragment}
      */
     public static LoadingFragment newInstance(final Integer loadingDelay, final String message) {
@@ -181,6 +114,79 @@ public class LoadingFragment extends BaseFragment {
     }
 
     /**
+     * @return
+     */
+    public View getContentView() {
+        return content;
+    }
+
+    /**
+     * @param view
+     */
+    public void setContentView(final View view) {
+        afterViews();
+
+        if (view == null) {
+            throw new IllegalArgumentException("Content view can't be null");
+        }
+
+        if (contentContainer instanceof ViewGroup) {
+            final ViewGroup container = (ViewGroup) contentContainer;
+
+            if (content == null) {
+                container.addView(view);
+            } else {
+                final int index = container.indexOfChild(content);
+
+                // replace content view
+                container.removeView(content);
+                container.addView(view, index);
+            }
+
+            content = view;
+        } else {
+            throw new IllegalStateException("Can't be used with a custom content view");
+        }
+    }
+
+    /**
+     * @param layoutResId ID for an XML layout resource to load.
+     */
+    public void setContentView(final int layoutResId) {
+        final LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        final View contentView = layoutInflater.inflate(layoutResId, null);
+
+        setContentView(contentView);
+    }
+
+    /**
+     * @return True if content is empty, otherwise false.
+     */
+    public boolean isContentEmpty() {
+        return isContentEmpty;
+    }
+
+    /**
+     * @param isEmpty
+     */
+    public void setContentEmpty(final boolean isEmpty) {
+        afterViews();
+
+        if (content == null) {
+            throw new IllegalStateException("Content view must be initialized before");
+        }
+        if (isEmpty) {
+            ViewUtils.setGone(empty, false);
+            ViewUtils.setGone(content, true);
+        } else {
+            ViewUtils.setGone(empty, true);
+            ViewUtils.setGone(content, false);
+        }
+
+        isContentEmpty = isEmpty;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -189,8 +195,7 @@ public class LoadingFragment extends BaseFragment {
 
         try {
             callback = (OnRetryListener) activity;
-        }
-        catch (final ClassCastException ex) {
+        } catch (final ClassCastException ex) {
             throw new ClassCastException(activity.toString() + " must implement OnRetryListener");
         }
     }
@@ -222,16 +227,6 @@ public class LoadingFragment extends BaseFragment {
     }
 
     /**
-     * @param layoutResId ID for an XML layout resource to load.
-     */
-    public void setContentView(final int layoutResId) {
-        final LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        final View contentView = layoutInflater.inflate(layoutResId, null);
-
-        setContentView(contentView);
-    }
-
-    /**
      * @param fragment
      * @param tag
      */
@@ -258,8 +253,7 @@ public class LoadingFragment extends BaseFragment {
 
         if (empty != null && empty instanceof TextView) {
             ((TextView) empty).setText(text);
-        }
-        else {
+        } else {
             throw new IllegalStateException("Can't be used with a custom content view");
         }
     }
@@ -322,8 +316,7 @@ public class LoadingFragment extends BaseFragment {
                     ViewUtils.setInvisible(progress, true);
                 }
             }, LoadingFragment.TRY_AGAIN_DELAY);
-        }
-        else {
+        } else {
             final TextView message = finder.find(R.id.loading_message);
 
             ViewUtils.setInvisible(progress, false);
@@ -370,8 +363,7 @@ public class LoadingFragment extends BaseFragment {
             if (arguments.containsKey(LOADING_MESSAGE)) {
                 loadingMessage = arguments.getString(LOADING_MESSAGE);
             }
-        }
-        else {
+        } else {
             loadingMessage = getString(R.string.loading_please_wait);
         }
 
@@ -403,16 +395,14 @@ public class LoadingFragment extends BaseFragment {
                 if (animation != null) {
                     contentContainer.startAnimation(animation);
                 }
-            }
-            else {
+            } else {
                 loadingContainer.clearAnimation();
                 contentContainer.clearAnimation();
             }
 
             ViewUtils.setGone(loadingContainer, true);
             ViewUtils.setGone(contentContainer, false);
-        }
-        else {
+        } else {
             if (animate) {
                 animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
                 if (animation != null) {
@@ -423,8 +413,7 @@ public class LoadingFragment extends BaseFragment {
                 if (animation != null) {
                     contentContainer.startAnimation(animation);
                 }
-            }
-            else {
+            } else {
                 loadingContainer.clearAnimation();
                 contentContainer.clearAnimation();
             }

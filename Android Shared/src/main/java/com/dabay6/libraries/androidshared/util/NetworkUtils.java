@@ -26,6 +26,7 @@ import android.content.Context;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+
 import com.dabay6.libraries.androidshared.enums.NetworkTypes;
 
 import java.io.IOException;
@@ -45,7 +46,6 @@ public final class NetworkUtils {
      * Formats the given ip address.
      *
      * @param ip The ip address to format.
-     *
      * @return The formatted ip address.
      */
     public static String formatIpAddress(final int ip) {
@@ -58,7 +58,6 @@ public final class NetworkUtils {
      *
      * @param context The {@link Context} used to retrieve the {@link WifiManager} system service.
      * @param type    The type of network to retrieve the broadcast address.
-     *
      * @return The broadcast address for the network type or null.
      */
     public static InetAddress getBroadcastAddress(final Context context, final NetworkTypes type) throws IOException {
@@ -98,7 +97,6 @@ public final class NetworkUtils {
      *
      * @param context The {@link Context} used to retrieve system related services.
      * @param type    The type of network to retrieve the ip address.
-     *
      * @return The ip address or null.
      */
     public static String getIpAddress(final Context context, final NetworkTypes type) {

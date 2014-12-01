@@ -42,7 +42,6 @@ public final class ListUtils {
      * Creates a {@link ArrayList} from the passed in list.
      *
      * @param list the array that will be copied from.
-     *
      * @return a newly-created {@link ArrayList} containing the list list.
      */
     public static <T> ArrayList<T> asList(final T[] list) {
@@ -58,7 +57,6 @@ public final class ListUtils {
      *
      * @param list The list to check.
      * @param <T>  The generic type of the list items.
-     *
      * @return True if the list is empty, otherwise false.
      */
     public static <T> boolean isEmpty(final List<T> list) {
@@ -83,7 +81,6 @@ public final class ListUtils {
      * elements.
      *
      * @param elements the elements that the list should contain, in order
-     *
      * @return a newly-created {@link ArrayList} containing those elements
      */
     public static <T> ArrayList<T> newArrayList(final T... elements) {
@@ -108,7 +105,6 @@ public final class ListUtils {
      * Creates an empty {@link List} instance.
      *
      * @param capacity the initial capacity of this {@link List} instance.
-     *
      * @return a newly-created, initially-empty {@link List}
      */
     public static <T> List<T> newList(final int capacity) {
@@ -127,7 +123,6 @@ public final class ListUtils {
     /**
      * @param list          the {@link ArrayList} that will be copied from.
      * @param componentType the component componentType of the new array
-     *
      * @return a newly-created array containing the {@link ArrayList} elements.
      */
     @SuppressWarnings("unchecked")
@@ -138,7 +133,6 @@ public final class ListUtils {
     /**
      * @param list          the {@link List} that will be copied from.
      * @param componentType the component componentType of the new array
-     *
      * @return a newly-created array containing the {@link ArrayList} elements.
      */
     @SuppressWarnings("unchecked")

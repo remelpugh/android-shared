@@ -27,8 +27,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager.LayoutParams;
+
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.fragments.FragmentBase;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
@@ -175,8 +180,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
 
         if (getDialog() == null) {
             getActivity().setTitle(title);
-        }
-        else {
+        } else {
             getDialog().setTitle(title);
         }
     }

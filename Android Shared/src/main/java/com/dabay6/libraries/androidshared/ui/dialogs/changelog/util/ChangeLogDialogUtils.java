@@ -31,9 +31,9 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
 import com.dabay6.libraries.androidshared.R;
-import com.dabay6.libraries.androidshared.helper.SharedPreferencesEditorHelper;
-import com.dabay6.libraries.androidshared.helper.SharedPreferencesHelper;
+import com.dabay6.libraries.androidshared.helper.PreferenceHelper;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.ChangeLogDialogFragment;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.ChangeLogItem;
@@ -88,7 +88,6 @@ public final class ChangeLogDialogUtils {
      * @param context   {@link Context} used to retrieve resources.
      * @param assetName Name of the asset file containing the change log json.
      * @param callback  The callback to call upon dismissal of the change log alert dialog.
-     *
      * @return {@link AlertDialog} used to display the change log.
      */
     public static AlertDialog createDialog(final Context context, final String assetName,
@@ -101,7 +100,6 @@ public final class ChangeLogDialogUtils {
      * @param assetName Name of the asset file containing the change log json.
      * @param style     The css style to be applied to the html.
      * @param callback  The callback to call upon dismissal of the change log alert dialog.
-     *
      * @return {@link AlertDialog} used to display the change log.
      */
     public static AlertDialog createDialog(final Context context, final String assetName, final String style,
@@ -118,8 +116,7 @@ public final class ChangeLogDialogUtils {
 
             settings = web.getSettings();
             settings.setSupportZoom(false);
-        }
-        catch (final IOException ex) {
+        } catch (final IOException ex) {
             html = StringUtils.empty();
 
             Logger.error(TAG, ex.getMessage(), ex);
@@ -129,16 +126,16 @@ public final class ChangeLogDialogUtils {
 
         builder = new AlertDialog.Builder(context);
         builder.setTitle(title)
-               .setView(web)
-               .setPositiveButton(R.string.change_log_close, new DialogInterface.OnClickListener() {
-                   @Override
-                   public void onClick(final DialogInterface dialog, final int which) {
-                       dialog.dismiss();
-                       if (callback != null) {
-                           callback.onChangeLogDismissed();
-                       }
-                   }
-               });
+                .setView(web)
+                .setPositiveButton(R.string.change_log_close, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(final DialogInterface dialog, final int which) {
+                        dialog.dismiss();
+                        if (callback != null) {
+                            callback.onChangeLogDismissed();
+                        }
+                    }
+                });
 
         return builder.create();
     }
@@ -202,23 +199,19 @@ public final class ChangeLogDialogUtils {
      */
     public static String getStyle() {
         return "<style type=\"text/css\">" + "h1 { margin-left: 0px; font-size: 14pt; }" +
-               "h3 { margin-left: 0px; padding-left: 10px; font-size: 10pt; }" +
-               "li { margin-left: 0px; font-size: 10pt;}" + "ul { padding-left: 30px;}" + "</style>";
+                "h3 { margin-left: 0px; padding-left: 10px; font-size: 10pt; }" +
+                "li { margin-left: 0px; font-size: 10pt;}" + "ul { padding-left: 30px;}" + "</style>";
     }
 
     /**
      * Check to see if the change log for the current application version has been displayed.
      *
      * @param context the {@link Context} used to retrieve the {@link android.content.SharedPreferences} instance.
-     *
      * @return true if change log has been viewed, otherwise false.
      */
     public static boolean hasShownChangeLog(final Context context) {
         final String currentVersionName = AppUtils.getApplicationVersion(context);
-        final SharedPreferencesHelper helper = new SharedPreferencesHelper(context);
-        final String versionName;
-
-        versionName = helper.stringValue(PREF_CHANGE_LOG, "Unknown");
+        final String versionName = PreferenceHelper.with(context).getString(PREF_CHANGE_LOG, "Unknown");
 
         return currentVersionName.equalsIgnoreCase(versionName);
     }
@@ -229,10 +222,9 @@ public final class ChangeLogDialogUtils {
      * @param context the {@link Context} used to retrieve the {@link android.content.SharedPreferences} instance.
      */
     public static void setChangeLogShown(final Context context) {
-        final SharedPreferencesEditorHelper helper = new SharedPreferencesEditorHelper(context);
         final String currentVersionName = AppUtils.getApplicationVersion(context);
 
-        helper.putString(PREF_CHANGE_LOG, currentVersionName).commit();
+        PreferenceHelper.with(context).save(PREF_CHANGE_LOG, currentVersionName);
     }
 
     /**
@@ -241,7 +233,6 @@ public final class ChangeLogDialogUtils {
      * @param context   {@link Context} used to retrieve resources.
      * @param assetName Name of the asset file containing the change log json.
      * @param style     The css style to be applied to the html.
-     *
      * @return A {@link String} containing html.
      */
     private static String getHtmlChangeLog(final Context context, final String assetName, final String style)
@@ -269,8 +260,7 @@ public final class ChangeLogDialogUtils {
                 html += parseReleases(context, releases);
                 html += "</body></html>";
             }
-        }
-        catch (final Exception ex) {
+        } catch (final Exception ex) {
             html = null;
 
             Logger.error(TAG, ex.getMessage(), ex);

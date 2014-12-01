@@ -68,8 +68,7 @@ public class RequiredValidator extends BaseValidator {
 
         if (view == null) {
             throw new IllegalStateException("Source must be set.");
-        }
-        else if (isEnabled()) {
+        } else if (isEnabled()) {
             return !TextUtils.isEmpty(view.getText());
         }
 

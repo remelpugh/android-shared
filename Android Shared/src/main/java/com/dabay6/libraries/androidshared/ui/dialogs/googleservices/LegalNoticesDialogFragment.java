@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dabay6.libraries.androidshared.R.string;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.BaseDialogFragment;
@@ -63,7 +64,6 @@ public class LegalNoticesDialogFragment extends BaseDialogFragment {
 
     /**
      * @param titleResourceId
-     *
      * @return
      */
     public static LegalNoticesDialogFragment newInstance(final int titleResourceId) {
@@ -79,7 +79,6 @@ public class LegalNoticesDialogFragment extends BaseDialogFragment {
 
     /**
      * @param title
-     *
      * @return
      */
     public static LegalNoticesDialogFragment newInstance(final String title) {

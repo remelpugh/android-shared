@@ -31,6 +31,7 @@ import android.view.animation.AnimationUtils;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.AssetUtils;
@@ -124,12 +125,10 @@ public class WebViewFragment extends BaseFragment {
 
         try {
             html = AssetUtils.read(context, assetName);
-        }
-        catch (final UnsupportedEncodingException ex) {
+        } catch (final UnsupportedEncodingException ex) {
             html = null;
             Logger.error(WebViewFragment.TAG, ex.getMessage(), ex);
-        }
-        catch (final IOException ex) {
+        } catch (final IOException ex) {
             html = null;
             Logger.error(WebViewFragment.TAG, ex.getMessage(), ex);
         }
@@ -192,8 +191,7 @@ public class WebViewFragment extends BaseFragment {
 
             ViewUtils.setGone(loadingContainer, true);
             ViewUtils.setGone(contentContainer, false);
-        }
-        else {
+        } else {
             animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
             if (animation != null) {
                 loadingContainer.startAnimation(animation);

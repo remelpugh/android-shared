@@ -33,6 +33,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.LinearLayout;
+
 import com.dabay6.libraries.androidshared.R.drawable;
 import com.dabay6.libraries.androidshared.logging.Logger;
 
@@ -132,7 +133,6 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
 
     /**
      * @param extraSpace
-     *
      * @return
      */
     @Override
@@ -223,8 +223,7 @@ public class CheckableLinearLayout extends LinearLayout implements Checkable {
 
             if (value == null) {
                 isChecked = false;
-            }
-            else {
+            } else {
                 isChecked = value;
             }
         }

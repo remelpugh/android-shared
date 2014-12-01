@@ -50,7 +50,6 @@ public final class GsonUtils {
      *
      * @param json the json to convert.
      * @param type type type json will be converted to.
-     *
      * @return instance of type
      */
     public static <T> T fromJson(final String json, final Class<T> type) {
@@ -62,7 +61,6 @@ public final class GsonUtils {
      *
      * @param json the json to convert.
      * @param type type type json will be converted to.
-     *
      * @return instance of type
      */
     public static <T> T fromJson(final String json, final Type type) {
@@ -74,7 +72,6 @@ public final class GsonUtils {
      *
      * @param reader the reader to convert.
      * @param type   type type json will be converted to.
-     *
      * @return instance of type
      */
     public static <T> T fromJson(final Reader reader, final Class<T> type) {
@@ -86,7 +83,6 @@ public final class GsonUtils {
      *
      * @param reader the reader to convert.
      * @param type   type type json will be converted to.
-     *
      * @return instance of type
      */
     public static <T> T fromJson(final Reader reader, final Type type) {
@@ -106,7 +102,6 @@ public final class GsonUtils {
      * Gets pre-configured {@link Gson} instance.
      *
      * @param serializeNulls determines if nulls will be serialized.
-     *
      * @return {@link Gson} instance.
      */
     public static Gson getGson(final boolean serializeNulls) {
@@ -117,7 +112,6 @@ public final class GsonUtils {
      * Serializes an object into json.
      *
      * @param object the object to serialize.
-     *
      * @return object serialized into json.
      */
     public static String toJson(final Object object) {
@@ -129,7 +123,6 @@ public final class GsonUtils {
      *
      * @param object       the object to serialize.
      * @param includeNulls determines if nulls will be included.
-     *
      * @return object serialized into json.
      */
     public static String toJson(final Object object, final boolean includeNulls) {
@@ -140,7 +133,6 @@ public final class GsonUtils {
      * Create a pre-configured {@link Gson} instance.
      *
      * @param serializeNulls determines if nulls will be serialized.
-     *
      * @return {@link Gson} instance.
      */
     private static Gson createGson(final boolean serializeNulls) {

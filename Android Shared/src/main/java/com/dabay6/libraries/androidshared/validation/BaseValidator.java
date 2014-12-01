@@ -90,8 +90,7 @@ public abstract class BaseValidator implements Validator {
     public String getMessage() {
         if (context == null || messageResourceId == null) {
             return message;
-        }
-        else {
+        } else {
             return context.getString(messageResourceId);
         }
     }
@@ -102,6 +101,14 @@ public abstract class BaseValidator implements Validator {
     @Override
     public void setMessage(final String message) {
         this.message = message;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMessage(final int resId) {
+        messageResourceId = resId;
     }
 
     /**
@@ -133,12 +140,4 @@ public abstract class BaseValidator implements Validator {
      */
     @Override
     public abstract boolean isValid() throws IllegalStateException;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMessage(final int resId) {
-        messageResourceId = resId;
-    }
 }

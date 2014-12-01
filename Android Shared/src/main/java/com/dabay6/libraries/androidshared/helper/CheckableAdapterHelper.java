@@ -33,10 +33,15 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.view.ActionMode.Callback;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
@@ -124,7 +129,6 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
     /**
      * @param position
      * @param view
-     *
      * @return
      */
     @SuppressWarnings("UnusedReturnValue")
@@ -136,8 +140,7 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
 
             if (AndroidUtils.isAtLeastHoneycomb()) {
                 view.setActivated(isSelected);
-            }
-            else {
+            } else {
                 ((Checkable) view).setChecked(isSelected);
             }
         }
@@ -151,7 +154,6 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
 
     /**
      * @param itemId
-     *
      * @return
      */
     public boolean isChecked(final long itemId) {
@@ -198,8 +200,7 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(adapterView, view, position, id);
             }
-        }
-        else {
+        } else {
             onItemLongClick(adapterView, view, position, id);
         }
     }
@@ -295,8 +296,7 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
     public void setSelected(final long itemId, final boolean isChecked) {
         if (isChecked) {
             select(itemId);
-        }
-        else {
+        } else {
             unSelect(itemId);
         }
     }
@@ -326,8 +326,7 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
         if (hasCheckbox == null) {
             if (!(view instanceof ViewGroup)) {
                 hasCheckbox = false;
-            }
-            else {
+            } else {
                 final ViewGroup root = (ViewGroup) view;
 
                 hasCheckbox = root.findViewById(android.R.id.checkbox) != null;

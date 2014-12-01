@@ -57,7 +57,6 @@ public final class StringUtils {
      *
      * @param format The string containing the format.
      * @param params The list of arguments passed to the formatter.
-     *
      * @return The formatted string.
      */
     public static String format(final String format, final Object... params) {
@@ -70,7 +69,6 @@ public final class StringUtils {
      * @param format The string containing the format.
      * @param locale The locale to apply.
      * @param params The list of arguments passed to the formatter.
-     *
      * @return The formatted string.
      */
     public static String format(final String format, final Locale locale, final Object... params) {
@@ -115,7 +113,6 @@ public final class StringUtils {
      * Splits the passed in string into words.
      *
      * @param s The string to be split.
-     *
      * @return The split string.
      */
     public static String splitIntoWords(final String s) {
@@ -126,7 +123,6 @@ public final class StringUtils {
      * Converts the passed in string to lower case, using the specified locale
      *
      * @param s The string to be changed to lower case.
-     *
      * @return The lower case string.
      */
     public static String toLowerCase(final String s) {
@@ -138,7 +134,6 @@ public final class StringUtils {
      *
      * @param s      The string to be changed to lower case.
      * @param locale The locale to apply.
-     *
      * @return The lower case string.
      */
     public static String toLowerCase(final String s, Locale locale) {
@@ -149,7 +144,6 @@ public final class StringUtils {
      * Converts the passed in string to upper case, using the specified locale
      *
      * @param s The string to be changed to upper case.
-     *
      * @return The lower case string.
      */
     public static String toUpperCase(final CharSequence s) {
@@ -160,7 +154,6 @@ public final class StringUtils {
      * Converts the passed in string to upper case, using the specified locale
      *
      * @param s The string to be changed to upper case.
-     *
      * @return The lower case string.
      */
     public static String toUpperCase(final String s) {
@@ -172,7 +165,6 @@ public final class StringUtils {
      *
      * @param s      The string to be changed to upper case.
      * @param locale The locale to apply.
-     *
      * @return The lower case string.
      */
     public static String toUpperCase(final CharSequence s, Locale locale) {
@@ -184,7 +176,6 @@ public final class StringUtils {
      *
      * @param s      The string to be changed to upper case.
      * @param locale The locale to apply.
-     *
      * @return The lower case string.
      */
     public static String toUpperCase(final String s, Locale locale) {

@@ -60,7 +60,7 @@ public final class ExternalStorageUtils {
     public static File openMusicDirectory(final Context context) {
         if (isExternalStorageAvailable()) {
             return (AndroidUtils.isAtLeastFroyo()) ? context.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
-                                                   : openDirectory("music");
+                    : openDirectory("music");
         }
 
         return null;

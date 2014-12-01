@@ -136,7 +136,6 @@ public final class AndroidUtils {
      * Determine if the OS is at least the passed in version.
      *
      * @param version the {@link android.os.Build.VERSION_CODES} to check against.
-     *
      * @return true if the android version is at least the version passed in, otherwise false.
      */
     public static boolean isVersionAtLeast(final int version) {
@@ -147,7 +146,6 @@ public final class AndroidUtils {
      * Determine if the OS is older than the passed in version.
      *
      * @param version the {@link android.os.Build.VERSION_CODES} to check against.
-     *
      * @return true if the android version is less than the version passed in, otherwise false.
      */
     public static boolean isVersionBefore(final int version) {

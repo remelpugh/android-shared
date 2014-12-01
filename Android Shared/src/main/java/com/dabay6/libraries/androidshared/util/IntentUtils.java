@@ -31,6 +31,7 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+
 import com.dabay6.libraries.androidshared.exceptions.ActivityStartException;
 
 import java.io.File;
@@ -55,7 +56,6 @@ public final class IntentUtils {
     /**
      * @param context
      * @param cls
-     *
      * @return
      */
     public static ActivityIntentBuilder createActivityIntent(final Context context,
@@ -67,7 +67,6 @@ public final class IntentUtils {
      * Creates an intent which when fired, will launch the phone's dialer.
      *
      * @param phone number to be dialed.
-     *
      * @return the newly-created {@link Intent}
      */
     public static Intent newDialNumberIntent(final String phone) {
@@ -82,17 +81,16 @@ public final class IntentUtils {
      * @param to      who the email will be sent to
      * @param subject email subject
      * @param body    email body
-     *
      * @return the newly-created {@link Intent}
      */
     public static Intent newEmailIntent(final String to, final String subject, final String body) {
         final IntentBuilder builder = new IntentBuilder(Intent.ACTION_SEND);
 
         return builder.add(Intent.EXTRA_EMAIL, new String[]{to})
-                      .add(Intent.EXTRA_TEXT, body)
-                      .add(Intent.EXTRA_SUBJECT, subject)
-                      .addType("message/rfc822")
-                      .toIntent();
+                .add(Intent.EXTRA_TEXT, body)
+                .add(Intent.EXTRA_SUBJECT, subject)
+                .addType("message/rfc822")
+                .toIntent();
     }
 
     /**
@@ -100,7 +98,6 @@ public final class IntentUtils {
      *
      * @param address {@link String} containing the address to be displayed on the map.
      * @param title   {@link String} containing the title for the address.
-     *
      * @return the newly-created {@link Intent}
      */
     public static Intent newMapIntent(final String address, final String title) {
@@ -127,7 +124,6 @@ public final class IntentUtils {
      * gallery to select a picture from it.
      *
      * @param title {@link String} containing the title to be used with the {@link Intent} chooser.
-     *
      * @return the newly-created {@link Intent}
      */
     public static Intent newSelectPictureIntent(final String title) {
@@ -137,8 +133,7 @@ public final class IntentUtils {
 
         if (TextUtils.isEmpty(title)) {
             return builder.toIntent();
-        }
-        else {
+        } else {
             return Intent.createChooser(builder.toIntent(), title);
         }
     }
@@ -149,7 +144,6 @@ public final class IntentUtils {
      * without going through the gallery.
      *
      * @param file {@link File} that should be used to temporarily store the picture
-     *
      * @return the newly-created {@link Intent}
      */
     public static Intent newTakePictureIntent(final File file) {
@@ -162,7 +156,6 @@ public final class IntentUtils {
      * Creates an intent which when fired, will launch a web browser.
      *
      * @param url {@link String} containing the url to be displayed.
-     *
      * @return the newly-created {@link Intent}
      */
     public static Intent newWebIntent(final String url) {
@@ -189,7 +182,6 @@ public final class IntentUtils {
      *
      * @param context {@link Context} used to retrieve the {@link PackageManager}.
      * @param intent  {@link Intent} to check for availability.
-     *
      * @return true if an Intent with the specified action can be sent and responded to, false otherwise.
      */
     private static boolean isIntentAvailable(final Context context, final Intent intent) {
@@ -277,14 +269,12 @@ public final class IntentUtils {
                 startWithAnimation(0, 0);
 
                 return true;
-            }
-            catch (Exception ignored) {
+            } catch (Exception ignored) {
                 return false;
             }
         }
 
         /**
-         *
          * @throws ActivityStartException
          */
         public void startWithAnimation() throws ActivityStartException {
@@ -308,8 +298,7 @@ public final class IntentUtils {
 
                 activity.startActivity(intent);
                 activity.overridePendingTransition(enterAnimation, exitAnimation);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 throw new ActivityStartException(ex);
             }
         }
@@ -400,7 +389,6 @@ public final class IntentUtils {
         }
 
         /**
-         *
          * @param fieldName
          * @param uri
          * @return
@@ -415,7 +403,6 @@ public final class IntentUtils {
          * Set the data this intent is operating on.
          *
          * @param uri The Uri of the data this intent is now targeting.
-         *
          * @return this builder
          */
         public IntentBuilder addData(final Uri uri) {
@@ -428,7 +415,6 @@ public final class IntentUtils {
          * Add additional flags to the intent (or with existing flags value).
          *
          * @param flag The new flags to set.
-         *
          * @return this builder
          */
         public IntentBuilder addFlag(final int flag) {
@@ -441,7 +427,6 @@ public final class IntentUtils {
          * Set an explicit MIME data type.
          *
          * @param type The MIME type of the data being handled by this intent.
-         *
          * @return this builder
          */
         public IntentBuilder addType(final String type) {

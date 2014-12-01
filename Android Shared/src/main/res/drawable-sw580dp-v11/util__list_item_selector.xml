@@ -22,11 +22,9 @@
   ~ SOFTWARE.
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-          android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+<selector xmlns:android="http://schemas.android.com/apk/res/android" android:exitFadeDuration="@android:integer/config_mediumAnimTime">
 
-    <item android:state_activated="true"
-          android:drawable="@drawable/util__list_activated" />
+    <item android:drawable="@drawable/util__list_activated" android:state_activated="true" />
     <item android:drawable="@drawable/util__list_background" />
 
 </selector>

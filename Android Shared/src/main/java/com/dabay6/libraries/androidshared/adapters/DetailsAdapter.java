@@ -32,11 +32,15 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
+
 import com.dabay6.libraries.androidshared.util.ListUtils;
 import com.dabay6.libraries.androidshared.util.StringUtils;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * DetailsAdapter
@@ -100,6 +104,22 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
     }
 
     /**
+     * Creates a new DetailsAdapter from external resources.
+     *
+     * @param context            The current context.
+     * @param items              The {@link DetailsItem} to represent in the {@link android.widget.ListView}.
+     * @param resource           The resource ID for a layout file containing a layout to use when
+     *                           instantiating views.
+     * @param textViewResourceId The resource IDs for a layout file containing 2 TextView to use when
+     *                           instantiating views.
+     * @return An DetailsAdapter
+     */
+    public static DetailsAdapter createFromResource(final Context context, final DetailsItemList items,
+                                                    final int resource, final int[] textViewResourceId) {
+        return new DetailsAdapter(context, items, resource, textViewResourceId);
+    }
+
+    /**
      * Adds the specified object at the end of the array.
      *
      * @param item The item to add at the end of the array.
@@ -108,8 +128,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         synchronized (lock) {
             if (originalItems != null) {
                 originalItems.add(item);
-            }
-            else {
+            } else {
                 items.add(item);
             }
         }
@@ -127,8 +146,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         synchronized (lock) {
             if (originalItems != null) {
                 originalItems.addAll(collection);
-            }
-            else {
+            } else {
                 items.addAll(collection);
             }
         }
@@ -146,8 +164,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         synchronized (lock) {
             if (originalItems != null) {
                 Collections.addAll(originalItems, items);
-            }
-            else {
+            } else {
                 Collections.addAll(this.items, items);
             }
         }
@@ -163,31 +180,13 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         synchronized (lock) {
             if (originalItems != null) {
                 originalItems.clear();
-            }
-            else {
+            } else {
                 items.clear();
             }
         }
         if (notifyOnChange) {
             notifyDataSetChanged();
         }
-    }
-
-    /**
-     * Creates a new DetailsAdapter from external resources.
-     *
-     * @param context            The current context.
-     * @param items              The {@link DetailsItem} to represent in the {@link android.widget.ListView}.
-     * @param resource           The resource ID for a layout file containing a layout to use when
-     *                           instantiating views.
-     * @param textViewResourceId The resource IDs for a layout file containing 2 TextView to use when
-     *                           instantiating views.
-     *
-     * @return An DetailsAdapter
-     */
-    public static DetailsAdapter createFromResource(final Context context, final DetailsItemList items,
-                                                    final int resource, final int[] textViewResourceId) {
-        return new DetailsAdapter(context, items, resource, textViewResourceId);
     }
 
     /**
@@ -243,7 +242,6 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
      * Returns the position of the specified item in the array.
      *
      * @param item The item to retrieve the position of.
-     *
      * @return The position of the specified item.
      */
     public int getPosition(final DetailsItem item) {
@@ -268,8 +266,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         synchronized (lock) {
             if (originalItems != null) {
                 originalItems.add(index, item);
-            }
-            else {
+            } else {
                 items.add(index, item);
             }
         }
@@ -297,8 +294,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         synchronized (lock) {
             if (originalItems != null) {
                 originalItems.remove(item);
-            }
-            else {
+            } else {
                 items.remove(item);
             }
         }
@@ -311,7 +307,6 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
      * <p>Sets the layout resource to create the drop down views.</p>
      *
      * @param resource the layout resource defining the drop down views
-     *
      * @see #getDropDownView(int, android.view.View, android.view.ViewGroup)
      */
     public void setDropDownViewResource(final int resource) {
@@ -340,8 +335,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         synchronized (lock) {
             if (originalItems != null) {
                 Collections.sort(originalItems, comparator);
-            }
-            else {
+            } else {
                 Collections.sort(items, comparator);
             }
         }
@@ -368,8 +362,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
 
                 convertView.setTag(holder);
             }
-        }
-        else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
@@ -377,6 +370,11 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         holder.label.setText(item.getLabel());
 
         return convertView;
+    }
+
+    static class ViewHolder {
+        public TextView data;
+        public TextView label;
     }
 
     /**
@@ -402,8 +400,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
 
                 results.values = list;
                 results.count = list.size();
-            }
-            else {
+            } else {
                 final ArrayList<DetailsItem> values;
                 final String prefixString = StringUtils.toLowerCase(prefix.toString());
 
@@ -419,8 +416,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
                     // First match against the whole, non-split value
                     if (valueText.startsWith(prefixString)) {
                         newValues.add(value);
-                    }
-                    else {
+                    } else {
                         final String[] words = valueText.split(" ");
 
                         // Start at index 0, in case valueText starts with space(s)
@@ -446,15 +442,9 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
 
             if (results.count > 0) {
                 notifyDataSetChanged();
-            }
-            else {
+            } else {
                 notifyDataSetInvalidated();
             }
         }
-    }
-
-    static class ViewHolder {
-        public TextView data;
-        public TextView label;
     }
 }

@@ -27,6 +27,7 @@ package com.dabay6.libraries.androidshared.validation;
 
 import android.content.Context;
 import android.widget.TextView;
+
 import com.dabay6.libraries.androidshared.util.HashMapUtils;
 
 import java.util.HashMap;
@@ -58,7 +59,6 @@ public class FormValidation {
      * Adds a {@link Validator} to the {@link HashMap} of validators.
      *
      * @param validator The {@link Validator} to be added.
-     *
      * @return This instance to support chaining.
      */
     public synchronized FormValidation addValidator(final String key, final Validator validator) {
@@ -87,8 +87,7 @@ public class FormValidation {
                     isValid = false;
                     view.setError(validator.getMessage());
                 }
-            }
-            else {
+            } else {
                 view.setError(null);
             }
         }

@@ -78,7 +78,6 @@ public class ViewsFinder {
      *
      * @param id       The id of the {@link android.widget.EditText}.
      * @param runnable The {@link Runnable} which will be executed when the text has changed.
-     *
      * @return The {@link android.widget.EditText}.
      */
     public EditText addTextWatcher(final int id, final Runnable runnable) {
@@ -103,7 +102,6 @@ public class ViewsFinder {
      *
      * @param id      The id of the {@link android.widget.EditText}.
      * @param watcher The {@link android.text.TextWatcher} to add.
-     *
      * @return The {@link android.widget.EditText}.
      */
     public EditText addTextWatcher(final int id, final TextWatcher watcher) {
@@ -145,15 +143,13 @@ public class ViewsFinder {
      * Look for a child view with the given id.  If this view has the given id, return this view.
      *
      * @param id The id to search for.
-     *
      * @return The view that has the given id in the hierarchy or null
      */
     @SuppressWarnings("unchecked")
     public <T extends View> T find(final int id) {
         try {
             return (T) finder.findViewById(id);
-        }
-        catch (IllegalArgumentException ignored) {
+        } catch (IllegalArgumentException ignored) {
             return null;
         }
     }
@@ -163,7 +159,6 @@ public class ViewsFinder {
      *
      * @param id       The id to search for.
      * @param listener The {@link android.view.View.OnClickListener} to be attached.
-     *
      * @return view registered with listener
      */
     public View onClick(final int id, final OnClickListener listener) {
@@ -179,7 +174,6 @@ public class ViewsFinder {
      *
      * @param id       The id to search for.
      * @param runnable The {@link java.lang.Runnable} to be executed upon click the view.
-     *
      * @return view registered with listener
      */
     public View onClick(final int id, final Runnable runnable) {
@@ -206,7 +200,6 @@ public class ViewsFinder {
     /**
      * @param listener
      * @param views
-     *
      * @return
      */
     public void onClick(final OnClickListener listener, final View... views) {
@@ -299,7 +292,6 @@ public class ViewsFinder {
      *
      * @param id    The id of the {@link android.widget.TextView}.
      * @param resId The resource id of the text to be set.
-     *
      * @return The {@link TextView}, otherwise null.
      */
     public TextView setText(final int id, final int resId) {
@@ -311,7 +303,6 @@ public class ViewsFinder {
      *
      * @param id   The id of the {@link android.widget.TextView}.
      * @param text The text to be set.
-     *
      * @return The {@link TextView}, otherwise null.
      */
     public TextView setText(final int id, final String text) {

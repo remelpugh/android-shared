@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.BaseDialogFragment;
 import com.dabay6.libraries.androidshared.ui.dialogs.opensource.util.OpenSourceDialogUtils;
@@ -56,7 +57,6 @@ public class OpenSourceDialogFragment extends BaseDialogFragment {
 
     /**
      * @param items
-     *
      * @return
      */
     public static OpenSourceDialogFragment newInstance(ArrayList<OpenSourceItem> items) {
@@ -66,7 +66,6 @@ public class OpenSourceDialogFragment extends BaseDialogFragment {
     /**
      * @param items
      * @param addDefaultItems
-     *
      * @return
      */
     public static OpenSourceDialogFragment newInstance(ArrayList<OpenSourceItem> items, final boolean addDefaultItems) {
@@ -90,8 +89,7 @@ public class OpenSourceDialogFragment extends BaseDialogFragment {
 
         try {
             onOpenSourceDialogListener = (OnOpenSourceDialogListener) activity;
-        }
-        catch (final ClassCastException ex) {
+        } catch (final ClassCastException ex) {
             throw new ClassCastException(activity.toString() + " must implement OnOpenSourceDialogListener");
         }
     }

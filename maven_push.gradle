@@ -19,6 +19,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+
 import groovy.swing.SwingBuilder
 
 apply plugin: "maven"
@@ -37,7 +39,7 @@ def repo_snapshot_url
 def repo_url
 def repo_username
 
-if(project.hasProperty("REPO.PROPERTIES") && new File(project.property("REPO.PROPERTIES")).exists()) {
+if (project.hasProperty("REPO.PROPERTIES") && new File(project.property("REPO.PROPERTIES")).exists()) {
     Properties props = new Properties()
     props.load(new FileInputStream(file(project.property("REPO.PROPERTIES"))))
 
@@ -67,7 +69,7 @@ afterEvaluate { project ->
                     configuration = configurations.deployerJars
 
                     if (repo_password.length() == 0) {
-                        if(System.console() == null) {
+                        if (System.console() == null) {
                             new SwingBuilder().edt {
                                 dialog(modal: true, // Otherwise the build will continue running before you closed the dialog
                                         title: 'Enter password', // Dialog title
@@ -81,14 +83,14 @@ afterEvaluate { project ->
                                         label(text: "Please enter repository password:")
                                         input = passwordField()
                                         button(defaultButton: true, text: 'OK', actionPerformed: {
-                                            repo_password = input.password; // Set pass variable to value of input field
+                                            repo_password = input.password;
+                                            // Set pass variable to value of input field
                                             dispose(); // Close dialog
                                         })
                                     } // vbox end
                                 } // dialog end
                             } // edt end
-                        }
-                        else {
+                        } else {
                             repo_password = System.console().readPassword("\nPlease enter repository password: ")
                             repo_password = new String(repo_password)
                         }
@@ -127,8 +129,7 @@ afterEvaluate { project ->
                     }
                 }
             }
-        }
-        else {
+        } else {
             println "Repository url not specified"
         }
     }
@@ -139,7 +140,7 @@ afterEvaluate { project ->
     }
 
     task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.allJava
+        source = android.sourceSets.main.java
     }
 
     task androidJavadocsJar(type: Jar) {
@@ -151,7 +152,7 @@ afterEvaluate { project ->
     task androidSourcesJar(type: Jar) {
         classifier = "sources"
         //basename = artifact_id
-        from android.sourceSets.main.allSource
+        from android.sourceSets.main.java
     }
 
     artifacts {

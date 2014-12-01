@@ -38,6 +38,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
+
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.R.id;
 import com.dabay6.libraries.androidshared.logging.Logger;
@@ -85,7 +86,6 @@ public class DateTimePickerDialogFragment extends BaseDialogFragment {
      * @param milliseconds
      * @param minDateTime
      * @param maxDateTime
-     *
      * @return
      */
     public static DateTimePickerDialogFragment newInstance(final Long milliseconds, final Long minDateTime,
@@ -117,8 +117,7 @@ public class DateTimePickerDialogFragment extends BaseDialogFragment {
 
         try {
             onDateTimePickerListener = (OnDateTimePickerListener) activity;
-        }
-        catch (final ClassCastException ex) {
+        } catch (final ClassCastException ex) {
             throw new ClassCastException(activity.toString() + " must implement OnDateTimePickerListener");
         }
     }
@@ -163,7 +162,7 @@ public class DateTimePickerDialogFragment extends BaseDialogFragment {
             calendar.setTimeInMillis(milliseconds);
 
             datePicker.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-                            calendar.get(Calendar.DAY_OF_MONTH), null);
+                    calendar.get(Calendar.DAY_OF_MONTH), null);
 
             timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
             timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
@@ -179,7 +178,7 @@ public class DateTimePickerDialogFragment extends BaseDialogFragment {
 
                     //noinspection MagicConstant
                     calendar.set(datePicker.getYear(), datePicker.getMonth(), datePicker.getDayOfMonth(),
-                                 timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+                            timePicker.getCurrentHour(), timePicker.getCurrentMinute());
 
                     onDateTimePickerListener.onDateTimeSet(calendar.getTimeInMillis());
                 }
