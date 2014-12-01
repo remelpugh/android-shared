@@ -28,7 +28,6 @@ import android.os.Build.VERSION_CODES;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.os.StrictMode.VmPolicy;
-
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
 import com.dabay6.libraries.androidshared.util.AppUtils;
 

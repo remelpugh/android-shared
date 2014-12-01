@@ -33,7 +33,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Checkable;
 import android.widget.FrameLayout;
-
 import com.dabay6.libraries.androidshared.R.drawable;
 import com.dabay6.libraries.androidshared.logging.Logger;
 
@@ -223,7 +222,8 @@ public class CheckableFrameLayout extends FrameLayout implements Checkable {
 
             if (value == null) {
                 isChecked = false;
-            } else {
+            }
+            else {
                 isChecked = value;
             }
         }

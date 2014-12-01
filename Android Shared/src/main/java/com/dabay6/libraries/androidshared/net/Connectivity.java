@@ -44,6 +44,7 @@ public final class Connectivity {
      * Determines if an active network connection is available.
      *
      * @param context {@link Context} used to create the {@link ConnectivityManager}.
+     *
      * @return true if connected, otherwise false.
      */
     public static boolean isConnected(final Context context) {
@@ -54,6 +55,7 @@ public final class Connectivity {
      * Determines if an active mobile network connection is available.
      *
      * @param context {@link Context} used to create the {@link ConnectivityManager}.
+     *
      * @return true if connected, otherwise false.
      */
     public static boolean isConnectedToMobile(final Context context) {
@@ -64,6 +66,7 @@ public final class Connectivity {
      * Determines if an active WiFi connection is available.
      *
      * @param context {@link Context} used to create the {@link ConnectivityManager}.
+     *
      * @return true if connected to WiFi, otherwise false.
      */
     public static boolean isConnectedToWifi(final Context context) {
@@ -74,6 +77,7 @@ public final class Connectivity {
      * Determines if an active network connection is available.
      *
      * @param context {@link Context} used to create the {@link ConnectivityManager}.
+     *
      * @return true if connected, otherwise false.
      */
     private static boolean checkConnection(final Context context) {
@@ -85,6 +89,7 @@ public final class Connectivity {
      *
      * @param context        {@link Context} used to create the {@link ConnectivityManager}.
      * @param connectionType The connection type to check.
+     *
      * @return true if connected, otherwise false.
      */
     private static boolean checkConnection(final Context context, final Integer connectionType) {
@@ -98,7 +103,8 @@ public final class Connectivity {
 
             return info != null && info.isAvailable() && info.isConnected();
 
-        } else {
+        }
+        else {
             info = manager.getNetworkInfo(connectionType);
 
             return info != null && info.isAvailable() && info.isConnected();

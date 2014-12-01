@@ -68,6 +68,7 @@ public final class DateUtils {
      *
      * @param context      The {@link android.content.Context} used to retrieve {@link java.text.DateFormat}.
      * @param milliseconds The milliseconds to be formatted.
+     *
      * @return A user locale formatted date.
      */
     public synchronized static String getUserLocaleFormattedDate(final Context context, final Long milliseconds) {
@@ -80,6 +81,7 @@ public final class DateUtils {
      * @param context      The {@link android.content.Context} used to retrieve {@link java.text.DateFormat}.
      * @param milliseconds The milliseconds to be formatted.
      * @param format       The format to be used for the date.
+     *
      * @return A user locale formatted date.
      */
     public synchronized static String getUserLocaleFormattedDate(final Context context, final Long milliseconds,
@@ -110,6 +112,7 @@ public final class DateUtils {
      *
      * @param context      The {@link android.content.Context} used to retrieve {@link java.text.DateFormat}.
      * @param milliseconds The milliseconds to be formatted.
+     *
      * @return A user locale formatted time.
      */
     public synchronized static String getUserLocaleFormattedTime(final Context context, final Long milliseconds) {
@@ -124,6 +127,7 @@ public final class DateUtils {
      * Retrieve the {@link Calendar} for the given milliseconds.
      *
      * @param milliseconds The number milliseconds used to initialize the {@link Calendar}.
+     *
      * @return A {@link Calendar}.
      */
     private synchronized static Calendar getCalendar(final Long milliseconds) {

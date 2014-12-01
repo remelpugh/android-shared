@@ -23,7 +23,6 @@
 package com.dabay6.libraries.androidshared.app;
 
 import android.app.Application;
-
 import com.dabay6.libraries.androidshared.BuildConfig;
 import com.dabay6.libraries.androidshared.enums.LogLevels;
 import com.dabay6.libraries.androidshared.helper.strictmode.Policy;
@@ -72,7 +71,7 @@ public abstract class ApplicationExtension extends Application {
         Logger.setTagPrefix(getTagPrefix());
 
         helper.setThreadPolicy(Policy.Thread.DetectAll, Policy.Thread.PenaltyLog)
-                .setVmPolicy(Policy.Vm.DetectAll, Policy.Vm.PenaltyLog)
-                .generate();
+              .setVmPolicy(Policy.Vm.DetectAll, Policy.Vm.PenaltyLog)
+              .generate();
     }
 }

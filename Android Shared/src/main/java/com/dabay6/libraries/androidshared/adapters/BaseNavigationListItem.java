@@ -32,19 +32,19 @@ public class BaseNavigationListItem implements NavigationListItem {
     private final CharSequence title;
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CharSequence getTitle() {
+        return title;
+    }
+
+    /**
      * Initializes this instance of {@link BaseNavigationListItem}.
      *
      * @param title The title of this instance.
      */
     BaseNavigationListItem(final CharSequence title) {
         this.title = title;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public CharSequence getTitle() {
-        return title;
     }
 }

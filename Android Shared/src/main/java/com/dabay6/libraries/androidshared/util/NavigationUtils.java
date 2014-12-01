@@ -57,7 +57,8 @@ public final class NavigationUtils {
                     // If there are ancestor activities, they should be added here.
                     .addNextIntent(upIntent).startActivities();
             activity.finish();
-        } else {
+        }
+        else {
             // This activity is part of the application's task, so simply navigate up to the hierarchical parent
             // activity.
             NavUtils.navigateUpTo(activity, upIntent);

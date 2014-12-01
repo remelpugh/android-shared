@@ -34,7 +34,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.dabay6.libraries.androidshared.R.drawable;
 import com.dabay6.libraries.androidshared.R.id;
 import com.dabay6.libraries.androidshared.R.layout;
@@ -104,7 +103,8 @@ public abstract class BaseNavigationDrawerActivity extends BaseFragmentActivity 
         if (item.getItemId() == android.R.id.home) {
             if (isDrawerOpen()) {
                 drawerLayout.closeDrawer(navigationList);
-            } else {
+            }
+            else {
                 drawerLayout.openDrawer(navigationList);
             }
 
@@ -198,7 +198,7 @@ public abstract class BaseNavigationDrawerActivity extends BaseFragmentActivity 
         navigationList.setOnItemClickListener(new DrawerItemClickListener());
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, drawable.ic_drawer, string.utils__drawer_open,
-                string.utils__drawer_close) {
+                                                 string.utils__drawer_close) {
             @Override
             public void onDrawerClosed(final View view) {
                 onNavigationDrawerClosed();

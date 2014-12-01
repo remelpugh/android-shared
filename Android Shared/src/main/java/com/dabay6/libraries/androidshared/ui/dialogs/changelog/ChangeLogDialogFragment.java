@@ -29,7 +29,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.BaseDialogFragment;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.util.ChangeLogDialogUtils;
@@ -55,6 +54,7 @@ public class ChangeLogDialogFragment extends BaseDialogFragment {
      * Creates a new instance of the {@link ChangeLogDialogFragment}.
      *
      * @param assetName The name of the asset file containing the change log json.
+     *
      * @return A {@link ChangeLogDialogFragment}.
      */
     public static ChangeLogDialogFragment newInstance(final String assetName) {
@@ -66,6 +66,7 @@ public class ChangeLogDialogFragment extends BaseDialogFragment {
      *
      * @param assetName The name of the asset file containing the change log json.
      * @param style     The css style to be applied to the html.
+     *
      * @return A {@link ChangeLogDialogFragment}.
      */
     public static ChangeLogDialogFragment newInstance(final String assetName, final String style) {
@@ -89,7 +90,8 @@ public class ChangeLogDialogFragment extends BaseDialogFragment {
 
         try {
             onChangeLogDialogDismissedListener = (OnChangeLogDialogListener) activity;
-        } catch (final ClassCastException ex) {
+        }
+        catch (final ClassCastException ex) {
             throw new ClassCastException(activity.toString() + " must implement OnChangeLogDialogListener");
         }
     }
@@ -103,7 +105,7 @@ public class ChangeLogDialogFragment extends BaseDialogFragment {
         final Context context = getActivity();
 
         return ChangeLogDialogUtils.createDialog(context, bundle.getString("assetName"), bundle.getString("style"),
-                onChangeLogDialogDismissedListener);
+                                                 onChangeLogDialogDismissedListener);
     }
 
     /**

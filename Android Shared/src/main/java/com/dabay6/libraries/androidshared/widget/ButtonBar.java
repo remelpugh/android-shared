@@ -37,7 +37,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
-
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.R.style;
 import com.dabay6.libraries.androidshared.R.styleable;
@@ -246,7 +245,7 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
      */
     private void initialize(final Context context, final AttributeSet attributes, final int defStyle) {
         final TypedArray array = context.obtainStyledAttributes(attributes, R.styleable.ButtonBar, defStyle,
-                style.utils_Widget_ButtonBar);
+                                                                style.utils_Widget_ButtonBar);
 
         try {
             LayoutInflater.from(context).inflate(R.layout.util__merge_button_bar, this, true);
@@ -260,8 +259,10 @@ public class ButtonBar extends FrameLayout implements OnClickListener {
                 configureButton(array, ButtonType.Negative);
                 configureButton(array, ButtonType.Positive);
             }
-        } catch (final Exception ignored) {
-        } finally {
+        }
+        catch (final Exception ignored) {
+        }
+        finally {
             if (array != null) {
                 array.recycle();
             }

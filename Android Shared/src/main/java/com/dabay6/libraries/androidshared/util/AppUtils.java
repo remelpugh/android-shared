@@ -44,6 +44,7 @@ public final class AppUtils {
      * Retrieves the application version as defined in the manifest.
      *
      * @param context {@link Context} used to retrieve the {@link PackageManager}.
+     *
      * @return application version
      */
     public static String getApplicationVersion(final Context context) {
@@ -58,7 +59,8 @@ public final class AppUtils {
 
                 version = info.versionName;
             }
-        } catch (final NameNotFoundException ex) {
+        }
+        catch (final NameNotFoundException ex) {
             version = "1.0";
         }
 
@@ -69,12 +71,13 @@ public final class AppUtils {
      * Determines if the application has been compiled with debugging enabled.
      *
      * @param context {@link Context} used to access the {@link ApplicationInfo}.
+     *
      * @return true if debugging is enabled, otherwise false.
      */
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean isDebuggable(final Context context) {
         return context == null || context.getApplicationInfo() == null ||
-                (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
+               (0 != (context.getApplicationInfo().flags & ApplicationInfo.FLAG_DEBUGGABLE));
 
     }
 }

@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
 import com.dabay6.libraries.androidshared.util.SharedPreferenceUtils;
@@ -45,9 +44,9 @@ import java.util.Set;
 public class PreferenceHelper {
     private final static String TAG = Logger.makeTag(PreferenceHelper.class);
     private final static Object lock = new Object();
-    private static PreferenceHelper singleton = null;
-    private static SharedPreferences preferences;
     private static SharedPreferences.Editor editor;
+    private static SharedPreferences preferences;
+    private static PreferenceHelper singleton = null;
 
     /**
      * @param context the {@link Context} used to access {@link SharedPreferences}.
@@ -66,41 +65,6 @@ public class PreferenceHelper {
     private PreferenceHelper(final Context context, final String name, final int mode) {
         preferences = SharedPreferenceUtils.get(context, name, mode);
         editor = preferences.edit();
-    }
-
-    /**
-     * @param context the {@link Context} used to access {@link SharedPreferences}.
-     * @return {@link PreferenceHelper}
-     */
-    public static PreferenceHelper with(Context context) {
-        if (singleton == null) {
-            synchronized (lock) {
-                if (singleton == null) {
-                    singleton = new PreferenceHelper(context);
-                }
-            }
-        }
-
-        return singleton;
-    }
-
-    /**
-     * @param context the {@link Context} used to access {@link SharedPreferences}.
-     * @param name    Desired preferences file. If a preferences file by this name does not exist, it will be created
-     *                when you retrieve an editor (SharedPreferences.edit()) and then commit changes (Editor.commit()).
-     * @param mode    Operating mode.
-     * @return {@link PreferenceHelper}
-     */
-    public static PreferenceHelper with(Context context, final String name, final int mode) {
-        if (singleton == null) {
-            synchronized (lock) {
-                if (singleton == null) {
-                    singleton = new PreferenceHelper(context, name, mode);
-                }
-            }
-        }
-
-        return singleton;
     }
 
     /**
@@ -129,6 +93,7 @@ public class PreferenceHelper {
      *
      * @param key          The name of the preference to retrieve.
      * @param defaultValue Value to return if this preference does not exist.
+     *
      * @return Returns the preference value if it exists, or defaultValue.
      */
     public boolean getBoolean(String key, boolean defaultValue) {
@@ -140,6 +105,7 @@ public class PreferenceHelper {
      *
      * @param key          The name of the preference to retrieve.
      * @param defaultValue Value to return if this preference does not exist.
+     *
      * @return Returns the preference value if it exists, or defaultValue.
      */
     public float getFloat(String key, float defaultValue) {
@@ -151,6 +117,7 @@ public class PreferenceHelper {
      *
      * @param key          The name of the preference to retrieve.
      * @param defaultValue Value to return if this preference does not exist.
+     *
      * @return Returns the preference value if it exists, or defaultValue.
      */
     public int getInt(String key, int defaultValue) {
@@ -162,6 +129,7 @@ public class PreferenceHelper {
      *
      * @param key          The name of the preference to retrieve.
      * @param defaultValue Value to return if this preference does not exist.
+     *
      * @return Returns the preference value if it exists, or defaultValue.
      */
     public long getLong(String key, long defaultValue) {
@@ -173,6 +141,7 @@ public class PreferenceHelper {
      *
      * @param key          The name of the preference to retrieve.
      * @param defaultValue Value to return if this preference does not exist.
+     *
      * @return Returns the preference value if it exists, or defaultValue.
      */
     public String getString(String key, String defaultValue) {
@@ -184,6 +153,7 @@ public class PreferenceHelper {
      *
      * @param key          The name of the preference to retrieve.
      * @param defaultValue Value to return if this preference does not exist.
+     *
      * @return Returns the preference value if it exists, or defaultValue.
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -199,6 +169,7 @@ public class PreferenceHelper {
      * Registers a callback to be invoked when a change happens to a preference.
      *
      * @param listener The callback that will run.
+     *
      * @return {@link PreferenceHelper}
      */
     public PreferenceHelper registerListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
@@ -285,6 +256,7 @@ public class PreferenceHelper {
      * Unregisters a previous callback.
      *
      * @param listener The callback that should be unregistered.
+     *
      * @return {@link PreferenceHelper}
      */
     public PreferenceHelper unregisterListener(SharedPreferences.OnSharedPreferenceChangeListener listener) {
@@ -293,10 +265,48 @@ public class PreferenceHelper {
         return this;
     }
 
+    /**
+     * @param context the {@link Context} used to access {@link SharedPreferences}.
+     *
+     * @return {@link PreferenceHelper}
+     */
+    public static PreferenceHelper with(Context context) {
+        if (singleton == null) {
+            synchronized (lock) {
+                if (singleton == null) {
+                    singleton = new PreferenceHelper(context);
+                }
+            }
+        }
+
+        return singleton;
+    }
+
+    /**
+     * @param context the {@link Context} used to access {@link SharedPreferences}.
+     * @param name    Desired preferences file. If a preferences file by this name does not exist, it will be created
+     *                when you retrieve an editor (SharedPreferences.edit()) and then commit changes (Editor.commit()).
+     * @param mode    Operating mode.
+     *
+     * @return {@link PreferenceHelper}
+     */
+    public static PreferenceHelper with(Context context, final String name, final int mode) {
+        if (singleton == null) {
+            synchronized (lock) {
+                if (singleton == null) {
+                    singleton = new PreferenceHelper(context, name, mode);
+                }
+            }
+        }
+
+        return singleton;
+    }
+
     private void commitChanges() {
         if (AndroidUtils.isAtLeastGingerbread()) {
             editor.apply();
-        } else {
+        }
+        else {
             new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(final Void... voids) {

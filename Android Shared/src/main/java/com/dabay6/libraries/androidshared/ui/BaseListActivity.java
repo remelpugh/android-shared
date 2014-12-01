@@ -31,7 +31,6 @@ import android.view.View;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.NavigationUtils;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;

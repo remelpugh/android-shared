@@ -27,7 +27,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.R.string;
 import com.dabay6.libraries.androidshared.logging.Logger;
@@ -45,32 +44,32 @@ import java.util.List;
 @SuppressWarnings("unused")
 public final class OpenSourceDialogUtils {
     public final static String HTML = "<html>\n" +
-            "<head>\n" +
-            "    <title></title>\n" +
-            "    <style>\n" +
-            "        li {\n" +
-            "            margin-left: 0px;\n" +
-            "            font-size: 10pt;\n" +
-            "        }\n" +
-            "        pre {\n" +
-            "            background-color: #eeeeee;\n" +
-            "            font-size: 8pt;\n" +
-            "            padding: .5em;\n" +
-            "            white-space: pre-wrap;\n" +
-            "        }\n" +
-            "        ul {\n" +
-            "            padding-left: 30px;\n" +
-            "        }\n" +
-            "    </style>\n" +
-            "</head>\n" +
-            "<body>\n" +
-            "%s" +
-            "</body>\n" +
-            "</html>";
+                                      "<head>\n" +
+                                      "    <title></title>\n" +
+                                      "    <style>\n" +
+                                      "        li {\n" +
+                                      "            margin-left: 0px;\n" +
+                                      "            font-size: 10pt;\n" +
+                                      "        }\n" +
+                                      "        pre {\n" +
+                                      "            background-color: #eeeeee;\n" +
+                                      "            font-size: 8pt;\n" +
+                                      "            padding: .5em;\n" +
+                                      "            white-space: pre-wrap;\n" +
+                                      "        }\n" +
+                                      "        ul {\n" +
+                                      "            padding-left: 30px;\n" +
+                                      "        }\n" +
+                                      "    </style>\n" +
+                                      "</head>\n" +
+                                      "<body>\n" +
+                                      "%s" +
+                                      "</body>\n" +
+                                      "</html>";
     public final static String HTML_ITEM = "<ul>\n" +
-            "   <li>%s</li>\n" +
-            "</ul>\n" +
-            "%s";
+                                           "   <li>%s</li>\n" +
+                                           "</ul>\n" +
+                                           "%s";
     private final static String TAG = Logger.makeTag(OpenSourceDialogUtils.class);
 
     /**
@@ -87,11 +86,11 @@ public final class OpenSourceDialogUtils {
         OpenSourceItem item;
 
         item = new OpenSourceItem(context.getString(string.open_source_actionbar_sherlock),
-                context.getString(string.open_source_actionbar_sherlock_license));
+                                  context.getString(string.open_source_actionbar_sherlock_license));
         items.add(item);
 
         item = new OpenSourceItem(context.getString(string.open_source_google_gson),
-                context.getString(string.open_source_google_gson_license));
+                                  context.getString(string.open_source_google_gson_license));
         items.add(item);
     }
 
@@ -119,15 +118,15 @@ public final class OpenSourceDialogUtils {
 
         builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.about_licenses)
-                .setView(web)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, final int whichButton) {
-                        dialog.dismiss();
-                        if (onOpenSourceDialogListener != null) {
-                            onOpenSourceDialogListener.onOpenSourceDialogDismissed();
-                        }
-                    }
-                });
+               .setView(web)
+               .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                   public void onClick(final DialogInterface dialog, final int whichButton) {
+                       dialog.dismiss();
+                       if (onOpenSourceDialogListener != null) {
+                           onOpenSourceDialogListener.onOpenSourceDialogDismissed();
+                       }
+                   }
+               });
 
         return builder.create();
     }

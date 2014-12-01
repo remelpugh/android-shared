@@ -57,6 +57,7 @@ public class ViewUtils {
      * Return the text the TextView is displaying.
      *
      * @param view The {@link EditText} used to retrieve the text.
+     *
      * @return The text of the {@link EditText} view, otherwise null.
      */
     @SuppressWarnings("ConstantConditions")
@@ -72,6 +73,7 @@ public class ViewUtils {
      * Determines if all {@link EditText} views supplied are empty.
      *
      * @param views {@link EditText} views to be checked.
+     *
      * @return true if all {@link EditText} views are empty, false otherwise.
      */
     @SuppressWarnings("ConstantConditions")
@@ -95,6 +97,7 @@ public class ViewUtils {
      *
      * @param view The {@link View} to displayed or not.
      * @param gone Determines if the view is displayed.
+     *
      * @return view
      */
     @SuppressWarnings("UnusedReturnValue")
@@ -104,7 +107,8 @@ public class ViewUtils {
                 if (View.GONE != view.getVisibility()) {
                     view.setVisibility(View.GONE);
                 }
-            } else {
+            }
+            else {
                 if (View.VISIBLE != view.getVisibility()) {
                     view.setVisibility(View.VISIBLE);
                 }
@@ -121,6 +125,7 @@ public class ViewUtils {
      *
      * @param view      The {@link View} whose visibility will changed.
      * @param invisible Determines if the view is visible.
+     *
      * @return view
      */
     @SuppressWarnings("UnusedReturnValue")
@@ -130,7 +135,8 @@ public class ViewUtils {
                 if (View.INVISIBLE != view.getVisibility()) {
                     view.setVisibility(View.INVISIBLE);
                 }
-            } else {
+            }
+            else {
                 if (View.VISIBLE != view.getVisibility()) {
                     view.setVisibility(View.VISIBLE);
                 }

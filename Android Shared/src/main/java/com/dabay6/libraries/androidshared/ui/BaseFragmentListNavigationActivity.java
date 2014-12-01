@@ -24,7 +24,6 @@ package com.dabay6.libraries.androidshared.ui;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBar.OnNavigationListener;
-
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.ActionBarUtils;
 import com.dabay6.libraries.androidshared.util.ListUtils;

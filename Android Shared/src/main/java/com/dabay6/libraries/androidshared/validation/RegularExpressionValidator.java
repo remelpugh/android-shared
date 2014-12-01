@@ -76,21 +76,25 @@ public class RegularExpressionValidator extends BaseValidator {
 
         if (view == null) {
             throw new IllegalStateException("Source must be set.");
-        } else if (isEnabled()) {
+        }
+        else if (isEnabled()) {
             if (TextUtils.isEmpty(expression) || pattern == null) {
                 if (expression == null) {
                     throw new IllegalStateException("No valid expression found");
-                } else {
+                }
+                else {
                     throw new IllegalStateException(faultPatternMessage);
                 }
-            } else {
+            }
+            else {
                 final CharSequence text = view.getText();
 
                 if (!TextUtils.isEmpty(text)) {
                     final Matcher matcher = pattern.matcher(text);
 
                     return matcher.find();
-                } else {
+                }
+                else {
                     return true;
                 }
             }
@@ -109,7 +113,8 @@ public class RegularExpressionValidator extends BaseValidator {
 
         try {
             pattern = Pattern.compile(expression);
-        } catch (final PatternSyntaxException ex) {
+        }
+        catch (final PatternSyntaxException ex) {
             faultPatternMessage = ex.getMessage();
             pattern = null;
         }

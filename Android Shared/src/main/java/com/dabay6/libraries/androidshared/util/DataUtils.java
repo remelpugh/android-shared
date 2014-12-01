@@ -25,7 +25,6 @@ package com.dabay6.libraries.androidshared.util;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
-
 import com.dabay6.libraries.androidshared.logging.Logger;
 
 /**
@@ -82,7 +81,8 @@ public final class DataUtils {
                 try {
                     Logger.debug(TAG, s.replace('|', ';'));
                     db.execSQL(s.replace('|', ';'));
-                } catch (final Exception ex) {
+                }
+                catch (final Exception ex) {
                     Logger.error(TAG, ex.getMessage(), ex);
                 }
             }
@@ -93,6 +93,7 @@ public final class DataUtils {
      * Determines if the passed in {@link Cursor} contains any data.
      *
      * @param cursor The {@link Cursor} that will be checked.
+     *
      * @return A {@link Boolean} indicating whether the passed in {@link Cursor} has data.
      */
     public static boolean hasData(final Cursor cursor) {
@@ -104,6 +105,7 @@ public final class DataUtils {
      *
      * @param cursor    The {@link Cursor} that will be checked.
      * @param moveFirst Indicates if the {@link Cursor} has data, move to the first record.
+     *
      * @return A {@link Boolean} indicating whether the passed in {@link Cursor} has data.
      */
     public static boolean hasData(final Cursor cursor, final boolean moveFirst) {
@@ -114,7 +116,8 @@ public final class DataUtils {
             if (success && moveFirst) {
                 success = cursor.moveToFirst();
             }
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             success = false;
         }
 

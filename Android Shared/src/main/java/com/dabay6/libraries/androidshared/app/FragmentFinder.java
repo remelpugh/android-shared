@@ -52,6 +52,7 @@ public class FragmentFinder {
      * Lookup fragment by its assigned resource identifier.
      *
      * @param resId The resource identifier of the fragment to lookup.
+     *
      * @return The fragment for the given resource identifier, otherwise null.
      */
     @SuppressWarnings("unchecked")
@@ -63,6 +64,7 @@ public class FragmentFinder {
      * Lookup fragment by its assigned tag.
      *
      * @param tag The name the fragment was tagged with.
+     *
      * @return The fragment for the given tag, otherwise null.
      */
     @SuppressWarnings("unchecked")

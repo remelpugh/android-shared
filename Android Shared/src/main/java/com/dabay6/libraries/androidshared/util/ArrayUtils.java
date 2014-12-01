@@ -37,6 +37,7 @@ public final class ArrayUtils {
      * Detect if an array is empty.
      *
      * @param array The array to be checked
+     *
      * @return True if the array is null or empty, otherwise false.
      */
     public static <T> boolean isEmpty(final T[] array) {

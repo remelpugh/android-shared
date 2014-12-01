@@ -28,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
 import com.dabay6.libraries.androidshared.logging.Logger;
 
 import java.util.List;
@@ -147,7 +146,8 @@ public abstract class BaseCheckableAdapter<T> extends BaseAdapter {
     public void select(final int position, final boolean isSelected) {
         if (isSelected) {
             selectedItems.put(position, true);
-        } else {
+        }
+        else {
             selectedItems.delete(position);
         }
 

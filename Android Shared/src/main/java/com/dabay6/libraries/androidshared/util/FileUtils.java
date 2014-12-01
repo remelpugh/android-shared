@@ -49,6 +49,7 @@ public final class FileUtils {
 
     /**
      * @param file The {@link File} to retrieve the extension of.
+     *
      * @return The extension of the file.
      */
     public static String getFileExtension(final File file) {
@@ -68,6 +69,7 @@ public final class FileUtils {
      * This method reads simple text file
      *
      * @param stream The {@link InputStream} to read.
+     *
      * @return data from file
      */
     public static String readTextFile(final InputStream stream) {
@@ -82,7 +84,8 @@ public final class FileUtils {
 
             output.close();
             stream.close();
-        } catch (final IOException ex) {
+        }
+        catch (final IOException ex) {
             Logger.error(FileUtils.TAG, ex.getMessage(), ex);
         }
 
@@ -101,9 +104,11 @@ public final class FileUtils {
         public int compare(final File fileOne, final File fileTwo) {
             if (fileOne.isDirectory() && !fileTwo.isDirectory()) {
                 return -1;
-            } else if (!fileOne.isDirectory() && fileTwo.isDirectory()) {
+            }
+            else if (!fileOne.isDirectory() && fileTwo.isDirectory()) {
                 return 1;
-            } else {
+            }
+            else {
                 return fileOne.getName().compareToIgnoreCase(fileTwo.getName());
             }
         }

@@ -31,18 +31,6 @@ package com.dabay6.libraries.androidshared.ui;
 @SuppressWarnings("unused")
 public interface FragmentActivityBase {
     /**
-     * Sets the parent {@link android.app.Activity}'s subtitle.
-     *
-     * @param subtitleResId The resource id of the subtitle.
-     */
-    void setSubtitle(final int subtitleResId);
-
-    /**
-     * Sets the parent {@link android.app.Activity}'s subtitle.
-     */
-    void setSubtitle(final String subtitle);
-
-    /**
      * Gets whether the activity is running on a phone or tablet.
      *
      * @return True if the activity is running on a tablet, otherwise false.
@@ -55,5 +43,17 @@ public interface FragmentActivityBase {
      * @param isDualPane True if the activity is running on a tablet, otherwise false.
      */
     void setDualPane(final boolean isDualPane);
+
+    /**
+     * Sets the parent {@link android.app.Activity}'s subtitle.
+     */
+    void setSubtitle(final String subtitle);
+
+    /**
+     * Sets the parent {@link android.app.Activity}'s subtitle.
+     *
+     * @param subtitleResId The resource id of the subtitle.
+     */
+    void setSubtitle(final int subtitleResId);
 
 }

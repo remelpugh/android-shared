@@ -30,7 +30,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
 import com.dabay6.libraries.androidshared.R.layout;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
@@ -180,7 +179,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         View view = convertView;
 
         layoutResourceId = (listItem instanceof NavigationDrawerCategory) ? layout.util__menu_row_category
-                : layout.util__menu_row_item;
+                                                                          : layout.util__menu_row_item;
 
         if (view == null) {
             view = LayoutInflater.from(context).inflate(layoutResourceId, parent, false);
@@ -192,7 +191,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
         }
 
         if (AndroidUtils.isVersionBefore(VERSION_CODES.ICE_CREAM_SANDWICH) &&
-                listItem instanceof NavigationDrawerCategory && text != null) {
+            listItem instanceof NavigationDrawerCategory && text != null) {
             text.setText(StringUtils.toUpperCase(text.getText()));
         }
 
@@ -207,7 +206,7 @@ public class NavigationDrawerAdapter extends BaseAdapter {
                 if (menuItemView != null) {
                     menuItemView.setCompoundDrawablesWithIntrinsicBounds(drawable, null, null, null);
                     menuItemView.setPadding(8, menuItemView.getPaddingTop(), menuItemView.getPaddingRight(),
-                            menuItemView.getPaddingBottom());
+                                            menuItemView.getPaddingBottom());
                 }
             }
         }

@@ -36,7 +36,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-
 import com.dabay6.libraries.androidshared.helper.CheckableAdapterHelper;
 import com.dabay6.libraries.androidshared.logging.Logger;
 

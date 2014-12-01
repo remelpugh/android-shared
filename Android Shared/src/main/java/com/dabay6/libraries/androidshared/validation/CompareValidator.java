@@ -72,7 +72,8 @@ public class CompareValidator extends BaseValidator {
 
         if (source == null) {
             throw new IllegalStateException("Source must be set.");
-        } else {
+        }
+        else {
             if (isEnabled()) {
                 if (compare != null && !TextUtils.isEmpty(compare.getText())) {
                     @SuppressWarnings("ConstantConditions") final String value = compare.getText().toString();
@@ -83,7 +84,7 @@ public class CompareValidator extends BaseValidator {
                                 case Equal: {
                                     //noinspection ConstantConditions
                                     return !TextUtils.isEmpty(source.getText()) &&
-                                            source.getText().toString().equalsIgnoreCase(value);
+                                           source.getText().toString().equalsIgnoreCase(value);
                                 }
                                 default: {
                                     return true;

@@ -45,29 +45,6 @@ public abstract class BaseValidator implements Validator {
     private Integer messageResourceId;
 
     /**
-     * Initializes this instance.
-     *
-     * @param view  The {@link android.view.View} that will be validated.
-     * @param resId The error message string resource id.
-     */
-    BaseValidator(final TextView view, final int resId) {
-        this(view, null);
-        messageResourceId = resId;
-    }
-
-    /**
-     * Initializes this instance.
-     *
-     * @param view    The {@link android.view.View} that will be validated.
-     * @param message The error message.
-     */
-    BaseValidator(final TextView view, final String message) {
-        messageResourceId = null;
-        source = view;
-        this.message = message;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -90,7 +67,8 @@ public abstract class BaseValidator implements Validator {
     public String getMessage() {
         if (context == null || messageResourceId == null) {
             return message;
-        } else {
+        }
+        else {
             return context.getString(messageResourceId);
         }
     }
@@ -101,14 +79,6 @@ public abstract class BaseValidator implements Validator {
     @Override
     public void setMessage(final String message) {
         this.message = message;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setMessage(final int resId) {
-        messageResourceId = resId;
     }
 
     /**
@@ -140,4 +110,35 @@ public abstract class BaseValidator implements Validator {
      */
     @Override
     public abstract boolean isValid() throws IllegalStateException;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setMessage(final int resId) {
+        messageResourceId = resId;
+    }
+
+    /**
+     * Initializes this instance.
+     *
+     * @param view  The {@link android.view.View} that will be validated.
+     * @param resId The error message string resource id.
+     */
+    BaseValidator(final TextView view, final int resId) {
+        this(view, null);
+        messageResourceId = resId;
+    }
+
+    /**
+     * Initializes this instance.
+     *
+     * @param view    The {@link android.view.View} that will be validated.
+     * @param message The error message.
+     */
+    BaseValidator(final TextView view, final String message) {
+        messageResourceId = null;
+        source = view;
+        this.message = message;
+    }
 }

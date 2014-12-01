@@ -34,7 +34,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ArrayAdapter;
-
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
 
@@ -74,9 +73,8 @@ public class ActionBarUtils {
         view = inflater.inflate(R.layout.util__actionbar_discard_done, null);
 
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME |
-                        ActionBar.DISPLAY_SHOW_TITLE
-        );
+                                    ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME |
+                                    ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setCustomView(view, new ActionBar.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         finder = new ViewsFinder(view);
@@ -88,7 +86,8 @@ public class ActionBarUtils {
                 if (listener != null) {
                     if (id == R.id.action_discard) {
                         listener.onDiscard();
-                    } else if (id == R.id.action_done) {
+                    }
+                    else if (id == R.id.action_done) {
                         listener.onDone();
                     }
                 }

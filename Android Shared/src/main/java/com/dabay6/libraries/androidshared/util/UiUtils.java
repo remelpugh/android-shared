@@ -43,6 +43,7 @@ public class UiUtils {
      * Determine if the device is a Honeycomb or better tablet.
      *
      * @param context {@link Context} used to check the device {@link Configuration}.
+     *
      * @return true if the device is a HONEYCOMB tablet, otherwise false.
      */
     public static boolean isHoneycombTablet(final Context context) {
@@ -53,12 +54,13 @@ public class UiUtils {
      * Determine if the device is a tablet.
      *
      * @param context {@link Context} used to check the device {@link Configuration}.
+     *
      * @return true if the device is a tablet, otherwise false.
      */
     public static boolean isTablet(final Context context) {
         final Configuration configuration = context.getResources().getConfiguration();
 
         return (configuration.screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >=
-                Configuration.SCREENLAYOUT_SIZE_LARGE;
+               Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 }

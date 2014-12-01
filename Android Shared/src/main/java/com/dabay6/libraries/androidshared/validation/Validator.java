@@ -68,13 +68,6 @@ public interface Validator {
     void setMessage(String message);
 
     /**
-     * Sets the message string resource id.
-     *
-     * @param resId The resource id of the error message.
-     */
-    void setMessage(int resId);
-
-    /**
      * This method return the source object that is under validation. The actual implementation of the {@link
      * Validator}
      * is responsible for the correctness of the Object.
@@ -103,4 +96,11 @@ public interface Validator {
      * @return True if valid, otherwise false.
      */
     boolean isValid() throws IllegalStateException;
+
+    /**
+     * Sets the message string resource id.
+     *
+     * @param resId The resource id of the error message.
+     */
+    void setMessage(int resId);
 }
