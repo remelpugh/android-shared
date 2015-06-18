@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,11 +23,11 @@
 package com.dabay6.libraries.androidshared.ui.dialogs;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dabay6.libraries.androidshared.util.GpsUtils;
 
 /**
@@ -79,17 +79,16 @@ public class GpsDialogFragment extends BaseDialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final Bundle arguments = getArguments();
-        final Context context = getActivity();
 
-        if (!GpsUtils.canBeShown(context)) {
+        if (!GpsUtils.canBeShown(applicationContext)) {
             return null;
         }
 
         if (arguments != null && arguments.containsKey("TitleResourceId")) {
-            return GpsUtils.createDialog(context, arguments.getInt("TitleResourceId"));
+            return GpsUtils.createDialog(activityContext, arguments.getInt("TitleResourceId"));
         }
 
-        return GpsUtils.createDialog(context);
+        return GpsUtils.createDialog(activityContext);
     }
 
     /**

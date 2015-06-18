@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,11 +37,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.R.style;
 import com.dabay6.libraries.androidshared.R.styleable;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
+import com.dabay6.libraries.androidshared.widget.interfaces.OnButtonBarClickListener;
 
 /**
  * ButtonBar

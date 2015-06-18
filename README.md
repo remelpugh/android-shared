@@ -10,6 +10,10 @@ Dependencies
 * [Google Play services][1] by Google.
 * [Google Gson][2] by Google.
 
+Credits
+-------
+* [android-floatinglabel-widgets][3] by [marvinlabs][4].
+
 Developed By
 ------------
 
@@ -39,3 +43,5 @@ License
 
 [1]: https://developer.android.com/google/index.html
 [2]: https://code.google.com/p/google-gson
+[3]: https://github.com/marvinlabs/android-floatinglabel-widgets
+[4]: https://github.com/marvinlabs

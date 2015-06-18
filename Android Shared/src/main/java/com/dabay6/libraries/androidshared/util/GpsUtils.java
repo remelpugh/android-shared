@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,12 +29,14 @@ import android.location.LocationManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
+
 import com.dabay6.libraries.androidshared.R.id;
 import com.dabay6.libraries.androidshared.R.layout;
 import com.dabay6.libraries.androidshared.R.string;
+import com.dabay6.libraries.androidshared.content.IntentBuilder;
 import com.dabay6.libraries.androidshared.helper.PreferenceHelper;
+import com.dabay6.libraries.androidshared.helper.SystemServiceHelper;
 import com.dabay6.libraries.androidshared.logging.Logger;
-import com.dabay6.libraries.androidshared.util.IntentUtils.IntentBuilder;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
 
 /**
@@ -90,14 +92,12 @@ public final class GpsUtils {
                .setPositiveButton(string.gps_settings, new DialogInterface.OnClickListener() {
                    @Override
                    public void onClick(final DialogInterface dialog, final int id) {
-                       final IntentBuilder intent;
-
                        if (checkBox != null && checkBox.isChecked()) {
                            setCanBeShown(context);
                        }
 
-                       intent = new IntentBuilder(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                       context.startActivity(intent.toIntent());
+                       context.startActivity(
+                               IntentBuilder.with(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS).build());
                    }
                })
                .setTitle(context.getString(titleResourceId))
@@ -124,9 +124,7 @@ public final class GpsUtils {
      * @return true if GpsUtils is enabled, otherwise false.
      */
     public static boolean isEnabled(final Context context, final String provider) {
-        final LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(provider);
+        return SystemServiceHelper.with(context).location().isProviderEnabled(provider);
     }
 
     /**

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -20,12 +20,52 @@
   ~ SOFTWARE.
   -->
 
-<resources>
-    <!-- BUTTON BAR STYLES -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+
     <style name="utils" />
+
+    <style name="utils.ActionBar" />
+
+    <style name="utils.ActionBar.Overlay">
+        <item name="android:textColorPrimary">@color/util__white</item>
+        <item name="colorControlNormal">@color/util__white</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
+
+    <style name="utils.ActionBar.Popup">
+        <item name="android:background">@color/util__white</item>
+        <item name="android:textColor">@color/util__black</item>
+    </style>
+
+    <style name="utils.ActionBar.Spinner"
+           parent="Widget.AppCompat.Light.Spinner.DropDown.ActionBar">
+        <item name="android:background">?android:selectableItemBackground</item>
+        <item name="android:dropDownSelector">?android:selectableItemBackground</item>
+        <item name="android:divider">@null</item>
+        <item name="android:overlapAnchor"
+              tools:ignore="NewApi">true
+        </item>
+    </style>
+
+    <style name="utils.ActionBar.Tabs">
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:elevation"
+              tools:ignore="NewApi">@dimen/util__headerbar_elevation
+        </item>
+    </style>
+
+    <style name="utils.ActionBar.Tabs.TabIndicator" />
+
+    <style name="utils.ActionBar.ThemeOverlay"
+           parent="">
+        <item name="android:textColorPrimary">#fff</item>
+        <item name="colorControlNormal">?actionBarIconColor</item>
+        <item name="colorControlHighlight">#3fff</item>
+    </style>
 
     <style name="utils.Widget" />
 
+    <!-- BUTTON BAR STYLES -->
     <style name="utils.Widget.ButtonBar">
         <item name="negativeButtonIcon">@drawable/ic_action_cancel_black</item>
         <item name="negativeButtonLabel">@android:string/cancel</item>
@@ -35,10 +75,30 @@
     </style>
     <!-- END BUTTON BAR STYLES -->
 
+    <!-- LABEL EDIT TEXT STYLES -->
+    <style name="utils.Widget.FloatLabelBase">
+        <item name="util__labelTextSize">@dimen/util__defaultLabelTextSize</item>
+        <item name="util__labelTextColor">@color/util__float_label_color</item>
+    </style>
+
+    <style name="utils.Widget.FloatLabelTextViewBase">
+        <item name="android:imeOptions">actionNext</item>
+        <item name="util__inputTextSize">@dimen/util__defaultLabelTextSize</item>
+        <item name="util__inputTextColor">@color/util__float_label_color</item>
+    </style>
+
+    <style name="utils.Widget.FloatLabelAutoCompleteTextView">
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="utils.Widget.FloatLabelEditText">
+        <item name="android:inputType">text</item>
+    </style>
+    <!-- END LABEL EDIT TEXT STYLES -->
+
     <!-- NAVIGATION DRAWER STYLES -->
     <style name="utils.Widget.NavigationDrawer">
-        <item name="android:background">@color/util__drawer_layout_background_color</item>
-        <item name="android:layout_width">240dp</item>
+        <item name="android:inputType">text</item>
     </style>
 
     <style name="utils.Widget.NavigationDrawer.Category">
@@ -58,13 +118,14 @@
     </style>
 
     <style name="utils.Widget.NavigationDrawer.Item">
-        <item name="android:background">@drawable/util__list_selector_holo_dark</item>
+        <item name="android:background">?android:attr/activatedBackgroundIndicator</item>
         <item name="android:drawablePadding">12dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:paddingLeft">16dp</item>
         <item name="android:paddingRight">32dp</item>
         <item name="android:paddingTop">8dp</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceListItemSmall</item>
     </style>
     <!-- END NAVIGATION DRAWER STYLES -->
 </resources>

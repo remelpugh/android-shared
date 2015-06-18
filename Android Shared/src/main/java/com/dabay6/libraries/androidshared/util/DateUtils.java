@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,9 @@ package com.dabay6.libraries.androidshared.util;
 import android.content.Context;
 import android.text.format.DateFormat;
 
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * DateUtils
@@ -121,6 +123,79 @@ public final class DateUtils {
         final java.text.DateFormat timeFormat = DateFormat.getTimeFormat(context);
 
         return timeFormat.format(calendar.getTime());
+    }
+
+    /**
+     * Determine if the passed in value is a valid date based on the devices specified date format.
+     *
+     * @param context The {@link android.content.Context} used to retrieve {@link java.text.DateFormat}.
+     * @param date    The date to parse.
+     *
+     * @return True if a valid date, otherwise false.
+     */
+    public static boolean isValid(final Context context, final CharSequence date) {
+        return isValid(context, date.toString());
+    }
+
+    /**
+     * Determine if the passed in value is a valid date based on the devices specified date format.
+     *
+     * @param context The {@link android.content.Context} used to retrieve {@link java.text.DateFormat}.
+     * @param date    The date to parse.
+     *
+     * @return True if a valid date, otherwise false.
+     */
+    public static boolean isValid(final Context context, final String date) {
+        try {
+            final java.text.DateFormat format = DateFormat.getDateFormat(context);
+
+            format.setLenient(false);
+            format.parse(date);
+        }
+        catch (ParseException e) {
+            return false;
+        }
+        catch (IllegalArgumentException e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Parses a date from the passed in string based on the devices specified date format.
+     *
+     * @param context The {@link android.content.Context} used to retrieve {@link java.text.DateFormat}.
+     * @param date    The date to parse.
+     *
+     * @return A valid date, otherwise null.
+     */
+    public static Date parse(final Context context, final CharSequence date) {
+        return parse(context, date);
+    }
+
+    /**
+     * Parses a date from the passed in string based on the devices specified date format.
+     *
+     * @param context The {@link android.content.Context} used to retrieve {@link java.text.DateFormat}.
+     * @param date    The date to parse.
+     *
+     * @return A valid date, otherwise null.
+     */
+    public static Date parse(final Context context, final String date) {
+        try {
+            final java.text.DateFormat format = DateFormat.getDateFormat(context);
+
+            format.setLenient(false);
+
+            return format.parse(date);
+        }
+        catch (ParseException e) {
+            return null;
+        }
+        catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     /**

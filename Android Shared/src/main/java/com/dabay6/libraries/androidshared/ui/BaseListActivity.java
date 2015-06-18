@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,23 +31,49 @@ import android.view.View;
 import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.dabay6.libraries.androidshared.app.ApplicationExtension;
+import com.dabay6.libraries.androidshared.interfaces.Injector;
 import com.dabay6.libraries.androidshared.logging.Logger;
+import com.dabay6.libraries.androidshared.modules.ActivityModule;
+import com.dabay6.libraries.androidshared.util.CollectionUtils;
 import com.dabay6.libraries.androidshared.util.NavigationUtils;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
 
+import java.util.List;
+
+import dagger.ObjectGraph;
+
 /**
- * BaseListActivity
- * <p>
- * Provides basic functionality for a {@link ActionBarActivity} that displays a list.
- * </p>
+ * BaseListActivity <p> Provides basic functionality for a {@link ActionBarActivity} that displays a list. </p>
  *
  * @author Remel Pugh
  * @version 1.0
  */
 @SuppressWarnings("unused")
-public abstract class BaseListActivity extends ActionBarActivity {
+public abstract class BaseListActivity extends ActionBarActivity implements Injector {
     private final static String TAG = Logger.makeTag(BaseListActivity.class);
+    private ObjectGraph activityGraph;
     private ListView listView;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ObjectGraph getObjectGraph() {
+        return activityGraph;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void inject(Object target) {
+        // ensure object graph has been created
+        buildGraph();
+
+        activityGraph.inject(target);
+    }
 
     /**
      * {@inheritDoc}
@@ -81,6 +107,11 @@ public abstract class BaseListActivity extends ActionBarActivity {
             }
         }
     }
+
+    /**
+     * @return
+     */
+    protected abstract List<Object> getActivityModules();
 
     /**
      * @return
@@ -154,8 +185,7 @@ public abstract class BaseListActivity extends ActionBarActivity {
     }
 
     /**
-     * Determines if the application title is displayed by default it is not
-     * displayed.
+     * Determines if the application title is displayed by default it is not displayed.
      *
      * @return true if the title is to be displayed, otherwise false
      */
@@ -188,11 +218,24 @@ public abstract class BaseListActivity extends ActionBarActivity {
      */
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        buildGraph();
+
         initialize(savedInstanceState);
 
         super.onCreate(savedInstanceState);
 
         onConfigureActionBar();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void onDestroy() {
+        // Eagerly clear the reference to the activity graph to allow it to be garbage collected as soon as possible.
+        activityGraph = null;
+
+        super.onDestroy();
     }
 
     /**
@@ -218,4 +261,20 @@ public abstract class BaseListActivity extends ActionBarActivity {
      *
      */
     protected abstract void populateList();
+
+    private void buildGraph() {
+        if (activityGraph == null) {
+            final ApplicationExtension application = (ApplicationExtension) getApplication();
+            final List<Object> modules = CollectionUtils.newList();
+
+            // Create the activity graph by .plus-ing our modules onto the application graph.
+            modules.add(new ActivityModule(this));
+            modules.addAll(getActivityModules());
+
+            activityGraph = application.getObjectGraph().plus(modules.toArray());
+
+            // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
+            activityGraph.inject(this);
+        }
+    }
 }

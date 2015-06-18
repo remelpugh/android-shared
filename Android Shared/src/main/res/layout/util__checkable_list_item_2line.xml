@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -23,12 +23,12 @@
   -->
 
 <com.utils.android.widget.CheckableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/util__list_item_selector"
-    android:minHeight="?android:attr/listPreferredItemHeight"
-    android:orientation="vertical"
-    android:padding="4dp">
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:background="@drawable/util__list_item_selector"
+                                                android:minHeight="?android:attr/listPreferredItemHeight"
+                                                android:orientation="vertical"
+                                                android:padding="4dp">
 
     <TextView
         android:id="@android:id/text1"
@@ -42,6 +42,7 @@
         android:id="@android:id/text2"
         style="?android:textAppearanceSmallInverse"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textAllCaps="true" />
 
 </com.utils.android.widget.CheckableLinearLayout>

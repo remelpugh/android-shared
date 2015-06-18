@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,10 +26,20 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.dabay6.libraries.androidshared.annotations.ForApplication;
+import com.dabay6.libraries.androidshared.interfaces.FragmentBase;
+import com.dabay6.libraries.androidshared.interfaces.FragmentLifeCycleListener;
 import com.dabay6.libraries.androidshared.logging.Logger;
+import com.dabay6.libraries.androidshared.ui.BaseActivity;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
+
+import javax.inject.Inject;
 
 /**
  * BaseFragment
@@ -40,9 +50,16 @@ import com.dabay6.libraries.androidshared.view.ViewsFinder;
 @SuppressWarnings("unused")
 public abstract class BaseFragment extends Fragment implements FragmentBase {
     private final static String TAG = Logger.makeTag(BaseFragment.class);
-    protected Context context;
+    @Inject
+    @ForApplication
+    protected Context applicationContext;
     protected ViewsFinder finder;
+    @Inject
+    ActionBarController actionBarController;
+    @Inject
+    ActivityTitleController titleController;
     private boolean isDualPane = false;
+    private boolean isFirstAttach = true;
     private FragmentLifeCycleListener onFragmentLifeCycleListener;
 
     /**
@@ -73,7 +90,11 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
             onFragmentLifeCycleListener.onFragmentAttached(this);
         }
 
-        context = activity.getApplicationContext();
+        if (getActivity() instanceof BaseActivity && isFirstAttach) {
+            ((BaseActivity) getActivity()).inject(this);
+
+            isFirstAttach = false;
+        }
     }
 
     /**
@@ -117,7 +138,7 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
      */
     @Override
     public void onDetach() {
-        context = null;
+        applicationContext = null;
 
         super.onDetach();
     }
@@ -156,9 +177,7 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
             return;
         }
 
-        if (getActivity() instanceof ActionBarActivity) {
-            ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle(subtitle);
-        }
+        titleController.setSubtitle(subtitle);
     }
 
     /**
@@ -178,7 +197,7 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
             return;
         }
 
-        getActivity().setTitle(title);
+        titleController.setSubtitle(title);
     }
 
     /**
@@ -206,8 +225,7 @@ public abstract class BaseFragment extends Fragment implements FragmentBase {
      *
      * @param savedInstanceState If the fragment is being re-initialized after previously being shut down then this
      *                           Bundle contains the data it most recently supplied in {@link
-     *                           BaseFragment#onSaveInstanceState(android.os.Bundle)}. Note:
-     *                           Otherwise it is null.
+     *                           BaseFragment#onSaveInstanceState(android.os.Bundle)}. Note: Otherwise it is null.
      */
     protected void initialize(final Bundle savedInstanceState) {
     }

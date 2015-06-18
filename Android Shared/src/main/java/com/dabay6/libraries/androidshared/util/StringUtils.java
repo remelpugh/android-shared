@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -47,9 +47,32 @@ public final class StringUtils {
     /**
      * @return An empty string.
      */
-    @SuppressWarnings("SameReturnValue")
     public static String empty() {
         return "";
+    }
+
+    /**
+     * Determine if the strings passed in are equal, ignoring case.
+     *
+     * @param text    The text to be compared.
+     * @param compare The text to compare to.
+     *
+     * @return True if equal, otherwise false.
+     */
+    public static boolean equals(final String text, final String compare) {
+        return text.equalsIgnoreCase(compare);
+    }
+
+    /**
+     * Determine if the strings passed in are equal, ignoring case.
+     *
+     * @param text    The text to be compared.
+     * @param compare The text to compare to.
+     *
+     * @return True if equal, otherwise false.
+     */
+    public static boolean equals(final CharSequence text, final CharSequence compare) {
+        return equals(text.toString(), compare.toString());
     }
 
     /**

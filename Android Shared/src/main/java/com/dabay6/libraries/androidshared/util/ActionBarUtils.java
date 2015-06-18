@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,7 @@
 package com.dabay6.libraries.androidshared.util;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBar.OnNavigationListener;
 import android.support.v7.app.ActionBar.Tab;
 import android.support.v7.app.ActionBar.TabListener;
 import android.support.v7.app.ActionBarActivity;
@@ -33,23 +31,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ArrayAdapter;
+
 import com.dabay6.libraries.androidshared.R;
+import com.dabay6.libraries.androidshared.helper.SystemServiceHelper;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
 
 import java.util.List;
 
 /**
- * ActionBarUtils
- * <p>
- * A {@link ActionBar} utility class used to setup the {@link ActionBar} in different configurations}.
- * </p>
+ * ActionBarUtils <p> A {@link ActionBar} utility class used to setup the {@link ActionBar} in different
+ * configurations}. </p>
  *
  * @author Remel Pugh
  * @version 1.0
  */
 @SuppressWarnings("unused")
-public class ActionBarUtils {
+public final class ActionBarUtils {
     /**
      * Hidden constructor
      */
@@ -68,13 +65,13 @@ public class ActionBarUtils {
         final View view;
         final ViewsFinder finder;
 
-        inflater = (LayoutInflater) actionBar.getThemedContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        inflater = SystemServiceHelper.with(actionBar.getThemedContext()).layout();
 
         view = inflater.inflate(R.layout.util__actionbar_discard_done, null);
 
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM,
-                                    ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME |
-                                    ActionBar.DISPLAY_SHOW_TITLE);
+                ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME |
+                ActionBar.DISPLAY_SHOW_TITLE);
         actionBar.setCustomView(view, new ActionBar.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
         finder = new ViewsFinder(view);
@@ -96,46 +93,45 @@ public class ActionBarUtils {
 
     }
 
-    /**
-     * Configures the {@link ActionBar} to display the list navigation spinner.
-     *
-     * @param activity the {@link ActionBarActivity} containing access to the {@link ActionBar}.
-     * @param <T>      Generic activity type that extends {@link ActionBarActivity}.
-     */
-    public static <T extends ActionBarActivity> void configureListNavigation(final T activity) {
-        final ActionBar actionBar = activity.getSupportActionBar();
+//    /**
+//     * Configures the {@link ActionBar} to display the list navigation spinner.
+//     *
+//     * @param activity the {@link ActionBarActivity} containing access to the {@link ActionBar}.
+//     * @param <T>      Generic activity type that extends {@link ActionBarActivity}.
+//     */
+//    public static <T extends ActionBarActivity> void configureListNavigation(final T activity) {
+//        final ActionBar actionBar = activity.getSupportActionBar();
+//
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//        actionBar.setDisplayShowTitleEnabled(false);
+//
+//    }
 
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setDisplayShowTitleEnabled(false);
-
-    }
-
-    /**
-     * Configures the {@link ActionBar} to display the list navigation spinner.
-     *
-     * @param actionBar      the {@link ActionBar} to customize.
-     * @param textArrayResId the identifier of the array to use as the data source.
-     * @param callback       an {@link OnNavigationListener} that will receive events when the user selects a
-     *                       navigation
-     *                       item.
-     */
-    public static void configureListNavigation(final ActionBar actionBar, final int textArrayResId,
-                                               final OnNavigationListener callback) {
-        final ArrayAdapter<CharSequence> list;
-        final Context context;
-
-        if (callback == null) {
-            throw new IllegalArgumentException("OnNavigationListener must be supplied");
-        }
-
-        context = actionBar.getThemedContext();
-
-        list = ArrayAdapter.createFromResource(context, textArrayResId, R.layout.support_simple_spinner_dropdown_item);
-        list.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
-
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
-        actionBar.setListNavigationCallbacks(list, callback);
-    }
+//    /**
+//     * Configures the {@link ActionBar} to display the list navigation spinner.
+//     *
+//     * @param actionBar      the {@link ActionBar} to customize.
+//     * @param textArrayResId the identifier of the array to use as the data source.
+//     * @param callback       an {@link OnNavigationListener} that will receive events when the user selects a navigation
+//     *                       item.
+//     */
+//    public static void configureListNavigation(final ActionBar actionBar, final int textArrayResId,
+//                                               final OnNavigationListener callback) {
+//        final ArrayAdapter<CharSequence> list;
+//        final Context context;
+//
+//        if (callback == null) {
+//            throw new IllegalArgumentException("OnNavigationListener must be supplied");
+//        }
+//
+//        context = actionBar.getThemedContext();
+//
+//        list = ArrayAdapter.createFromResource(context, textArrayResId, R.layout.support_simple_spinner_dropdown_item);
+//        list.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+//
+//        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
+//        actionBar.setListNavigationCallbacks(list, callback);
+//    }
 
     /**
      * Configures the {@link ActionBar} to display the standard navigation.
@@ -177,10 +173,8 @@ public class ActionBarUtils {
     }
 
     /**
-     * OnActionBarDiscardDoneListener
-     * <p>
-     * Interface definition for a callback to be invoked when the done or discard views are clicked.
-     * </p>
+     * OnActionBarDiscardDoneListener <p> Interface definition for a callback to be invoked when the done or discard
+     * views are clicked. </p>
      *
      * @author Remel Pugh
      * @version 1.0

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -130,6 +130,33 @@ public final class AndroidUtils {
      */
     public static boolean isAtLeastJellyBeanMR1() {
         return VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN_MR1;
+    }
+
+    /**
+     * Determine if the OS is at least KITKAT (API Level 19).
+     *
+     * @return true if the android version is KITKAT (API Level 19) or greater, otherwise false.
+     */
+    public static boolean isAtLeastKitKat() {
+        return VERSION.SDK_INT >= VERSION_CODES.KITKAT;
+    }
+
+    /**
+     * Determine if the OS is at least LOLLIPOP (API Level 21).
+     *
+     * @return true if the android version is LOLLIPOP (API Level 21) or greater, otherwise false.
+     */
+    public static boolean isAtLeastLollipop() {
+        return VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP;
+    }
+
+    /**
+     * Determine if the OS is at least Android Wear (API Level 20).
+     *
+     * @return true if the android version is Android Wear (API Level 20) or greater, otherwise false.
+     */
+    public static boolean isAtLeastWear() {
+        return VERSION.SDK_INT >= VERSION_CODES.KITKAT_WATCH;
     }
 
     /**

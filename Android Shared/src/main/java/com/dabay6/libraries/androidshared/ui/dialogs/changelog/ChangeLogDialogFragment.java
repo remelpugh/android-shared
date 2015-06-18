@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,11 @@ package com.dabay6.libraries.androidshared.ui.dialogs.changelog;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.BaseDialogFragment;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.util.ChangeLogDialogUtils;
@@ -102,10 +102,11 @@ public class ChangeLogDialogFragment extends BaseDialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final Bundle bundle = getArguments();
-        final Context context = getActivity();
 
-        return ChangeLogDialogUtils.createDialog(context, bundle.getString("assetName"), bundle.getString("style"),
-                                                 onChangeLogDialogDismissedListener);
+        return ChangeLogDialogUtils.createDialog(activityContext,
+                bundle.getString("assetName"),
+                bundle.getString("style"),
+                onChangeLogDialogDismissedListener);
     }
 
     /**

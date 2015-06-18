@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,7 @@ package com.dabay6.libraries.androidshared.logging;
 
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.dabay6.libraries.androidshared.enums.LogLevels;
 
 /**
@@ -73,6 +74,10 @@ public class Logger {
      */
     public static void debug(final String tag, final String format, final Object... args) {
         Logger.debug(tag, Logger.formatMessage(format, args));
+    }
+
+    public static void error(final String tag, final String message) {
+        error(tag, message, null);
     }
 
     /**

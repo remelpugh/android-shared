@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -51,7 +51,7 @@
                 android:id="@+id/loading_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/element_spacing_normal"
+                android:layout_marginRight="@dimen/util__element_spacing_normal"
                 android:text="@string/loading_please_wait"
                 android:textAppearance="?android:textAppearanceMedium" />
 

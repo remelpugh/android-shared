@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -33,10 +33,15 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.view.ActionMode.Callback;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.*;
+import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.Checkable;
+import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+
 import com.dabay6.libraries.androidshared.R;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
@@ -355,7 +360,7 @@ public class CheckableAdapterHelper implements OnItemLongClickListener, OnItemCl
             final Resources res = adapterView.getResources();
 
             if (res != null) {
-                final String title = res.getQuantityString(R.plurals.utils__number_of_selected_items, count, count);
+                final String title = res.getQuantityString(R.plurals.util__number_of_selected_items, count, count);
 
                 actionMode.setTitle(title);
             }

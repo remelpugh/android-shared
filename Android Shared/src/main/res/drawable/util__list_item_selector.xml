@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -22,8 +22,15 @@
   ~ SOFTWARE.
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/util__list_item_background_pressed" android:state_pressed="true" />
-    <item android:drawable="@color/util__list_item_background_checked" android:state_checked="true" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+          android:exitFadeDuration="@android:integer/config_mediumAnimTime">
+
+    <item android:drawable="@color/util__list_item_background_checked"
+          android:state_activated="true" />
+    <item android:drawable="@color/util__list_item_background_pressed"
+          android:state_pressed="true" />
+    <item android:drawable="@color/util__list_item_background_checked"
+          android:state_checked="true" />
     <item android:drawable="@color/util__list_item_background_normal" />
+
 </selector>

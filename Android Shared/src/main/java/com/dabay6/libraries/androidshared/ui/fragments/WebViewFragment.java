@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,6 @@
 
 package com.dabay6.libraries.androidshared.ui.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -31,19 +30,18 @@ import android.view.animation.AnimationUtils;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import com.dabay6.libraries.androidshared.R;
+import com.dabay6.libraries.androidshared.helper.AppHelper;
 import com.dabay6.libraries.androidshared.logging.Logger;
-import com.dabay6.libraries.androidshared.util.AssetUtils;
+import com.dabay6.libraries.androidshared.ui.BaseActivity;
 import com.dabay6.libraries.androidshared.util.ViewUtils;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 /**
- * WebViewFragment
- * <p>
- * This fragment shows a {@link WebView}.
- * </p>
+ * WebViewFragment <p> This fragment shows a {@link WebView}. </p>
  *
  * @author Remel Pugh
  * @version 1.0
@@ -88,6 +86,18 @@ public class WebViewFragment extends BaseFragment {
      * {@inheritDoc}
      */
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getActivity() instanceof BaseActivity) {
+            ((BaseActivity) getActivity()).inject(this);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void onDestroyView() {
         isContentShown = false;
 
@@ -123,7 +133,7 @@ public class WebViewFragment extends BaseFragment {
         String html;
 
         try {
-            html = AssetUtils.read(context, assetName);
+            html = AppHelper.with(getActivity()).readAsset(assetName);
         }
         catch (final UnsupportedEncodingException ex) {
             html = null;
@@ -170,7 +180,6 @@ public class WebViewFragment extends BaseFragment {
      * @param isVisible True if the content is visible, otherwise false.
      */
     protected void setContentShown(boolean isVisible) {
-        final Context context = getActivity();
         Animation animation;
 
         if (isContentShown == isVisible) {
@@ -180,32 +189,32 @@ public class WebViewFragment extends BaseFragment {
         isContentShown = isVisible;
 
         if (isVisible) {
-            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+            animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_out);
             if (animation != null) {
                 loadingContainer.startAnimation(animation);
             }
 
-            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+            animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_in);
             if (animation != null) {
                 contentContainer.startAnimation(animation);
             }
 
-            ViewUtils.setGone(loadingContainer, true);
-            ViewUtils.setGone(contentContainer, false);
+            ViewUtils.setGone(loadingContainer);
+            ViewUtils.setVisible(contentContainer);
         }
         else {
-            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+            animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_in);
             if (animation != null) {
                 loadingContainer.startAnimation(animation);
             }
 
-            animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+            animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_out);
             if (animation != null) {
                 contentContainer.startAnimation(animation);
             }
 
-            ViewUtils.setGone(loadingContainer, false);
-            ViewUtils.setGone(contentContainer, true);
+            ViewUtils.setVisible(loadingContainer);
+            ViewUtils.setGone(contentContainer);
         }
     }
 

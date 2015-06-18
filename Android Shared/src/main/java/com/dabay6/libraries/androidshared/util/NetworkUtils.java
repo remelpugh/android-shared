@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,7 +26,9 @@ import android.content.Context;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+
 import com.dabay6.libraries.androidshared.enums.NetworkTypes;
+import com.dabay6.libraries.androidshared.helper.SystemServiceHelper;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -68,10 +70,8 @@ public final class NetworkUtils {
 
         switch (type) {
             case WIFI: {
-                final DhcpInfo info;
-                final WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+                final DhcpInfo info = SystemServiceHelper.with(context).wifi().getDhcpInfo();
 
-                info = manager.getDhcpInfo();
                 if (info == null) {
                     return null;
                 }
@@ -106,8 +106,7 @@ public final class NetworkUtils {
 
         switch (type) {
             case WIFI: {
-                final WifiManager manager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-                final WifiInfo info = manager.getConnectionInfo();
+                final WifiInfo info = SystemServiceHelper.with(context).wifi().getConnectionInfo();
 
                 if (info == null) {
                     return null;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dabay6.libraries.androidshared.widget.FloatLabelAutoCompleteTextView;
+import com.dabay6.libraries.androidshared.widget.FloatLabelEditText;
+import com.dabay6.libraries.androidshared.widget.FloatLabelTextViewBase;
+
 /**
  * ViewUtils
  *
@@ -34,12 +38,11 @@ import android.widget.TextView;
  * @version 1.0
  */
 @SuppressWarnings("unused")
-public class ViewUtils {
+public final class ViewUtils {
     /**
      * Hidden constructor.
      */
     private ViewUtils() {
-
     }
 
     /**
@@ -47,9 +50,15 @@ public class ViewUtils {
      *
      * @param views The views to be cleared.
      */
-    public static void clearText(final TextView... views) {
-        for (final TextView view : views) {
-            view.setText(StringUtils.empty());
+    public static void clearText(final View... views) {
+        for (final View view : views) {
+            if (view instanceof FloatLabelTextViewBase) {
+                clearText(((FloatLabelTextViewBase) view).getInput());
+                continue;
+            }
+            if (view instanceof TextView) {
+                ((TextView) view).setText(StringUtils.empty());
+            }
         }
     }
 
@@ -60,8 +69,37 @@ public class ViewUtils {
      *
      * @return The text of the {@link EditText} view, otherwise null.
      */
-    @SuppressWarnings("ConstantConditions")
     public static String getText(final EditText view) {
+        if (view != null && !TextUtils.isEmpty(view.getText())) {
+            return view.getText().toString();
+        }
+
+        return null;
+    }
+
+    /**
+     * Return the text the TextView is displaying.
+     *
+     * @param view The {@link FloatLabelEditText} used to retrieve the text.
+     *
+     * @return The text of the {@link FloatLabelEditText} view, otherwise null.
+     */
+    public static String getText(final FloatLabelAutoCompleteTextView view) {
+        if (view != null && !TextUtils.isEmpty(view.getText())) {
+            return view.getText().toString();
+        }
+
+        return null;
+    }
+
+    /**
+     * Return the text the TextView is displaying.
+     *
+     * @param view The {@link FloatLabelEditText} used to retrieve the text.
+     *
+     * @return The text of the {@link FloatLabelEditText} view, otherwise null.
+     */
+    public static String getText(final FloatLabelEditText view) {
         if (view != null && !TextUtils.isEmpty(view.getText())) {
             return view.getText().toString();
         }
@@ -76,7 +114,6 @@ public class ViewUtils {
      *
      * @return true if all {@link EditText} views are empty, false otherwise.
      */
-    @SuppressWarnings("ConstantConditions")
     public static boolean isEmpty(final EditText... views) {
         for (final EditText view : views) {
             if (view != null) {
@@ -90,58 +127,108 @@ public class ViewUtils {
     }
 
     /**
-     * Set visibility of given view to be gone or visible
-     * <p>
-     * This method has no effect if the view visibility is currently invisible
-     * </p>
+     * Determines if all {@link FloatLabelAutoCompleteTextView} views supplied are empty.
      *
-     * @param view The {@link View} to displayed or not.
-     * @param gone Determines if the view is displayed.
+     * @param views {@link FloatLabelAutoCompleteTextView} views to be checked.
      *
-     * @return view
+     * @return true if all {@link FloatLabelAutoCompleteTextView} views are empty, false otherwise.
      */
-    @SuppressWarnings("UnusedReturnValue")
-    public static <T extends View> T setGone(final T view, final boolean gone) {
-        if (view != null) {
-            if (gone) {
-                if (View.GONE != view.getVisibility()) {
-                    view.setVisibility(View.GONE);
-                }
-            }
-            else {
-                if (View.VISIBLE != view.getVisibility()) {
-                    view.setVisibility(View.VISIBLE);
+    public static boolean isEmpty(final FloatLabelAutoCompleteTextView... views) {
+        for (final FloatLabelAutoCompleteTextView view : views) {
+            if (view != null) {
+                if (!TextUtils.isEmpty(view.getText().toString())) {
+                    return false;
                 }
             }
         }
+
+        return true;
+    }
+
+    /**
+     * Determines if all {@link FloatLabelEditText} views supplied are empty.
+     *
+     * @param views {@link FloatLabelEditText} views to be checked.
+     *
+     * @return true if all {@link FloatLabelEditText} views are empty, false otherwise.
+     */
+    public static boolean isEmpty(final FloatLabelEditText... views) {
+        for (final FloatLabelEditText view : views) {
+            if (view != null) {
+                if (!TextUtils.isEmpty(view.getText().toString())) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Determine if a view is visible.
+     *
+     * @param view The {@link View} used to determine visibility.
+     *
+     * @return True if visible, otherwise false.
+     */
+    public static <T extends View> boolean isVisible(final T view) {
+        if (view != null) {
+            final int visibility = view.getVisibility();
+
+            return visibility == View.VISIBLE;
+        }
+
+        return false;
+    }
+
+    /**
+     * Set visibility of given view to be gone.
+     *
+     * @param view The {@link android.view.View} whose visibility will changed.
+     *
+     * @return {@link android.view.View}
+     */
+    public static <T extends View> T setGone(final T view) {
+        if (view != null) {
+            if (View.GONE != view.getVisibility()) {
+                view.setVisibility(View.GONE);
+            }
+        }
+
         return view;
     }
 
     /**
-     * Set visibility of given view to be invisible or visible
-     * <p>
-     * This method has no effect if the view visibility is currently gone
-     * </p>
+     * Set visibility of given view to be invisible.
      *
-     * @param view      The {@link View} whose visibility will changed.
-     * @param invisible Determines if the view is visible.
+     * @param view The {@link android.view.View} whose visibility will changed.
      *
-     * @return view
+     * @return {@link android.view.View}
      */
-    @SuppressWarnings("UnusedReturnValue")
-    public static <T extends View> T setInvisible(final T view, final boolean invisible) {
+    public static <T extends View> T setInvisible(final T view) {
         if (view != null) {
-            if (invisible) {
-                if (View.INVISIBLE != view.getVisibility()) {
-                    view.setVisibility(View.INVISIBLE);
-                }
-            }
-            else {
-                if (View.VISIBLE != view.getVisibility()) {
-                    view.setVisibility(View.VISIBLE);
-                }
+            if (View.INVISIBLE != view.getVisibility()) {
+                view.setVisibility(View.INVISIBLE);
             }
         }
+
+        return view;
+    }
+
+    /**
+     * Set visibility of given view to be visible.
+     *
+     * @param view The {@link android.view.View} whose visibility will changed.
+     *
+     * @return {@link android.view.View}
+     */
+    public static <T extends View> T setVisible(final T view) {
+        if (view != null) {
+            if (View.VISIBLE != view.getVisibility()) {
+                view.setVisibility(View.VISIBLE);
+            }
+        }
+
         return view;
     }
 }

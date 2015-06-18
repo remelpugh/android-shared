@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,23 +23,20 @@
 package com.dabay6.libraries.androidshared.ui.dialogs.googleservices;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dabay6.libraries.androidshared.R.string;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.BaseDialogFragment;
 import com.dabay6.libraries.androidshared.ui.dialogs.googleservices.util.LegalNoticesUtils;
 
 /**
- * LegalNoticesDialogFragment
- * <p>
- * Used to display the Google Play Services attribution text as required by
- * <a href="https://developers.google.com/maps/documentation/android/intro#attribution_requirements">https
- * ://developers.google.com/maps/documentation/android/intro#attribution_requirements</a>
- * </p>
+ * LegalNoticesDialogFragment <p> Used to display the Google Play Services attribution text as required by <a
+ * href="https://developers.google.com/maps/documentation/android/intro#attribution_requirements">https
+ * ://developers.google.com/maps/documentation/android/intro#attribution_requirements</a> </p>
  *
  * @author Remel Pugh
  * @version 1.0
@@ -63,6 +60,7 @@ public class LegalNoticesDialogFragment extends BaseDialogFragment {
 
     /**
      * @param titleResourceId
+     *
      * @return
      */
     public static LegalNoticesDialogFragment newInstance(final int titleResourceId) {
@@ -78,6 +76,7 @@ public class LegalNoticesDialogFragment extends BaseDialogFragment {
 
     /**
      * @param title
+     *
      * @return
      */
     public static LegalNoticesDialogFragment newInstance(final String title) {
@@ -97,13 +96,12 @@ public class LegalNoticesDialogFragment extends BaseDialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
         final Bundle bundle = getArguments();
-        final Context context = getActivity();
 
         if (bundle.containsKey("titleResourceId")) {
-            return LegalNoticesUtils.createDialog(context, bundle.getInt("titleResourceId"));
+            return LegalNoticesUtils.createDialog(activityContext, bundle.getInt("titleResourceId"));
         }
 
-        return LegalNoticesUtils.createDialog(context, bundle.getString("title"));
+        return LegalNoticesUtils.createDialog(activityContext, bundle.getString("title"));
     }
 
     /**
@@ -138,7 +136,7 @@ public class LegalNoticesDialogFragment extends BaseDialogFragment {
     }
 
     /**
-     * @return
+     * {@inheritDoc}
      */
     @Override
     protected Integer getMenuResourceId() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +32,8 @@ import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
-import com.dabay6.libraries.androidshared.util.ListUtils;
+
+import com.dabay6.libraries.androidshared.util.CollectionUtils;
 import com.dabay6.libraries.androidshared.util.StringUtils;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
 
@@ -382,6 +383,11 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
         return convertView;
     }
 
+    static class ViewHolder {
+        public TextView data;
+        public TextView label;
+    }
+
     /**
      *
      */
@@ -414,7 +420,7 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
                     values = new ArrayList<DetailsItem>(originalItems);
                 }
 
-                final ArrayList<DetailsItem> newValues = ListUtils.newArrayList();
+                final ArrayList<DetailsItem> newValues = CollectionUtils.newArrayList();
 
                 for (final DetailsItem value : values) {
                     final String valueText = StringUtils.toLowerCase(value.toString());
@@ -454,10 +460,5 @@ public class DetailsAdapter extends BaseAdapter implements Filterable {
                 notifyDataSetInvalidated();
             }
         }
-    }
-
-    static class ViewHolder {
-        public TextView data;
-        public TextView label;
     }
 }

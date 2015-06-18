@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,10 +29,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.BaseDialogFragment;
 import com.dabay6.libraries.androidshared.ui.dialogs.opensource.util.OpenSourceDialogUtils;
-import com.dabay6.libraries.androidshared.util.ListUtils;
+import com.dabay6.libraries.androidshared.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +103,7 @@ public class OpenSourceDialogFragment extends BaseDialogFragment {
         final Bundle bundle = getArguments();
         final Context context = getActivity();
         boolean addDefaultItems = true;
-        List<OpenSourceItem> items = ListUtils.newList();
+        List<OpenSourceItem> items = CollectionUtils.newList();
 
         if (bundle.containsKey("addDefaultItems")) {
             addDefaultItems = bundle.getBoolean("addDefaultItems");

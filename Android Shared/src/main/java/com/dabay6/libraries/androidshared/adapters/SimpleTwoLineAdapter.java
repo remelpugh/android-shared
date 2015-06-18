@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,8 +28,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.dabay6.libraries.androidshared.util.ArrayUtils;
-import com.dabay6.libraries.androidshared.util.ListUtils;
+
+import com.dabay6.libraries.androidshared.util.CollectionUtils;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
 
 import java.util.ArrayList;
@@ -90,8 +90,8 @@ public class SimpleTwoLineAdapter extends BaseAdapter {
      * @param data
      */
     public void add(final Map<String, String>... data) {
-        if (!ArrayUtils.isEmpty(data)) {
-            add(ListUtils.asList(data));
+        if (!CollectionUtils.isEmpty(data)) {
+            add(CollectionUtils.asList(data));
         }
     }
 
@@ -100,10 +100,10 @@ public class SimpleTwoLineAdapter extends BaseAdapter {
      */
     public void add(final ArrayList<Map<String, String>> data) {
         if (items == null) {
-            items = new ArrayList<Map<String, String>>();
+            items = CollectionUtils.newArrayList();
         }
 
-        if (!ListUtils.isEmpty(data)) {
+        if (!CollectionUtils.isEmpty(data)) {
             items.addAll(data);
         }
 
@@ -126,7 +126,7 @@ public class SimpleTwoLineAdapter extends BaseAdapter {
      * @return
      */
     public static Map<String, String> createItem(final String label, final String data) {
-        final HashMap<String, String> map = new HashMap<String, String>();
+        final HashMap<String, String> map = CollectionUtils.newHashMap();
 
         map.put(LABEL_KEY, label);
         map.put(DATA_KEY, data);

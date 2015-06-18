@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -23,34 +23,30 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
-        android:id="@+id/buttons_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="?android:attr/listDivider"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:divider="?android:dividerHorizontal"
+        android:orientation="vertical"
+        android:showDividers="middle">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
 
         <LinearLayout
+            style="?android:buttonBarStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:divider="?android:attr/listDivider"
             android:orientation="horizontal">
 
-            <Button
+            <include
                 android:id="@+id/negative"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp" />
+                layout="@layout/util__include_button_bar_button" />
 
-            <Button
+            <include
                 android:id="@+id/positive"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:paddingLeft="4dp"
-                android:paddingRight="4dp" />
+                layout="@layout/util__include_button_bar_button" />
+
         </LinearLayout>
 
     </LinearLayout>

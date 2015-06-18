@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -21,7 +21,54 @@
   -->
 
 <resources>
-    <item name="utils__content_frame" type="id" />
-    <item name="utils__drawer_layout" type="id" />
-    <item name="utils__navigation_list" type="id" />
+    <item name="util__content_frame"
+          type="id" />
+    <item name="util__drawer"
+          type="id" />
+    <item name="util__drawer_account_box_indicator"
+          type="id" />
+    <item name="util__drawer_account_item_text"
+          type="id" />
+    <item name="util__drawer_account_list"
+          type="id" />
+    <item name="util__drawer_account_profile_email"
+          type="id" />
+    <item name="util__drawer_account_profile_name"
+          type="id" />
+    <item name="util__drawer_chosen_account"
+          type="id" />
+    <item name="util__drawer_chosen_account_content_view"
+          type="id" />
+    <item name="util__drawer_header_text"
+          type="id" />
+    <item name="util__drawer_item_icon"
+          type="id" />
+    <item name="util__drawer_item_count"
+          type="id" />
+    <item name="util__drawer_item_text"
+          type="id" />
+    <item name="util__drawer_items"
+          type="id" />
+    <item name="util__drawer_layout"
+          type="id" />
+    <!--<item name="util__drawer_layout_list"-->
+    <!--type="id" />-->
+    <item name="util__drawer_profile_image"
+          type="id" />
+    <item name="util__empty"
+          type="id" />
+    <item name="util__floating_input"
+          type="id" />
+    <item name="util__floating_label"
+          type="id" />
+    <item name="util__recycler_view"
+          type="id" />
+    <item name="util__toolbar"
+          type="id" />
+    <item name="util__toolbar_spinner"
+          type="id" />
+    <item name="util__toolbar_tabs"
+          type="id" />
+    <item name="util__sliding_tab_strip"
+          type="id" />
 </resources>

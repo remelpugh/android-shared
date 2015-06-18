@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@
 package com.dabay6.libraries.androidshared.ui.fragments;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -35,15 +34,14 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
+
 import com.dabay6.libraries.androidshared.R;
+import com.dabay6.libraries.androidshared.ui.BaseActivity;
 import com.dabay6.libraries.androidshared.util.ViewUtils;
 
 /**
- * LoadingFragment
- * <p>
- * This fragment shows a loading progress spinner. Upon reaching a set timeout (in case
- * of a poor network connection), the user can try again.
- * </p>
+ * LoadingFragment <p> This fragment shows a loading progress spinner. Upon reaching a set timeout (in case of a poor
+ * network connection), the user can try again. </p>
  *
  * @author Remel Pugh
  * @version 1.0
@@ -78,34 +76,13 @@ public class LoadingFragment extends BaseFragment {
     }
 
     /**
-     * @param view
+     * @param layoutResId ID for an XML layout resource to load.
      */
-    public void setContentView(final View view) {
-        afterViews();
+    public void setContentView(final int layoutResId) {
+        final LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+        final View contentView = layoutInflater.inflate(layoutResId, null);
 
-        if (view == null) {
-            throw new IllegalArgumentException("Content view can't be null");
-        }
-
-        if (contentContainer instanceof ViewGroup) {
-            final ViewGroup container = (ViewGroup) contentContainer;
-
-            if (content == null) {
-                container.addView(view);
-            }
-            else {
-                final int index = container.indexOfChild(content);
-
-                // replace content view
-                container.removeView(content);
-                container.addView(view, index);
-            }
-
-            content = view;
-        }
-        else {
-            throw new IllegalStateException("Can't be used with a custom content view");
-        }
+        setContentView(contentView);
     }
 
     /**
@@ -125,12 +102,12 @@ public class LoadingFragment extends BaseFragment {
             throw new IllegalStateException("Content view must be initialized before");
         }
         if (isEmpty) {
-            ViewUtils.setGone(empty, false);
-            ViewUtils.setGone(content, true);
+            ViewUtils.setVisible(empty);
+            ViewUtils.setGone(content);
         }
         else {
-            ViewUtils.setGone(empty, true);
-            ViewUtils.setGone(content, false);
+            ViewUtils.setGone(empty);
+            ViewUtils.setVisible(content);
         }
 
         isContentEmpty = isEmpty;
@@ -199,6 +176,18 @@ public class LoadingFragment extends BaseFragment {
      * {@inheritDoc}
      */
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        if (getActivity() instanceof BaseActivity) {
+            ((BaseActivity) getActivity()).inject(this);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void onDestroyView() {
         isContentEmpty = false;
         isContentShown = false;
@@ -214,21 +203,41 @@ public class LoadingFragment extends BaseFragment {
     }
 
     /**
-     * Like {@link #setContentShown(boolean)}, but no animation is used when
-     * transitioning from the previous state.
+     * Like {@link #setContentShown(boolean)}, but no animation is used when transitioning from the previous state.
      */
     public void setContentShownNoAnimation(final boolean shown) {
         setContentShown(shown, false);
     }
 
     /**
-     * @param layoutResId ID for an XML layout resource to load.
+     * @param view
      */
-    public void setContentView(final int layoutResId) {
-        final LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-        final View contentView = layoutInflater.inflate(layoutResId, null);
+    public void setContentView(final View view) {
+        afterViews();
 
-        setContentView(contentView);
+        if (view == null) {
+            throw new IllegalArgumentException("Content view can't be null");
+        }
+
+        if (contentContainer instanceof ViewGroup) {
+            final ViewGroup container = (ViewGroup) contentContainer;
+
+            if (content == null) {
+                container.addView(view);
+            }
+            else {
+                final int index = container.indexOfChild(content);
+
+                // replace content view
+                container.removeView(content);
+                container.addView(view, index);
+            }
+
+            content = view;
+        }
+        else {
+            throw new IllegalStateException("Can't be used with a custom content view");
+        }
     }
 
     /**
@@ -319,15 +328,15 @@ public class LoadingFragment extends BaseFragment {
                         return;
                     }
 
-                    ViewUtils.setInvisible(progress, true);
+                    ViewUtils.setInvisible(progress);
                 }
             }, LoadingFragment.TRY_AGAIN_DELAY);
         }
         else {
             final TextView message = finder.find(R.id.loading_message);
 
-            ViewUtils.setInvisible(progress, false);
-            ViewUtils.setGone(button, true);
+            ViewUtils.setVisible(progress);
+            ViewUtils.setGone(button);
 
             message.setText(loadingMessage);
         }
@@ -381,7 +390,6 @@ public class LoadingFragment extends BaseFragment {
     }
 
     private void setContentShown(final boolean shown, final boolean animate) {
-        final Context context = getActivity();
         Animation animation;
 
         afterViews();
@@ -394,12 +402,12 @@ public class LoadingFragment extends BaseFragment {
 
         if (shown) {
             if (animate) {
-                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+                animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_out);
                 if (animation != null) {
                     loadingContainer.startAnimation(animation);
                 }
 
-                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+                animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_in);
                 if (animation != null) {
                     contentContainer.startAnimation(animation);
                 }
@@ -409,17 +417,17 @@ public class LoadingFragment extends BaseFragment {
                 contentContainer.clearAnimation();
             }
 
-            ViewUtils.setGone(loadingContainer, true);
-            ViewUtils.setGone(contentContainer, false);
+            ViewUtils.setGone(loadingContainer);
+            ViewUtils.setVisible(contentContainer);
         }
         else {
             if (animate) {
-                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_in);
+                animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_in);
                 if (animation != null) {
                     loadingContainer.startAnimation(animation);
                 }
 
-                animation = AnimationUtils.loadAnimation(context, android.R.anim.fade_out);
+                animation = AnimationUtils.loadAnimation(applicationContext, android.R.anim.fade_out);
                 if (animation != null) {
                     contentContainer.startAnimation(animation);
                 }
@@ -429,8 +437,8 @@ public class LoadingFragment extends BaseFragment {
                 contentContainer.clearAnimation();
             }
 
-            ViewUtils.setGone(loadingContainer, false);
-            ViewUtils.setGone(contentContainer, true);
+            ViewUtils.setVisible(loadingContainer);
+            ViewUtils.setGone(contentContainer);
         }
     }
 

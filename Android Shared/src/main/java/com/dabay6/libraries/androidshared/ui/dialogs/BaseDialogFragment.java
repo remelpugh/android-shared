@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,11 +27,21 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager.LayoutParams;
+
+import com.dabay6.libraries.androidshared.annotations.ForActivity;
+import com.dabay6.libraries.androidshared.annotations.ForApplication;
+import com.dabay6.libraries.androidshared.interfaces.FragmentBase;
 import com.dabay6.libraries.androidshared.logging.Logger;
-import com.dabay6.libraries.androidshared.ui.fragments.FragmentBase;
+import com.dabay6.libraries.androidshared.ui.BaseActivity;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
+
+import javax.inject.Inject;
 
 /**
  * BaseDialogFragment
@@ -42,9 +52,15 @@ import com.dabay6.libraries.androidshared.view.ViewsFinder;
 @SuppressWarnings("unused")
 public abstract class BaseDialogFragment extends DialogFragment implements FragmentBase {
     private final static String TAG = Logger.makeTag(BaseDialogFragment.class);
+    @Inject
+    @ForActivity
+    protected Context activityContext;
+    @Inject
+    @ForApplication
     protected Context applicationContext;
     protected ViewsFinder finder;
     private boolean isDualPane = false;
+    private boolean isFirstAttach = true;
 
     /**
      * {@inheritDoc}
@@ -66,10 +82,15 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      * {@inheritDoc}
      */
     @Override
-    public void onAttach(final Activity activity) {
+    public void onAttach(Activity activity) {
         super.onAttach(activity);
 
-        applicationContext = activity.getApplicationContext();
+        //activityContext = activity;
+        if (getActivity() instanceof BaseActivity && isFirstAttach) {
+            ((BaseActivity) getActivity()).inject(this);
+
+            isFirstAttach = false;
+        }
     }
 
     /**
@@ -115,6 +136,7 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      */
     @Override
     public void onDetach() {
+        activityContext = null;
         applicationContext = null;
 
         super.onDetach();
@@ -186,7 +208,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      *
      * @param savedInstanceState The saved state of fragment.
      */
-    @SuppressWarnings("EmptyMethod")
     protected abstract void afterViews(final Bundle savedInstanceState);
 
     /**
@@ -194,7 +215,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      *
      * @return Resource identifier for the layout resource.
      */
-    @SuppressWarnings("SameReturnValue")
     protected abstract int getLayoutResourceId();
 
     /**
@@ -202,7 +222,6 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      *
      * @return Resource identifier for the menu resource.
      */
-    @SuppressWarnings("SameReturnValue")
     protected abstract Integer getMenuResourceId();
 
     /**
@@ -210,8 +229,8 @@ public abstract class BaseDialogFragment extends DialogFragment implements Fragm
      *
      * @param savedInstanceState If the fragment is being re-initialized after previously being shut down then this
      *                           Bundle contains the data it most recently supplied in {@link
-     *                           BaseDialogFragment#onSaveInstanceState(android.os.Bundle)}. Note:
-     *                           Otherwise it is null.
+     *                           BaseDialogFragment#onSaveInstanceState(android.os.Bundle)}. Note: Otherwise it is
+     *                           null.
      */
     @SuppressWarnings("EmptyMethod")
     protected void initialize(final Bundle savedInstanceState) {

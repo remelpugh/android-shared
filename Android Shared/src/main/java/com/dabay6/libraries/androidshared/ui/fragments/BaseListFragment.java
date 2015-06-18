@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -26,12 +26,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
+
+import com.dabay6.libraries.androidshared.interfaces.FragmentBase;
+import com.dabay6.libraries.androidshared.interfaces.FragmentLifeCycleListener;
 import com.dabay6.libraries.androidshared.logging.Logger;
+import com.dabay6.libraries.androidshared.ui.BaseActivity;
 import com.dabay6.libraries.androidshared.view.ViewsFinder;
+
+import javax.inject.Inject;
 
 /**
  * BaseListFragment
@@ -44,7 +49,12 @@ public abstract class BaseListFragment extends ListFragment implements FragmentB
     private final static String TAG = Logger.makeTag(BaseListFragment.class);
     protected Context applicationContext;
     protected ViewsFinder finder;
+    @Inject
+    ActionBarController actionBarController;
+    @Inject
+    ActivityTitleController titleController;
     private boolean isDualPane = false;
+    private boolean isFirstAttach = true;
     private FragmentLifeCycleListener onFragmentLifeCycleListener;
 
     /**
@@ -86,6 +96,12 @@ public abstract class BaseListFragment extends ListFragment implements FragmentB
         }
 
         applicationContext = activity.getApplicationContext();
+
+        if (getActivity() instanceof BaseActivity && isFirstAttach) {
+            ((BaseActivity) getActivity()).inject(this);
+
+            isFirstAttach = false;
+        }
     }
 
     /**
@@ -96,6 +112,10 @@ public abstract class BaseListFragment extends ListFragment implements FragmentB
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(getMenuResourceId() != null && getMenuResourceId() > 0);
+
+        if (getActivity() instanceof BaseActivity) {
+            ((BaseActivity) getActivity()).inject(this);
+        }
     }
 
     /**
@@ -148,9 +168,7 @@ public abstract class BaseListFragment extends ListFragment implements FragmentB
             return;
         }
 
-        if (getActivity() instanceof ActionBarActivity) {
-            ((ActionBarActivity) getActivity()).getSupportActionBar().setSubtitle(subtitle);
-        }
+        titleController.setSubtitle(subtitle);
     }
 
     /**
@@ -170,7 +188,7 @@ public abstract class BaseListFragment extends ListFragment implements FragmentB
             return;
         }
 
-        getActivity().setTitle(title);
+        titleController.setTitle(title);
     }
 
     /**

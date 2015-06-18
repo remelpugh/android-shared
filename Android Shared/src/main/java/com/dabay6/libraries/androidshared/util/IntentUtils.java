@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,6 @@
 
 package com.dabay6.libraries.androidshared.util;
 
-import android.R.anim;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -31,10 +30,11 @@ import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
-import com.dabay6.libraries.androidshared.exceptions.ActivityStartException;
+
+import com.dabay6.libraries.androidshared.app.ActivityIntentBuilder;
+import com.dabay6.libraries.androidshared.content.IntentBuilder;
 
 import java.io.File;
-import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,7 +59,7 @@ public final class IntentUtils {
      */
     public static ActivityIntentBuilder createActivityIntent(final Context context,
                                                              final Class<? extends Activity> cls) {
-        return new ActivityIntentBuilder(context, cls);
+        return ActivityIntentBuilder.with(context, cls);
     }
 
     /**
@@ -70,9 +70,10 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newDialNumberIntent(final String phone) {
-        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_DIAL);
-
-        return builder.addData(Uri.parse("tel:" + phone.replace(" ", ""))).isExternal().toIntent();
+        return IntentBuilder.with(Intent.ACTION_DIAL)
+                            .addData(Uri.parse("tel:" + phone.replace(" ", "")))
+                            .isExternal()
+                            .build();
     }
 
     /**
@@ -85,13 +86,12 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newEmailIntent(final String to, final String subject, final String body) {
-        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_SEND);
-
-        return builder.add(Intent.EXTRA_EMAIL, new String[]{to})
-                      .add(Intent.EXTRA_TEXT, body)
-                      .add(Intent.EXTRA_SUBJECT, subject)
-                      .addType("message/rfc822")
-                      .toIntent();
+        return IntentBuilder.with(Intent.ACTION_SEND)
+                            .add(Intent.EXTRA_EMAIL, new String[]{to})
+                            .add(Intent.EXTRA_TEXT, body)
+                            .add(Intent.EXTRA_SUBJECT, subject)
+                            .addType("message/rfc822")
+                            .build();
     }
 
     /**
@@ -103,7 +103,6 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newMapIntent(final String address, final String title) {
-        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_VIEW);
         final StringBuilder request = new StringBuilder();
 
         request.append("geo:0,0?q=");
@@ -118,7 +117,7 @@ public final class IntentUtils {
         request.append("&hl=");
         request.append(Locale.getDefault().getLanguage());
 
-        return builder.addData(Uri.parse(request.toString())).toIntent();
+        return IntentBuilder.with(Intent.ACTION_VIEW).addData(Uri.parse(request.toString())).build();
     }
 
     /**
@@ -130,16 +129,7 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newSelectPictureIntent(final String title) {
-        final IntentBuilder builder = new IntentBuilder(Intent.ACTION_PICK);
-
-        builder.addType("image/*");
-
-        if (TextUtils.isEmpty(title)) {
-            return builder.toIntent();
-        }
-        else {
-            return Intent.createChooser(builder.toIntent(), title);
-        }
+        return Intent.createChooser(IntentBuilder.with(Intent.ACTION_PICK).addType("image/*").build(), title);
     }
 
     /**
@@ -152,9 +142,9 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newTakePictureIntent(final File file) {
-        final IntentBuilder builder = new IntentBuilder(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        return builder.add(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file)).toIntent();
+        return IntentBuilder.with(MediaStore.ACTION_IMAGE_CAPTURE)
+                            .add(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file))
+                            .build();
     }
 
     /**
@@ -165,7 +155,7 @@ public final class IntentUtils {
      * @return the newly-created {@link Intent}
      */
     public static Intent newWebIntent(final String url) {
-        return (new IntentBuilder(Intent.ACTION_VIEW)).addData(Uri.parse(url)).toIntent();
+        return IntentBuilder.with(Intent.ACTION_VIEW).addData(Uri.parse(url)).build();
     }
 
     /**
@@ -204,263 +194,4 @@ public final class IntentUtils {
         return list.size() > 0;
     }
 
-    /**
-     * ActivityIntentBuilder
-     * <p>
-     * </p>
-     *
-     * @author Remel Pugh
-     * @version 1.0
-     */
-    public static class ActivityIntentBuilder {
-        private final Context activityContext;
-        private final Intent intent;
-
-        /**
-         * @param context
-         * @param cls
-         */
-        public ActivityIntentBuilder(final Context context, final Class<? extends Activity> cls) {
-            activityContext = context;
-            intent = new Intent(context, cls);
-        }
-
-        /**
-         * @return
-         */
-        public ActivityIntentBuilder clearTop() {
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-            return this;
-        }
-
-        /**
-         * @return
-         */
-        public Intent get() {
-            return intent;
-        }
-
-        /**
-         * @return
-         */
-        public ActivityIntentBuilder newTask() {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            return this;
-        }
-
-        /**
-         * @return
-         */
-        public ActivityIntentBuilder noAnimation() {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
-            return this;
-        }
-
-        /**
-         * @return
-         */
-        public ActivityIntentBuilder noHistory() {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-
-            return this;
-        }
-
-        /**
-         * @return True if activity was successfully started, otherwise false.
-         */
-        public boolean start() {
-            try {
-                startWithAnimation(0, 0);
-
-                return true;
-            }
-            catch (Exception ignored) {
-                return false;
-            }
-        }
-
-        /**
-         * @throws ActivityStartException
-         */
-        public void startWithAnimation() throws ActivityStartException {
-            startWithAnimation(anim.fade_in, anim.fade_out);
-        }
-
-        /**
-         * @param enterAnimation A resource ID of the animation resource to use for the incoming activity. Use 0 for no
-         *                       animation.
-         * @param exitAnimation  A resource ID of the animation resource to use for the outgoing activity. Use 0 for no
-         *                       animation.
-         */
-        public void startWithAnimation(final int enterAnimation, final int exitAnimation)
-                throws ActivityStartException {
-            try {
-                if (!(activityContext instanceof Activity)) {
-                    throw new ActivityStartException("Context must of type Activity");
-                }
-
-                final Activity activity = (Activity) activityContext;
-
-                activity.startActivity(intent);
-                activity.overridePendingTransition(enterAnimation, exitAnimation);
-            }
-            catch (Exception ex) {
-                throw new ActivityStartException(ex);
-            }
-        }
-    }
-
-    /**
-     * IntentBuilder
-     * <p>
-     * </p>
-     *
-     * @author Remel Pugh
-     * @version 1.0
-     */
-    public static class IntentBuilder {
-        private final Intent intent;
-
-        /**
-         * Create {@link IntentUtils.IntentBuilder} with a default action.
-         */
-        public IntentBuilder(final String action) {
-            intent = new Intent(action);
-        }
-
-        /**
-         * Add extra field data value to intent being built up
-         *
-         * @return this builder
-         */
-        public IntentBuilder add(final String fieldName, final boolean[] values) {
-            intent.putExtra(fieldName, values);
-
-            return this;
-        }
-
-        /**
-         * Add extra field data values to intent being built up
-         *
-         * @return this builder
-         */
-        public IntentBuilder add(final String fieldName, final CharSequence[] values) {
-            intent.putExtra(fieldName, values);
-
-            return this;
-        }
-
-        /**
-         * Add extra field data value to intent being built up
-         *
-         * @return this builder
-         */
-        public IntentBuilder add(final String fieldName, final int value) {
-            intent.putExtra(fieldName, value);
-
-            return this;
-        }
-
-        /**
-         * Add extra field data value to intent being built up
-         *
-         * @return this builder
-         */
-        public IntentBuilder add(final String fieldName, final int[] values) {
-            intent.putExtra(fieldName, values);
-
-            return this;
-        }
-
-        /**
-         * Add extra field data value to intent being built up
-         *
-         * @return this builder
-         */
-        public IntentBuilder add(final String fieldName, final Serializable value) {
-            intent.putExtra(fieldName, value);
-
-            return this;
-        }
-
-        /**
-         * Add extra field data value to intent being built up
-         *
-         * @return this builder
-         */
-        public IntentBuilder add(final String fieldName, final String value) {
-            intent.putExtra(fieldName, value);
-
-            return this;
-        }
-
-        /**
-         * @param fieldName
-         * @param uri
-         * @return
-         */
-        public IntentBuilder add(final String fieldName, final Uri uri) {
-            intent.putExtra(fieldName, uri);
-
-            return this;
-        }
-
-        /**
-         * Set the data this intent is operating on.
-         *
-         * @param uri The Uri of the data this intent is now targeting.
-         *
-         * @return this builder
-         */
-        public IntentBuilder addData(final Uri uri) {
-            intent.setData(uri);
-
-            return this;
-        }
-
-        /**
-         * Add additional flags to the intent (or with existing flags value).
-         *
-         * @param flag The new flags to set.
-         *
-         * @return this builder
-         */
-        public IntentBuilder addFlag(final int flag) {
-            intent.addFlags(flag);
-
-            return this;
-        }
-
-        /**
-         * Set an explicit MIME data type.
-         *
-         * @param type The MIME type of the data being handled by this intent.
-         *
-         * @return this builder
-         */
-        public IntentBuilder addType(final String type) {
-            intent.setType(type);
-
-            return this;
-        }
-
-        /**
-         * @return this builder
-         */
-        public IntentBuilder isExternal() {
-            return addFlag(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        }
-
-        /**
-         * Get built intent
-         *
-         * @return intent
-         */
-        public Intent toIntent() {
-            return intent;
-        }
-    }
 }

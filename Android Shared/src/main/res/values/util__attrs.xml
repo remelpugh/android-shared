@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -21,13 +21,108 @@
   -->
 
 <resources>
-    <attr name="util__buttonBarStyle" format="reference" />
+    <!-- BASETHEME -->
+    <declare-styleable name="BaseTheme">
+        <attr name="actionBarIconColor"
+              format="color" />
+        <attr name="actionBarInsetStart"
+              format="dimension" />
+        <attr name="spinnerBarInsetStart"
+              format="dimension" />
+        <attr name="popupItemBackground"
+              format="reference" />
+        <attr name="photoItemForeground"
+              format="reference" />
+        <attr name="photoItemForegroundBorderless"
+              format="reference" />
+
+        <!--ACTIONBAR-->
+        <attr name="util__actionbarAccentColor"
+              format="reference|color" />
+        <attr name="util__actionbarControlHighlightColor"
+              format="reference|color" />
+        <attr name="util__actionbarPrimaryColor"
+              format="reference|color" />
+        <attr name="util__actionbarPrimaryColorDark"
+              format="reference|color" />
+
+        <!--ACTIONBAR SPINNER-->
+        <attr name="util__toolbarSpinnerTextColor"
+              format="reference" />
+        <attr name="util__toolbarSpinnerTextColorSecondary"
+              format="reference" />
+
+        <!--DRAWER LAYOUT-->
+        <attr name="util__drawer_background_color"
+              format="reference|color" />
+        <attr name="util__drawer_item_count_background"
+              format="reference" />
+        <attr name="util__drawer_item_count_text_color"
+              format="reference|color" />
+        <attr name="util__drawer_item_text_color"
+              format="reference|color" />
+        <attr name="util__drawer_width"
+              format="reference|dimension" />
+    </declare-styleable>
+
+    <!--BUTTONBAR-->
+    <attr name="util__buttonBarStyle"
+          format="reference" />
 
     <declare-styleable name="ButtonBar">
-        <attr name="negativeButtonIcon" format="reference" />
-        <attr name="negativeButtonLabel" format="reference|string" />
-        <attr name="positiveButtonEnabled" format="reference|boolean" />
-        <attr name="positiveButtonIcon" format="reference" />
-        <attr name="positiveButtonLabel" format="reference|string" />
+        <attr name="negativeButtonIcon"
+              format="reference" />
+        <attr name="negativeButtonLabel"
+              format="reference|string" />
+        <attr name="positiveButtonEnabled"
+              format="reference|boolean" />
+        <attr name="positiveButtonIcon"
+              format="reference" />
+        <attr name="positiveButtonLabel"
+              format="reference|string" />
+    </declare-styleable>
+
+    <!--FLOATLABELEDITTEXT-->
+    <attr name="util__floatLabelBase"
+          format="reference" />
+    <attr name="util__floatLabelAutoCompleteTextView"
+          format="reference" />
+    <attr name="util__floatLabelEditText"
+          format="reference" />
+    <attr name="util__floatLabelTextViewBase"
+          format="reference" />
+
+    <declare-styleable name="FloatLabelBase">
+        <attr name="android:enabled" />
+        <attr name="android:layout" />
+        <attr name="util__labelText"
+              format="reference|string" />
+        <attr name="util__labelTextColor"
+              format="reference|color" />
+        <attr name="util__labelTextSize"
+              format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="FloatLabelTextViewBase">
+        <attr name="android:drawableRight" />
+        <attr name="android:drawableLeft" />
+        <attr name="android:drawablePadding" />
+        <attr name="android:imeOptions" />
+        <attr name="util__inputTextColor"
+              format="reference|color" />
+        <attr name="util__inputTextSize"
+              format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="FloatLabelAutoCompleteTextView">
+        <attr name="android:completionHint" />
+        <attr name="android:completionThreshold" />
+        <attr name="android:dropDownHeight" />
+        <attr name="android:dropDownWidth" />
+        <attr name="android:popupBackground" />
+    </declare-styleable>
+
+    <declare-styleable name="FloatLabelEditText">
+        <attr name="android:inputType" />
     </declare-styleable>
 </resources>

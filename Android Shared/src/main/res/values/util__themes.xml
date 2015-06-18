@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,50 @@
 
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="Root.Theme"
+           parent="Theme.AppCompat.Light.DarkActionBar" />
+
+    <style name="Theme"
+           parent="Root.Theme" />
+
+    <style name="AppTheme.Base"
+           parent="Theme">
+        <item name="actionBarIconColor">@color/util__white</item>
+        <item name="actionBarInsetStart">@dimen/util__width_32dp</item>
+        <item name="homeAsUpIndicator">@drawable/ic_up</item>
+        <item name="spinnerBarInsetStart">@dimen/util__width_56dp</item>
+        <item name="popupItemBackground">?android:selectableItemBackground</item>
+        <item name="photoItemForeground">?android:selectableItemBackground</item>
+        <item name="photoItemForegroundBorderless">?android:selectableItemBackground</item>
+
+        <item name="colorPrimary">@color/util__primary_color</item>
+        <item name="colorPrimaryDark">@color/util__primary_color_dark</item>
+        <item name="colorAccent">@color/util__accent_color</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_up</item>
+
+        <!-- Start DrawerLayout Styles -->
+        <item name="util__drawer_background_color">@color/util__navigation_drawer_background_color</item>
+        <item name="util__drawer_item_count_background">@drawable/util__navigation_item_count_bg</item>
+        <item name="util__drawer_item_count_text_color">@color/util__white</item>
+        <item name="util__drawer_item_text_color">@color/util__text_3</item>
+        <item name="util__drawer_width">@dimen/util__navigation_drawer_width</item>
+        <!-- End DrawerLayout Styles -->
+
+        <!-- Start Toolbar Styles -->
+        <item name="util__toolbarSpinnerTextColor">@color/util__text_1_inverse</item>
+        <item name="util__toolbarSpinnerTextColorSecondary">@color/util__text_2_inverse</item>
+        <!-- End Toolbar Styles -->
     </style>
+
+    <style name="AppTheme"
+           parent="AppTheme.Base" />
+
+    <style name="AppTheme.WithNavDrawer"
+           parent="AppTheme" />
+
 </resources>

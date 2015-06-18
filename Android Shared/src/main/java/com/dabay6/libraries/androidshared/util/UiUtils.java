@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +24,9 @@ package com.dabay6.libraries.androidshared.util;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.view.View;
 
 /**
  * UiUtils
@@ -32,11 +35,28 @@ import android.content.res.Configuration;
  * @version 1.0
  */
 @SuppressWarnings("unused")
-public class UiUtils {
+public final class UiUtils {
     /**
      * Hidden constructor
      */
     private UiUtils() {
+    }
+
+    /**
+     * Creates a bitmap from the supplied view.
+     *
+     * @param view The view to create the bitmap from.
+     *
+     * @return The bitmap of the view.
+     */
+    public static Bitmap createBitmapFromView(View view) {
+        final Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        final Canvas canvas = new Canvas(bitmap);
+
+        view.layout(view.getLeft(), view.getTop(), view.getRight(), view.getBottom());
+        view.draw(canvas);
+
+        return bitmap;
     }
 
     /**

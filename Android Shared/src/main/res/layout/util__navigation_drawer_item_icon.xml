@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2015 Remel Pugh
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="?android:selectableItemBackground"
+                android:gravity="start|center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/util__width_16dp"
+                android:paddingRight="@dimen/util__width_16dp">
+
+    <ImageView
+        android:id="@id/util__drawer_item_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_centerVertical="true"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/ic_action_tick_black" />
+
+    <TextView
+        android:id="@id/util__drawer_item_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/util__width_16dp"
+        android:layout_marginLeft="@dimen/util__width_32dp"
+        android:layout_marginRight="@dimen/util__width_8dp"
+        android:layout_marginStart="@dimen/util__width_32dp"
+        android:layout_toLeftOf="@+id/util__drawer_item_count"
+        android:layout_toStartOf="@+id/util__drawer_item_count"
+        android:gravity="start|center_vertical"
+        android:textColor="?util__drawer_item_text_color"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        tools:text="@string/placeholder_lorem_ipsum" />
+
+    <TextView
+        android:id="@id/util__drawer_item_count"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="?attr/util__drawer_item_count_background"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLength="3"
+        android:singleLine="true"
+        android:textColor="?attr/util__drawer_item_count_text_color"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:text="99+"
+        tools:visibility="visible" />
+
+</RelativeLayout>

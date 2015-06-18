@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,18 +29,19 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+
 import com.dabay6.libraries.androidshared.R;
+import com.dabay6.libraries.androidshared.helper.AppHelper;
 import com.dabay6.libraries.androidshared.helper.PreferenceHelper;
 import com.dabay6.libraries.androidshared.logging.Logger;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.ChangeLogDialogFragment;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.ChangeLogItem;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.OnChangeLogDialogListener;
 import com.dabay6.libraries.androidshared.ui.dialogs.changelog.Release;
-import com.dabay6.libraries.androidshared.util.AppUtils;
-import com.dabay6.libraries.androidshared.util.AssetUtils;
-import com.dabay6.libraries.androidshared.util.ListUtils;
+import com.dabay6.libraries.androidshared.util.CollectionUtils;
 import com.dabay6.libraries.androidshared.util.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -107,7 +108,7 @@ public final class ChangeLogDialogUtils {
                                            final OnChangeLogDialogListener callback) {
         final AlertDialog.Builder builder;
         final Resources res = context.getResources();
-        final String title = res.getString(R.string.change_log_title, AppUtils.getApplicationVersion(context));
+        final String title = res.getString(R.string.change_log_title, AppHelper.with(context).version());
         final WebSettings settings;
         final WebView web = new WebView(context);
         String html;
@@ -189,9 +190,13 @@ public final class ChangeLogDialogUtils {
             return;
         }
 
-        final DialogFragment fragment = ChangeLogDialogFragment.newInstance(assetName, style);
+        final FragmentManager manager = context.getSupportFragmentManager();
 
-        fragment.show(context.getSupportFragmentManager(), "change_log");
+        if (manager.findFragmentByTag("change_log") == null) {
+            final DialogFragment fragment = ChangeLogDialogFragment.newInstance(assetName, style);
+
+            fragment.show(manager, "change_log");
+        }
     }
 
     /**
@@ -213,7 +218,7 @@ public final class ChangeLogDialogUtils {
      * @return true if change log has been viewed, otherwise false.
      */
     public static boolean hasShownChangeLog(final Context context) {
-        final String currentVersionName = AppUtils.getApplicationVersion(context);
+        final String currentVersionName = AppHelper.with(context).version();
         final String versionName = PreferenceHelper.with(context).getString(PREF_CHANGE_LOG, "Unknown");
 
         return currentVersionName.equalsIgnoreCase(versionName);
@@ -225,7 +230,7 @@ public final class ChangeLogDialogUtils {
      * @param context the {@link Context} used to retrieve the {@link android.content.SharedPreferences} instance.
      */
     public static void setChangeLogShown(final Context context) {
-        final String currentVersionName = AppUtils.getApplicationVersion(context);
+        final String currentVersionName = AppHelper.with(context).version();
 
         PreferenceHelper.with(context).save(PREF_CHANGE_LOG, currentVersionName);
     }
@@ -243,11 +248,11 @@ public final class ChangeLogDialogUtils {
             throws IOException {
         final JsonReader reader;
         final Gson gson = new Gson();
-        final List<Release> releases = ListUtils.newList();
+        final List<Release> releases = CollectionUtils.newList();
         String html = null;
 
         try {
-            reader = new JsonReader(new InputStreamReader(AssetUtils.open(context, assetName), "UTF-8"));
+            reader = new JsonReader(new InputStreamReader(AppHelper.with(context).openAsset(assetName), "UTF-8"));
             reader.beginArray();
 
             while (reader.hasNext()) {

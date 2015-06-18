@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,7 +22,7 @@
 
 package com.dabay6.libraries.androidshared.enums;
 
-import com.dabay6.libraries.androidshared.util.HashMapUtils;
+import com.dabay6.libraries.androidshared.util.CollectionUtils;
 
 import java.util.EnumSet;
 import java.util.Map;
@@ -36,7 +36,7 @@ import java.util.Map;
 @SuppressWarnings("unused")
 public enum NetworkTypes {
     WIFI(0);
-    private static final Map<Integer, NetworkTypes> lookup = HashMapUtils.newHashMap();
+    private static final Map<Integer, NetworkTypes> lookup = CollectionUtils.newHashMap();
     private final int index;
 
     private NetworkTypes(final int index) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,9 +28,10 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
-import com.dabay6.libraries.androidshared.logging.Logger;
+import android.preference.PreferenceManager;
+import android.text.TextUtils;
+
 import com.dabay6.libraries.androidshared.util.AndroidUtils;
-import com.dabay6.libraries.androidshared.util.SharedPreferenceUtils;
 
 import java.util.Map;
 import java.util.Set;
@@ -42,7 +43,6 @@ import java.util.Set;
  */
 @SuppressWarnings("unused")
 public class PreferenceHelper {
-    private final static String TAG = Logger.makeTag(PreferenceHelper.class);
     private final static Object lock = new Object();
     private static SharedPreferences.Editor editor;
     private static SharedPreferences preferences;
@@ -51,8 +51,10 @@ public class PreferenceHelper {
     /**
      * @param context the {@link Context} used to access {@link SharedPreferences}.
      */
-    private PreferenceHelper(final Context context) {
-        this(context, TAG, Context.MODE_PRIVATE);
+    @SuppressLint("CommitPrefEdits")
+    PreferenceHelper(final Context context) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        editor = preferences.edit();
     }
 
     /**
@@ -62,8 +64,8 @@ public class PreferenceHelper {
      * @param mode    Operating mode.
      */
     @SuppressLint("CommitPrefEdits")
-    private PreferenceHelper(final Context context, final String name, final int mode) {
-        preferences = SharedPreferenceUtils.get(context, name, mode);
+    PreferenceHelper(final Context context, final String name, final Integer mode) {
+        preferences = context.getSharedPreferences(name, mode);
         editor = preferences.edit();
     }
 
@@ -274,7 +276,7 @@ public class PreferenceHelper {
         if (singleton == null) {
             synchronized (lock) {
                 if (singleton == null) {
-                    singleton = new PreferenceHelper(context);
+                    singleton = new SharedPreferenceBuilder(context).build();
                 }
             }
         }
@@ -294,7 +296,7 @@ public class PreferenceHelper {
         if (singleton == null) {
             synchronized (lock) {
                 if (singleton == null) {
-                    singleton = new PreferenceHelper(context, name, mode);
+                    singleton = new SharedPreferenceBuilder(context, name, mode).build();
                 }
             }
         }
@@ -315,6 +317,34 @@ public class PreferenceHelper {
                     return null;
                 }
             }.execute();
+        }
+    }
+
+    private static class SharedPreferenceBuilder {
+        private final Context context;
+        private final Integer mode;
+        private final String name;
+
+        public SharedPreferenceBuilder(Context context) {
+            this(context, null, null);
+        }
+
+        public SharedPreferenceBuilder(Context context, String name, Integer mode) {
+            if (context == null) {
+                throw new IllegalArgumentException("Context must not be null.");
+            }
+
+            this.context = context.getApplicationContext();
+            this.mode = mode;
+            this.name = name;
+        }
+
+        public PreferenceHelper build() {
+            if (TextUtils.isEmpty(this.name) || this.mode == null) {
+                return new PreferenceHelper(context);
+            }
+
+            return new PreferenceHelper(context, this.name, this.mode);
         }
     }
 }

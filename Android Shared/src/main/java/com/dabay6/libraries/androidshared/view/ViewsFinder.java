@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014 Remel Pugh
+ * Copyright (c) 2015 Remel Pugh
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +34,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.dabay6.libraries.androidshared.widget.FloatLabelAutoCompleteTextView;
+import com.dabay6.libraries.androidshared.widget.FloatLabelEditText;
+
 /**
  * ViewsFinder
  *
@@ -45,8 +48,7 @@ public class ViewsFinder {
     private final Finder finder;
 
     /**
-     * Creates a {@link com.dabay6.libraries.androidshared.view.ViewsFinder} using an {@link Activity} as the
-     * parent.
+     * Creates a {@link com.dabay6.libraries.androidshared.view.ViewsFinder} using an {@link Activity} as the parent.
      *
      * @param activity The parent that will be searched.
      */
@@ -206,6 +208,7 @@ public class ViewsFinder {
     /**
      * @param listener
      * @param views
+     *
      * @return
      */
     public void onClick(final OnClickListener listener, final View... views) {
@@ -255,6 +258,61 @@ public class ViewsFinder {
 
             }
         }, views);
+    }
+
+    /**
+     * @param runnable
+     * @param imeActionId
+     * @param views
+     */
+    public void onEditorAction(final EditTextRunnable runnable, final int imeActionId,
+                               final FloatLabelAutoCompleteTextView... views) {
+        onEditorAction(new OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
+                return imeActionId == actionId && runnable.run();
+
+            }
+        }, views);
+    }
+
+    /**
+     * @param listener
+     * @param views
+     */
+    public void onEditorAction(final OnEditorActionListener listener, final FloatLabelAutoCompleteTextView... views) {
+        for (final FloatLabelAutoCompleteTextView view : views) {
+            if (view != null) {
+                view.setOnEditorActionListener(listener);
+            }
+        }
+    }
+
+    /**
+     * @param runnable
+     * @param imeActionId
+     * @param views
+     */
+    public void onEditorAction(final EditTextRunnable runnable, final int imeActionId,
+                               final FloatLabelEditText... views) {
+        onEditorAction(new OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(final TextView v, final int actionId, final KeyEvent event) {
+                return imeActionId == actionId && runnable.run();
+            }
+        }, views);
+    }
+
+    /**
+     * @param listener
+     * @param views
+     */
+    public void onEditorAction(final OnEditorActionListener listener, final FloatLabelEditText... views) {
+        for (final FloatLabelEditText view : views) {
+            if (view != null) {
+                view.setOnEditorActionListener(listener);
+            }
+        }
     }
 
     /**

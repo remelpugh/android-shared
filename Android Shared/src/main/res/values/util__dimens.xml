@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ Copyright (c) 2014 Remel Pugh
+  ~ Copyright (c) 2015 Remel Pugh
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -21,5 +21,32 @@
   -->
 
 <resources>
-    <dimen name="element_spacing_normal">8dp</dimen>
+    <dimen name="util__default_item_height">48dp</dimen>
+
+    <dimen name="util__width_4dp">4dp</dimen>
+    <dimen name="util__width_8dp">8dp</dimen>
+    <dimen name="util__width_16dp">16dp</dimen>
+    <dimen name="util__width_32dp">32dp</dimen>
+    <dimen name="util__width_56dp">56dp</dimen>
+    <dimen name="util__width_72dp">72dp</dimen>
+
+    <!--TEXT-->
+    <dimen name="util__text_size_large">18sp</dimen>
+    <dimen name="util__text_size_medium">14sp</dimen>
+    <dimen name="util__text_size_small">12sp</dimen>
+    <dimen name="util__text_size_xsmall">11sp</dimen>
+    <dimen name="util__text_size_xlarge">20sp</dimen>
+    <!--END TEXT-->
+
+    <!-- DRAWERLAYOUT -->
+    <dimen name="util__navigation_drawer_chosen_account_height">140dp</dimen>
+    <dimen name="util__navigation_drawer_width">260dp</dimen>
+    <dimen name="util__navigation_drawer_profile_image_size">40dp</dimen>
+    <!-- END DRAWERLAYOUT -->
+
+    <dimen name="util__element_spacing_normal">8dp</dimen>
+    <dimen name="util__defaultInputTextSize">14sp</dimen>
+    <dimen name="util__defaultLabelTextSize">14sp</dimen>
+
+    <dimen name="util__headerbar_elevation">4dp</dimen>
 </resources>
