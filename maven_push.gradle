@@ -34,14 +34,21 @@ dependencies {
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.2"
 }
 
+def divider
 def osName
 def repo_properties
 
 osName = System.getProperty("os.name").toLowerCase();
-repo_properties = "REPO.PROPERTIES." + ((osName.contains("windows")) ? "WIN" : "MAC")
+divider = ((osName.contains("windows")) ? "\\" : "/");
 
-if (!project.hasProperty(repo_properties) || !new File(project.property(repo_properties).toString()).exists()) {
-    throw new GradleException("Unable to locate gradle properties file.")
+repo_properties = System.properties["user.home"] + divider + ".android_build" + divider + "repo.properties";
+
+println repo_properties
+println ""
+println ""
+
+if (!new File(repo_properties.toString()).exists()) {
+    throw new GradleException("Unable to locate gradle properties file.") as Throwable
 }
 
 def repo_password
@@ -50,7 +57,7 @@ def repo_url
 def repo_username
 
 Properties props = new Properties()
-props.load(new FileInputStream(file(project.property(repo_properties))))
+props.load(new FileInputStream(file(repo_properties)))
 
 repo_password = props["REPO_PASSWORD"]
 repo_snapshot_url = props["REPO_SNAPSHOT_URL"]
